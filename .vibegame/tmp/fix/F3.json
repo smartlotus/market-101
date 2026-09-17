@@ -1,0 +1,85 @@
+{
+  "result": {
+    "comfortText": "\u4f60\u8bd5\u8bd5\u770b",
+    "base": {
+      "mode": "chapter",
+      "beatId": "2.1",
+      "muted": true,
+      "line": null
+    },
+    "attempts": [
+      {
+        "i": 1,
+        "reasonCode": "REJECT_6",
+        "accepted": false,
+        "line": "\u4f60\u60f3\u4e70\u8305\u53f0\u4e70\u4e0d\u5230\uff0c\u4e0d\u662f\u56e0\u4e3a\u4f60\u7a77\uff0c\u662f\u56e0\u4e3a\u5b83\u4e00\u624b\u5c31\u8981 14 \u4e07\u2014\u2014\u8fd9\u6761\u89c4\u5219\u62e6\u4f4f\u7684\u4e0d\u662f\u4f60\u7684\u94b1\uff0c\u662f\u4f60\u7684\u51b2\u52a8\u3002",
+        "source": "beat"
+      },
+      {
+        "i": 2,
+        "reasonCode": "REJECT_6",
+        "accepted": false,
+        "line": "\u4f60\u60f3\u4e70\u8305\u53f0\u4e70\u4e0d\u5230\uff0c\u4e0d\u662f\u56e0\u4e3a\u4f60\u7a77\uff0c\u662f\u56e0\u4e3a\u5b83\u4e00\u624b\u5c31\u8981 14 \u4e07\u2014\u2014\u8fd9\u6761\u89c4\u5219\u62e6\u4f4f\u7684\u4e0d\u662f\u4f60\u7684\u94b1\uff0c\u662f\u4f60\u7684\u51b2\u52a8\u3002",
+        "source": "beat"
+      },
+      {
+        "i": 3,
+        "reasonCode": "REJECT_6",
+        "accepted": false,
+        "line": "\u4f60\u8bd5\u8bd5\u770b",
+        "source": "beat"
+      },
+      {
+        "i": 4,
+        "reasonCode": "REJECT_6",
+        "accepted": false,
+        "line": "\u4f60\u8bd5\u8bd5\u770b",
+        "source": "beat"
+      },
+      {
+        "i": 5,
+        "reasonCode": "REJECT_6",
+        "accepted": false,
+        "line": "\u4f60\u8bd5\u8bd5\u770b",
+        "source": "beat"
+      }
+    ],
+    "historyTail": {
+      "chapterId": 2,
+      "beatId": "2.1",
+      "timing": "rejected",
+      "source": "beat",
+      "speaker": "face",
+      "conceptKey": null,
+      "line": "\u4f60\u8bd5\u8bd5\u770b"
+    },
+    "checks": {
+      "mutedIsOn": true,
+      "comfortSurvivesMute": true,
+      "comfortSourceIsBeat": true,
+      "comfortRecordedInHistory": true,
+      "rejectReasonIsLot": true,
+      "beatUnchanged": true,
+      "volunteerHintSuppressedByMute": true,
+      "hintTierWasYellow": true,
+      "volunteerHintAppearsWhenUnmuted": true,
+      "volunteerHintSourceIsProactive": true,
+      "comfortAlsoAppearsUnmuted": true
+    },
+    "volunteerHintMuted": {
+      "before": null,
+      "after": null,
+      "source": null,
+      "tier": "yellow"
+    },
+    "volunteerHintUnmuted": {
+      "after": "\u4f60\u7684\u672c\u91d1\u53ea\u5269 \u00a520000\u3002\u968f\u65f6\u53ef\u4ee5\u8865\u8db3\u3002",
+      "source": "proactiveHint"
+    },
+    "comfortUnmuted": {
+      "line": "\u4f60\u8bd5\u8bd5\u770b",
+      "source": "beat",
+      "reasonCode": "REJECT_6"
+    }
+  }
+}

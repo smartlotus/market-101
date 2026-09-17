@@ -116,6 +116,8 @@ export default class NavStandingView {
   _render(state) {
     const ch = chapterOf(state)
     const copy = (ch.copy && ch.copy.standing) || {}
+    // 免责声明按 plan 的落点放在**顶层** `copy.standingDisclaimer`（不在 `copy.standing` 子树里）
+    const disclaimer = (ch.copy && ch.copy.standingDisclaimer) || ''
     const standing = ch.graduationStanding || null
     const series = this._series(state)
 
@@ -134,7 +136,7 @@ export default class NavStandingView {
     this.titleEl.textContent = copy.title || FALLBACK_TITLE
     clear(this.bodyEl)
     this._renderChart(copy, standing, series)
-    this._renderStanding(copy, standing)
+    this._renderStanding(copy, standing, disclaimer)
   }
 
   _section(title) {
@@ -291,7 +293,7 @@ export default class NavStandingView {
     return found ? found.name || '' : ''
   }
 
-  _renderStanding(copy, standing) {
+  _renderStanding(copy, standing, disclaimer = '') {
     const sec = this._section(copy.tierTitle)
     const box = el('div', 'stand', sec)
     box.dataset.role = 'standing'
@@ -371,6 +373,12 @@ export default class NavStandingView {
       el('span', 'k', line, `第 ${grade.chapterId} 章`)
       el('span', 'nm', line, this._chapterName(grade.chapterId))
       el('span', 'g', line, grade.grade)
+    }
+    // 免责声明（GDD Realism vs Legibility #11：游戏内需在结业评定面板上明写）。
+    // 文案是**数据里的一行**（顶层 `copy.standingDisclaimer`），视图不自己造句。
+    if (disclaimer) {
+      const note = el('div', 'disc', box, String(disclaimer))
+      note.dataset.role = 'standing-disclaimer'
     }
     return box
   }

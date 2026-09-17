@@ -5,7 +5,7 @@
  *   1. **哪些章节走完了** —— `chapter.unlockedChapters`（唯一持久字段）；
  *   2. **哪些品种已解锁** —— `chapter.unlockedInstruments`（**派生量**，由运行时现算）；
  *   3. **哪些概念学过了** —— `chapter.conceptsIntroduced`（名字查 `config/concepts.json`）；
- *   4. **本章评级记录** —— `chapter.grades`（只列**已记录**的章，不写死分母）。
+ *   4. **本章评级记录** —— `chapter.chapterGrades`（只列**已记录**的章，不写死分母）。
  *
  * 结构性约束（PRD §5「解锁看理解，推进看成绩」）：
  *   - 本视图**只读运行时快照**，不自己推导任何解锁条件、不读 NAV、不读评级；
@@ -110,7 +110,7 @@ export default class ProgressUnlockView {
     // **派生量**直接取用，本视图不重算、不交叉验证、不与钱或评级比对
     const unlockedInstruments = Array.isArray(ch.unlockedInstruments) ? ch.unlockedInstruments : []
     const conceptsIntroduced = Array.isArray(ch.conceptsIntroduced) ? ch.conceptsIntroduced : []
-    const grades = (ch.grades && typeof ch.grades === 'object') ? ch.grades : {}
+    const grades = (ch.chapterGrades && typeof ch.chapterGrades === 'object') ? ch.chapterGrades : {}
 
     const signature = [
       ch.chapterId,

@@ -1221,6 +1221,14 @@ ${PALETTE}
 #chapter-root .ch-nav .stand .g-row .nm { color: var(--text-2); }
 #chapter-root .ch-nav .stand .g-row .g { font-size: 14px; font-weight: 600; color: var(--text); }
 #chapter-root .ch-nav .stand .g-empty { font-size: 12px; color: var(--muted); line-height: 1.78; }
+#chapter-root .ch-nav .stand .disc {
+  margin-top: 13px;
+  padding-top: 10px;
+  border-top: 1px solid var(--hair-2);
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.78;
+}
 #chapter-root .ch-nav .body.nav-body::-webkit-scrollbar { width: 6px; }
 #chapter-root .ch-nav .body.nav-body::-webkit-scrollbar-thumb { background: #2A3546; border-radius: 3px; }
 

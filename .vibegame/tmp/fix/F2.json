@@ -1,0 +1,136 @@
+{
+  "result": {
+    "order": {
+      "accepted": true,
+      "reasonCode": "OK",
+      "price": 6.21
+    },
+    "before": {
+      "mode": "freeDay",
+      "histLen": 1,
+      "curveLast": 100000,
+      "simNAV": 99994.99,
+      "navFinal": 99994.99,
+      "adjustedCumReturn": -5e-05,
+      "injectionsTotal": 0,
+      "tier": "\u7ed3\u4e1a"
+    },
+    "days": [
+      {
+        "mode": "freeDay",
+        "histLen": 2,
+        "curveLast": 100032.99,
+        "simNAV": 100032.99,
+        "navFinal": 100032.99,
+        "adjustedCumReturn": 0.00033,
+        "injectionsTotal": 0,
+        "tier": "\u7ed3\u4e1a"
+      },
+      {
+        "mode": "freeDay",
+        "histLen": 3,
+        "curveLast": 100034.99,
+        "simNAV": 100034.99,
+        "navFinal": 100034.99,
+        "adjustedCumReturn": 0.00035,
+        "injectionsTotal": 0,
+        "tier": "\u7ed3\u4e1a"
+      },
+      {
+        "mode": "freeDay",
+        "histLen": 4,
+        "curveLast": 100034.99,
+        "simNAV": 100034.99,
+        "navFinal": 100034.99,
+        "adjustedCumReturn": 0.00035,
+        "injectionsTotal": 0,
+        "tier": "\u7ed3\u4e1a"
+      },
+      {
+        "mode": "freeDay",
+        "histLen": 5,
+        "curveLast": 100036.99,
+        "simNAV": 100036.99,
+        "navFinal": 100036.99,
+        "adjustedCumReturn": 0.00037,
+        "injectionsTotal": 0,
+        "tier": "\u7ed3\u4e1a"
+      },
+      {
+        "mode": "freeDay",
+        "histLen": 6,
+        "curveLast": 100036.99,
+        "simNAV": 100036.99,
+        "navFinal": 100036.99,
+        "adjustedCumReturn": 0.00037,
+        "injectionsTotal": 0,
+        "tier": "\u7ed3\u4e1a"
+      },
+      {
+        "mode": "freeDay",
+        "histLen": 7,
+        "curveLast": 100036.99,
+        "simNAV": 100036.99,
+        "navFinal": 100036.99,
+        "adjustedCumReturn": 0.00037,
+        "injectionsTotal": 0,
+        "tier": "\u7ed3\u4e1a"
+      }
+    ],
+    "after": {
+      "mode": "freeDay",
+      "histLen": 7,
+      "curveLast": 100036.99,
+      "simNAV": 100036.99,
+      "navFinal": 100036.99,
+      "adjustedCumReturn": 0.00037,
+      "injectionsTotal": 0,
+      "tier": "\u7ed3\u4e1a"
+    },
+    "checks": {
+      "inFreeDay": true,
+      "curveGrew": true,
+      "navActuallyMoved": true,
+      "curveMovedDuringFreeDay": true,
+      "navFinalEqualsCurveLast": true,
+      "everyDayConsistent": true,
+      "navFinalEqualsSimNAV": true,
+      "injectionsUnchanged": true,
+      "riskWarningFiredOnDayAdvance": true,
+      "riskWarningBelowLine": true,
+      "riskWarningMatchesCurve": true
+    },
+    "beforeDrop": {
+      "mode": "freeDay",
+      "histLen": 7,
+      "curveLast": 100036.99,
+      "simNAV": 100036.99,
+      "navFinal": 100036.99,
+      "adjustedCumReturn": 0.00037,
+      "injectionsTotal": 0,
+      "tier": "\u7ed3\u4e1a"
+    },
+    "staleBeforeAdvance": {
+      "reportedNav": 100036.99,
+      "line": null,
+      "source": null
+    },
+    "drop": {
+      "line": "\u5148\u505c\u4e00\u4e0b\uff1a\u4f60\u7684\u672c\u91d1\u5df2\u7ecf\u6389\u5230 \u00a510,000 \u4ee5\u4e0b\u4e86\u3002\u4ed3\u4f4d\u91cd\u7684\u65f6\u5019\uff0c\u6ce2\u52a8\u4f1a\u76f4\u63a5\u6253\u5728\u672c\u91d1\u4e0a\u3002\u8981\u4e0d\u8981\u5148\u770b\u770b\u4f60\u624b\u4e0a\u8fd8\u7559\u7740\u591a\u5c11\u73b0\u91d1\uff1f",
+      "source": "riskWarning",
+      "nav": 9000,
+      "curveLast": 9000,
+      "hist": [
+        {
+          "chapterId": 2,
+          "beatId": "2.1",
+          "timing": "rejected",
+          "source": "riskWarning",
+          "speaker": "face",
+          "conceptKey": null,
+          "line": "\u5148\u505c\u4e00\u4e0b\uff1a\u4f60\u7684\u672c\u91d1\u5df2\u7ecf\u6389\u5230 \u00a510,000 \u4ee5\u4e0b\u4e86\u3002\u4ed3\u4f4d\u91cd\u7684\u65f6\u5019\uff0c\u6ce2\u52a8\u4f1a\u76f4\u63a5\u6253\u5728\u672c\u91d1\u4e0a\u3002\u8981\u4e0d\u8981\u5148\u770b\u770b\u4f60\u624b\u4e0a\u8fd8\u7559\u7740\u591a\u5c11\u73b0\u91d1\uff1f"
+        }
+      ]
+    }
+  }
+}

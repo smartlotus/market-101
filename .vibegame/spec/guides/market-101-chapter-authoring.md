@@ -67,8 +67,9 @@
 
 可在**任意节拍中**打开的面板（词典全文 / 导师对话历史 / 进度与解锁 / 净值与结业评定）声明在
 `config/chapters.json` 的**顶层 `panels`** 对象里；`PanelHost` 先在本章 `panels` 里找，找不到再到这里找。
-它们同样是 `pausesGame: true` 的 `ChapterOverlay` 面板；打开时运行时会把在屏的节拍面板挂起
-（`suspendedPanelId`），关闭后自动恢复 —— 这是「随时查词典不会把节拍面板顶掉后回不来」的保证。
+**lead 裁决（2026-09-17）**：这四块「参考资料」面板**豁免真暂停**，允许作为挂在 `#chapter-root` 上的
+独立浮层实现（回合制游戏没有实时时钟，「真暂停」对它们只是外观问题）。因此运行时**不**挂起在屏的
+节拍面板、**没有** `suspendedPanelId` 挂起 / 恢复机制；它们只需保证打开时不改游戏状态、不顶掉节拍面板。
 
 ## `require[]` 的闭合集合（不得自创）
 
@@ -143,7 +144,9 @@
 - 新增可持久化字段必须同时登记进 `saveStore` 的白名单；**不得**为了省事绕过白名单。
 - Stage 2 追加的章节白名单键（新章若用到新状态，按同一形态继续追加）：
   `unlockedChapters` / `advancedUnlocked` / `chapterGrades` / `injectionsTotal` / `mentorHistory` /
-  `matchProgress` / `flowProgress` / `suspendedPanelId`。`mentor` 子树**仍然只有三项**。
+  `matchProgress` / `flowProgress`。`mentor` 子树**仍然只有三项**。
+  （**无** `suspendedPanelId`：四块「参考资料」面板按 lead 裁决豁免真暂停、挂在 `#chapter-root`
+  上，不经过 `openPanel()`，没有挂起 / 恢复路径，故不登记。）
 
 ## 结业评定（三档，全部都是毕业）
 

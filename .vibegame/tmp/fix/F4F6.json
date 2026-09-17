@@ -1,0 +1,75 @@
+{
+  "result": {
+    "F5": {
+      "hasChapterGrades": true,
+      "chapterGrades": {},
+      "legacyGradesKeyStillPresent": false
+    },
+    "F6": {
+      "tiers": {
+        "green": 50000,
+        "yellow": 10000
+      },
+      "rawRiskLine": "\u5148\u505c\u4e00\u4e0b\uff1a\u4f60\u7684\u672c\u91d1\u5df2\u7ecf\u6389\u5230 \u00a5{amount} \u4ee5\u4e0b\u4e86\u3002\u4ed3\u4f4d\u91cd\u7684\u65f6\u5019\uff0c\u6ce2\u52a8\u4f1a\u76f4\u63a5\u6253\u5728\u672c\u91d1\u4e0a\u3002\u8981\u4e0d\u8981\u5148\u770b\u770b\u4f60\u624b\u4e0a\u8fd8\u7559\u7740\u591a\u5c11\u73b0\u91d1\uff1f",
+      "hardcodedInData": false,
+      "freeDayLine": "\u5148\u505c\u4e00\u4e0b\uff1a\u4f60\u7684\u672c\u91d1\u5df2\u7ecf\u6389\u5230 \u00a510,000 \u4ee5\u4e0b\u4e86\u3002\u4ed3\u4f4d\u91cd\u7684\u65f6\u5019\uff0c\u6ce2\u52a8\u4f1a\u76f4\u63a5\u6253\u5728\u672c\u91d1\u4e0a\u3002\u8981\u4e0d\u8981\u5148\u770b\u770b\u4f60\u624b\u4e0a\u8fd8\u7559\u7740\u591a\u5c11\u73b0\u91d1\uff1f",
+      "freeDaySource": "riskWarning",
+      "expectedAmountText": "\u00a510,000"
+    },
+    "F4": {
+      "panelOpen": true,
+      "disclaimerText": "\u7ed3\u4e1a\u8bc4\u5b9a\uff08\u4f18\u79c0 / \u826f\u597d / \u7ed3\u4e1a\uff09\u53ea\u63cf\u8ff0\u8fd9\u4e2a\u6a21\u62df\u8d26\u6237\u7684\u8fd9\u516b\u7ae0\uff0c\u4e0d\u6784\u6210\u4efb\u4f55\u5f62\u5f0f\u7684\u6295\u8d44\u80fd\u529b\u5224\u65ad\u6216\u8d44\u8d28\u3002",
+      "expected": "\u7ed3\u4e1a\u8bc4\u5b9a\uff08\u4f18\u79c0 / \u826f\u597d / \u7ed3\u4e1a\uff09\u53ea\u63cf\u8ff0\u8fd9\u4e2a\u6a21\u62df\u8d26\u6237\u7684\u8fd9\u516b\u7ae0\uff0c\u4e0d\u6784\u6210\u4efb\u4f55\u5f62\u5f0f\u7684\u6295\u8d44\u80fd\u529b\u5224\u65ad\u6216\u8d44\u8d28\u3002",
+      "rendered": true,
+      "matchesData": true,
+      "hasTier": true,
+      "hasNavFinal": true
+    },
+    "F1": {
+      "whitelistHasSuspended": false,
+      "whitelistChapterKeys": [
+        "chapter.chapterId",
+        "chapter.beatId",
+        "chapter.beatIndex",
+        "chapter.completedBeats",
+        "chapter.mode",
+        "chapter.shellMode",
+        "chapter.sceneId",
+        "chapter.panelId",
+        "chapter.pendingChoiceId",
+        "chapter.answeredChoices",
+        "chapter.pendingChoiceSnapshots",
+        "chapter.conceptsIntroduced",
+        "chapter.ruleCardsSeen",
+        "chapter.remedialUsedThisChapter",
+        "chapter.chapterRejectSeen",
+        "chapter.extraSegment",
+        "chapter.rating",
+        "chapter.ratingInputs",
+        "chapter.ratingWindow",
+        "chapter.goalCardState",
+        "chapter.mentor",
+        "chapter.mentor.explainCounts",
+        "chapter.mentor.muted",
+        "chapter.mentor.proactiveEnabled",
+        "chapter.hintCounts",
+        "chapter.selectTouched",
+        "chapter.unlockedChapters",
+        "chapter.advancedUnlocked",
+        "chapter.mentorHistory",
+        "chapter.chapterGrades",
+        "chapter.injectionsTotal",
+        "chapter.matchProgress",
+        "chapter.flowProgress"
+      ],
+      "snapshotMentionsIt": false
+    },
+    "checks": {
+      "F5_snapshotUsesChapterGrades": true,
+      "F6_dataHasNoLiteralThreshold": true,
+      "F6_spokenLineUsesTierValue": true,
+      "F4_disclaimerRendered": true,
+      "F1_whitelistClean": true
+    }
+  }
+}

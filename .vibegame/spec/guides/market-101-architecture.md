@@ -145,10 +145,11 @@
 
 - 需要在**任意节拍中**打开的面板（词典全文 / 导师对话历史 / 进度与解锁 / 净值与结业评定）
   声明在 `config/chapters.json` 的**顶层 `panels`**（全局面板注册表），而不是某章 `panels` 里。
-- 它们仍然是 `ChapterOverlay` 的 `pausesGame: true` 面板（真暂停 + 互斥），由 `PanelHost` 渲染
-  （块型 `dictionary` / `mentorHistory` / `progressUnlock` / `navStanding`）。
-- **挂起/恢复**：打开全局面板时，若已有节拍面板在屏上，`ChapterRuntime` 记 `suspendedPanelId`；
-  关闭全局面板时恢复它。这是「随时查词典不会把节拍面板顶掉后回不来」的硬保证（防软锁）。
+- 它们**豁免真暂停**（lead 裁决 2026-09-17）：本作是回合制，没有实时时钟，故这四块面板作为
+  挂在 `#chapter-root` 上的独立浮层实现，**不**占 `ChapterOverlay` 的暂停语义。
+- **没有挂起/恢复**：它们不经过 `openPanel()`，也就不动 `panelId`、不会把节拍面板顶掉，
+  因此运行时**不**存在 `suspendedPanelId`（存档白名单里也没有这个键）。
+  它们只需保证：打开时不改游戏状态、不顶掉当前节拍面板、关闭后能继续当前节拍。
 
 ## 两个新互动（配对 / 顺序走查）
 

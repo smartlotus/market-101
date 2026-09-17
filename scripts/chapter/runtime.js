@@ -60,6 +60,14 @@ function fillTemplate(text, vars) {
   )
 }
 
+/**
+ * 千分位整数（`10000` → `10,000`）：**只**用于把数据文案里的金额占位符填成人读的样子。
+ * 不参与任何计算，也不是金额的唯一来源 —— 金额一律来自 `MONEY_TIERS` / 账户快照。
+ */
+function groupThousands(value) {
+  return String(Math.round(Number(value) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 export class ChapterRuntime {
   /**
    * @param {object}   input
@@ -666,7 +674,23 @@ export class ChapterRuntime {
     const n = (this.hintCounts[beat.id] || 0) + 1
     this.hintCounts[beat.id] = n
     if (n <= REJECT_HINT_MAX) this._speak(line)
-    else this._setMentorLine(this.copy.giveUpExhaustedLine || '', 'face', null, { timing: MENTOR_TIMING.REACTIVE, source: MENTOR_SOURCE.BEAT })
+    else {
+      // 第 3 次起的兜底句同样是**被拒单的安慰**（story/functional），因此经唯一闸门
+      // `request()` 开口、归到 `source='beat'`（与上面 `_speak()` 的拒单台词同一分类）：
+      // 静音**不得**吞掉它（lead 裁决），但它必须由穷举时机表判定 ——
+      // 直接写 `_setMentorLine` 会成为第三处绕过闸门的发言。
+      const verdict = this.mentor.request({
+        timing: MENTOR_TIMING.REACTIVE,
+        mode: this.mode,
+        source: MENTOR_SOURCE.BEAT,
+      })
+      if (verdict.speak) {
+        this._setMentorLine(this.copy.giveUpExhaustedLine || '', 'face', null, {
+          timing: MENTOR_TIMING.REACTIVE,
+          source: MENTOR_SOURCE.BEAT,
+        })
+      }
+    }
   }
 
   /** `choice`：作答（**不判对错**；答错只重讲，同题可无限重试）。 */
@@ -856,7 +880,17 @@ export class ChapterRuntime {
 
   /** `advanceDay`：本拍发生过一次交易日推进（`simAction` 之外的推进路径也可用）。 */
   onMarketOpen({ changes = null, viaAdvance = false } = {}) {
-    if (this.mode !== 'chapter') return { ok: false, reason: 'outside_rating_window' }
+    if (this.mode !== 'chapter') {
+      // 章外（`freeDay` / `sandbox`）不进评级窗口、不推进任何节拍，但 NAV 必须在**每一次**
+      // 交易日推进时照常采样 —— 否则 `lastNav` 会停在上一笔成交 / 补足 / 重置的时刻：
+      //   ① 结业评定的 `NAV_final`（getter 优先读 `lastNav`）会与同一个面板由 `navHistory`
+      //      画出来的曲线末点对不上；
+      //   ② `_maybeRiskWarning()` 只有在下单之后才可能开口，纯行情下跌永远不响。
+      // 采样仍然只走 `noteNav` → `_sample()` 那道门，而它在 `mode !== 'chapter'` 时直接跳过，
+      // 故 Stage 0/1「自由模式 / 沙盒的盈亏不进评级窗口」的口径一字未动。
+      this._syncFromWorld()
+      return { ok: false, reason: 'outside_rating_window' }
+    }
     const w = this.ratingWindow
     if (w && w.open) {
       w.marketDays += 1
@@ -1233,7 +1267,9 @@ export class ChapterRuntime {
       return null
     }
     if (this._riskWarned) return null
-    const line = this.copy.riskLine || ''
+    // 阈值只有一个来源：`MONEY_TIERS.yellow`（黄档 / 红线 / 风险警示是同一条线）。
+    // 文案里的金额是占位符 → 改档位时这句话跟着变，两处不可能漂移。
+    const line = fillTemplate(this.copy.riskLine || '', { amount: groupThousands(MONEY_TIERS.yellow) })
     if (!line) return null
     const verdict = this.mentor.request({
       timing: MENTOR_TIMING.REACTIVE,
@@ -1782,7 +1818,8 @@ export class ChapterRuntime {
       chapterEndReached: this.chapterEndReached,
       redLineActive: this.redLineActive,
       interruptedBeatId: this.interruptedBeatId,
-      grades: { ...this.chapterGrades },
+      // 键名 = plan「Runtime State Contract」的 `chapterGrades`（与 `saveStore` 白名单、内部字段同名）
+      chapterGrades: { ...this.chapterGrades },
       unlockedChapters: [...this.unlockedChapters],
       // 派生量：视图**只读**这两个，不自己推导任何解锁、不自己算评定
       unlockedInstruments: this.unlockedInstruments,

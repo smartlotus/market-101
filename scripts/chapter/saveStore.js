@@ -95,10 +95,13 @@ export const SAVE_SCHEMA = {
     // 章末评级记录（键 = 章号）与**毕生**外来入金：结业评定的两项输入，刷新后必须还在
     chapterGrades: 'deep',
     injectionsTotal: 'money',
-    // 第四章两个新互动的进度（配对 / 流程走查）与被全局面板顶掉的节拍面板
+    // 第四章两个新互动的进度（配对 / 流程走查）
     matchProgress: 'deep',
     flowProgress: 'deep',
-    suspendedPanelId: 'nullable-string',
+    // 注：**没有** `suspendedPanelId` —— 四块「参考资料」面板（词典 / 导师历史 / 进度解锁 /
+    // 净值评定）按 lead 裁决豁免真暂停，作为挂在 `#chapter-root` 上的独立浮层实现，
+    // 不经过 `openPanel()`，也就不存在「顶掉节拍面板 → 挂起 → 恢复」这条路径。
+    // 没有任何运行时代码写它，故不留这个死 schema 键。
   },
 }
 
