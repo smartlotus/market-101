@@ -13,10 +13,14 @@ import { Account } from './account.js'
 import { Calendar } from './calendar.js'
 import { EventDeck, toPublicEvent } from './eventDeck.js'
 import { QUOTE_PARAMS, QuoteEngine } from './quote.js'
-import { LOT_SIZE, PRICE_TICK, computeFee, isPriceTickAligned, roundMoney } from './fees.js'
+import { FxBook } from './fx.js'
+import {
+  LOT_SIZE, PRICE_TICK, checkLot, computeFee, currencyOf, isTickAligned,
+  isPriceTickAligned, roundMoney, roundToTick, tickOf,
+} from './fees.js'
 export const MARKET = 'A_SHARE'
 
-/** 拒单原因码（与 GDD 拒单表编号一致；#5 期权 / #9 基金属后续 Stage，Stage 0 不可达）。 */
+/** 拒单原因码（与 GDD 拒单表编号一致；#5 期权属后续 Stage）。 */
 export const REJECT = {
   FUNDS: 'REJECT_1',
   LIMIT: 'REJECT_2',
@@ -25,10 +29,12 @@ export const REJECT = {
   LOT: 'REJECT_6',
   TICK: 'REJECT_7',
   SHARES: 'REJECT_8',
+  MIN_AMOUNT: 'REJECT_9', // 场外基金 / 加密：低于最小申购（下单）金额
   QTY: 'REJECT_10',
+  LOCKED: 'REJECT_11', // 该品种尚未解锁（章节进度未到）
 }
 
-/** 玩家可见中文文案（PRD §3.4 拒单表，逐字照录）。 */
+/** 玩家可见中文文案（A 股逐字照录 PRD §3.4；其余市场按各自规则生成，见 `rejectTextFor`）。 */
 export const REJECT_TEXT = {
   CLOSED: '今天该市场休市，无法下单',
   T1: 'A 股实行 T+1，今日买入需下个交易日才能卖出',
@@ -36,6 +42,45 @@ export const REJECT_TEXT = {
   TICK: `价格需为 ¥${PRICE_TICK.toFixed(2)} 的整数倍`,
   SHARES: '可用持仓不足，无法卖出',
   QTY: '委托数量必须大于 0',
+}
+
+/** 按市场生成拒单文案（A 股返回逐字原文，其余市场说清自己的规则）。 */
+function rejectTextFor(kind, market, instrument) {
+  const label = marketLabel(market)
+  switch (kind) {
+    case 'CLOSED': return `今天是${label}的休市日，无法下单`
+    case 'T1': return `${label}实行 T+1，今日买入需下个交易日才能卖出`
+    case 'LOT': {
+      const lot = instrument && instrument.lotSize ? Number(instrument.lotSize) : null
+      if (market === 'US') return '美股最小交易单位为 1 股（支持碎股，最小 0.001 股）'
+      if (market === 'HK' && lot) return `这只港股的 1 手是 ${lot} 股（港股每手股数不固定）`
+      return `A 股最小交易单位为 ${LOT_SIZE} 股（1 手）`
+    }
+    case 'TICK': return `价格需为 ${tickLabel(market)} 的整数倍`
+    case 'SHARES': return '可用持仓不足，无法卖出'
+    case 'QTY': return '委托数量必须大于 0'
+    default: return REJECT_TEXT[kind] || '无法下单'
+  }
+}
+
+function marketLabel(market) {
+  return { A_SHARE: 'A 股', ETF: 'ETF', FUND: '场外基金', HK: '港股', US: '美股', CRYPTO: '加密市场', OPTION: '期权' }[market] || market
+}
+
+function tickLabel(market) {
+  const t = tickOf(market)
+  const sign = { CNY: '¥', HKD: 'HK$', USD: '$', USDT: 'USDT ' }[currencyOf(market)] || ''
+  return `${sign}${t.toFixed(t >= 0.01 ? 2 : 4)}`
+}
+
+/** 该市场的 T+N（期权的 tPlus 为 0；场外基金走确认/到账流程，不锁仓）。 */
+function marketTPlus(market) {
+  return market === 'A_SHARE' || market === 'ETF' ? 1 : 0
+}
+
+/** 该市场的「按金额下单」最小门槛（场外基金 / 加密：100 元起）。 */
+function marketMinAmount(market) {
+  return { FUND: 100, CRYPTO: 100 }[market] || 0
 }
 
 function money2(value) {
@@ -65,8 +110,33 @@ export class MarketSim {
       (Array.isArray(events) ? events : []).filter((e) => e && e.id).map((e) => [e.id, e]),
     )
     this.quotes = new QuoteEngine(instruments, this.params, { historyBars: this.config.historyBars })
-    this.account = new Account({ initialCash: this.config.initialCash, market: this.market })
+    /** 汇率账本：只为折算服务，不参与任何评级判定。 */
+    this.fx = new FxBook()
+    this.account = new Account({ initialCash: this.config.initialCash, market: this.market, fx: this.fx })
+    /** 已解锁的市场。A 股第 1 章即开，其余按章节解锁阶梯放出。 */
+    this.unlockedMarkets = new Set(['A_SHARE'])
     this.reset()
+  }
+
+  /** 按章节解锁：把 `unlockChapter <= chapterId` 的标的所属市场全部放开。 */
+  unlockForChapter(chapterId) {
+    const n = Number(chapterId) || 1
+    for (const inst of this.instruments) {
+      const c = Number(inst.unlockChapter) || 1
+      if (c <= n) this.unlockedMarkets.add(inst.market || 'A_SHARE')
+    }
+    return [...this.unlockedMarkets]
+  }
+
+  /** 该市场是否可交易（未解锁的品种仍可看、可选，UI 不得置灰）。 */
+  isUnlocked(market) {
+    return this.unlockedMarkets.has(market || 'A_SHARE')
+  }
+
+  /** 解锁全部（沙盒 / 测试用）。 */
+  unlockAllMarkets() {
+    for (const inst of this.instruments) this.unlockedMarkets.add(inst.market || 'A_SHARE')
+    return [...this.unlockedMarkets]
   }
 
   // === 生命周期 ===
@@ -93,6 +163,8 @@ export class MarketSim {
     this.dayOpen = false
     this.nextEventQueue = []
     this.directedDrawn = []
+    this.fxMove = null
+    this.fx.reset()
     if (this.config.autoEnterFirstDay) this._openSandboxSession()
     return this
   }
@@ -128,6 +200,7 @@ export class MarketSim {
    */
   devSkipToSandbox({ instrumentId = null } = {}) {
     this.config.autoEnterFirstDay = true
+    this.unlockAllMarkets()
     this.reset()
     this.selectInstrument(instrumentId || (this.instruments[0] && this.instruments[0].id) || null)
     return this
@@ -163,6 +236,13 @@ export class MarketSim {
    * 纯读取：账户可用资金能买得起的最低价款（PRD §3.4 缺陷修复 1）。
    * 与 `selectCheapestAffordable()` 共用同一份判据，避免「产品规则」出现两套实现。
    */
+  /**
+   * 全场「买得起的最低价款」。
+   * 两处易错、已修正：
+   *   1. **只看已解锁的市场** —— 否则第一章会被场外基金（净值 1.5）抢走默认选中。
+   *   2. **按各自市场的「一手」与费率算** —— 不能对所有标的套用 A 股的 100 股与 A 股费率
+   *      （港股小米 1 手 200 股、美股 1 股起、基金/加密按金额，费率各不相同）。
+   */
   cheapestAffordableId() {
     const quotes = this.quotes.snapshot()
     let best = null
@@ -170,11 +250,19 @@ export class MarketSim {
     for (const inst of this.instruments) {
       const q = quotes[inst.id]
       if (!q) continue
-      const perLot = roundMoney(q.lastPrice * LOT_SIZE)
-      if (!cheapest || perLot < cheapest.perLot) cheapest = { id: inst.id, perLot }
-      const cost = roundMoney(perLot + computeFee(this.market, 'buy', perLot))
-      if (cost > this.account.cash) continue
-      if (!best || perLot < best.perLot) best = { id: inst.id, perLot }
+      const market = inst.market || 'A_SHARE'
+      if (!this.isUnlocked(market)) continue
+      // 按金额下单的市场（基金 / 加密）用 1 份作比较基准，再套各自的最小金额门槛
+      const lot = inst.lotSize === null || inst.lotSize === undefined ? 1 : Number(inst.lotSize) || 1
+      const perLot = roundToTick(q.lastPrice * lot, market)
+      const rate = this.account.rateFor(inst.currency || 'CNY')
+      const minAmount = Number(inst.minAmount) || marketMinAmount(market) || 0
+      const base = Math.max(perLot, minAmount > 0 ? minAmount / (rate || 1) : 0)
+      const fee = computeFee(market, 'buy', base)
+      const costCNY = roundMoney((base + fee) * rate)
+      if (!cheapest || costCNY < cheapest.costCNY) cheapest = { id: inst.id, costCNY }
+      if (costCNY > this.account.cash) continue
+      if (!best || costCNY < best.costCNY) best = { id: inst.id, costCNY }
     }
     // 兜底（理论上不可达：¥100,000 总能买起最低价款）：退化为全场最低价款，
     // 保证「默认高亮」永远有值，不给玩家一个空白的下单目标。
@@ -246,7 +334,9 @@ export class MarketSim {
       event = this.deck.drawNext()
     }
     this.currentEvent = toPublicEvent(event)
-    this.quotes.advanceDay(event, isOpen)
+    // 汇率先动（持仓折算依赖当日汇率），行情再动
+    this.fxMove = this.fx.applyEvent(event)
+    this.quotes.advanceDay(event, (m) => this.calendar.isOpenFor(m))
   }
 
   /** 点击「进入下一交易日」：结算（§3.5）→ 进入下一自然日 → 回到 §3.1 步骤 1。 */
@@ -320,18 +410,39 @@ export class MarketSim {
       return this.lastOrder
     }
 
-    if (!this.calendar.isMarketOpen) return reject(REJECT.CLOSED, REJECT_TEXT.CLOSED)
-    if (!Number.isFinite(rawQty) || qty <= 0) return reject(REJECT.QTY, REJECT_TEXT.QTY)
-    if (qty % LOT_SIZE !== 0) return reject(REJECT.LOT, REJECT_TEXT.LOT)
-    if (type === 'limit' && (!Number.isFinite(price) || price <= 0 || !isPriceTickAligned(price))) {
-      return reject(REJECT.TICK, REJECT_TEXT.TICK)
+    const market = instrument.market || 'A_SHARE'
+    const currency = instrument.currency || currencyOf(market) || 'CNY'
+    const sign = { CNY: '¥', HKD: 'HK$', USD: '$', USDT: '' }[currency] || ''
+
+    // 未解锁的品种：可看、可选、但不可交易（引导而非禁用 —— UI 不得置灰，见 prd R3）
+    if (!this.isUnlocked(market)) {
+      return reject(
+        REJECT.LOCKED,
+        `${marketLabel(market)}还没到开放的时候——先把这一章走完，你会知道它怎么用。`,
+      )
+    }
+    if (!this.calendar.isOpenFor(market)) {
+      return reject(REJECT.CLOSED, rejectTextFor('CLOSED', market, instrument))
+    }
+    if (!Number.isFinite(rawQty) || qty <= 0) return reject(REJECT.QTY, rejectTextFor('QTY', market, instrument))
+
+    const lotErr = checkLot(market, qty, instrument)
+    if (lotErr === 'lot') return reject(REJECT.LOT, rejectTextFor('LOT', market, instrument))
+    if (lotErr === 'qty_not_positive') return reject(REJECT.QTY, rejectTextFor('QTY', market, instrument))
+
+    if (type === 'limit' && (!Number.isFinite(price) || price <= 0 || !isTickAligned(price, market))) {
+      return reject(REJECT.TICK, rejectTextFor('TICK', market, instrument))
     }
 
     const state = this.quotes.stateOf(instrumentId)
-    const lastPrice = roundMoney(state.lastPrice)
+    const lastPrice = roundToTick(state.lastPrice, market)
     const { limitUp, limitDown } = this.quotes.limitsFor(instrument)
-    if (type === 'limit' && (price > limitUp || price < limitDown)) {
-      return reject(REJECT.LIMIT, `委托价超出今日涨跌停区间（¥${money2(limitDown)} – ¥${money2(limitUp)}）`)
+    // 无涨跌停的市场（港股 / 美股 / 加密 / 场外基金）：不做区间校验
+    if (type === 'limit' && limitUp !== null && limitDown !== null && (price > limitUp || price < limitDown)) {
+      return reject(
+        REJECT.LIMIT,
+        `委托价超出今日涨跌停区间（${sign}${limitDown.toFixed(2)} – ${sign}${limitUp.toFixed(2)}）`,
+      )
     }
 
     // 成交价推导：限价成交取优 min(限价, 对手价)，保证成交价不差于限价；未触发则挂起。
@@ -339,29 +450,40 @@ export class MarketSim {
     let pending = false
     if (type === 'market') {
       const slip = this.params.slippagePct
-      fillPrice = roundMoney(side === 'buy' ? lastPrice * (1 + slip) : lastPrice * (1 - slip))
+      fillPrice = roundToTick(side === 'buy' ? lastPrice * (1 + slip) : lastPrice * (1 - slip), market)
     } else {
       const triggered = side === 'buy' ? lastPrice <= price : lastPrice >= price
       if (triggered) {
-        fillPrice = roundMoney(Math.min(price, lastPrice))
+        fillPrice = roundToTick(Math.min(price, lastPrice), market)
       } else {
-        fillPrice = roundMoney(price)
+        fillPrice = roundToTick(price, market)
         pending = true
       }
     }
 
-    const notional = roundMoney(fillPrice * qty)
-    const fee = computeFee(this.market, side, notional)
-    const needed = roundMoney(notional + fee)
+    const notional = roundToTick(fillPrice * qty, market)
+    const fee = computeFee(market, side, notional)
+    // 现金是 CNY：该市场的金额一律按当日汇率折算后再比较
+    const rate = this.account.rateFor ? this.account.rateFor(currency) : 1
+    const needed = roundMoney((notional + fee) * rate)
+
+    // 场外基金 / 加密货币：按金额下单，有最小金额门槛
+    const minAmount = Number(instrument.minAmount) || Number(marketMinAmount(market)) || 0
+    if (minAmount > 0 && notional * rate < minAmount) {
+      return reject(
+        REJECT.MIN_AMOUNT,
+        `单笔金额不能少于 ¥${money2(minAmount)}（当前约 ¥${money2(notional * rate)}）`,
+      )
+    }
 
     if (side === 'sell') {
       const position = this.account.getPosition(instrumentId)
-      if (!position || position.qty < qty) return reject(REJECT.SHARES, REJECT_TEXT.SHARES)
+      if (!position || position.qty < qty) return reject(REJECT.SHARES, rejectTextFor('SHARES', market, instrument))
       if (this.account.availableQty(instrumentId) < qty) {
         // 差额来自当日买入的 T+1 锁定 → 报 #4；仅被挂单占用 → 报 #8
         return position.t1LockedQty > 0
-          ? reject(REJECT.T1, REJECT_TEXT.T1)
-          : reject(REJECT.SHARES, REJECT_TEXT.SHARES)
+          ? reject(REJECT.T1, rejectTextFor('T1', market, instrument))
+          : reject(REJECT.SHARES, rejectTextFor('SHARES', market, instrument))
       }
     } else if (this.account.cash < needed) {
       return reject(
@@ -371,8 +493,9 @@ export class MarketSim {
     }
 
     if (!pending) {
-      if (side === 'buy') this.account.buy(instrumentId, qty, fillPrice)
-      else this.account.sell(instrumentId, qty, fillPrice)
+      const opts = { market, currency, tPlus: marketTPlus(market) }
+      if (side === 'buy') this.account.buy(instrumentId, qty, fillPrice, opts)
+      else this.account.sell(instrumentId, qty, fillPrice, opts)
       this.lastOrder = {
         accepted: true,
         status: 'filled',
@@ -479,6 +602,19 @@ export class MarketSim {
       pendingOrders: this.pendingOrders.map((o) => ({ ...o })),
       canSubmitOrder: this.calendar.isMarketOpen && Boolean(this.selectedInstrumentId),
       eventDeck: this.deck.state(),
+      // —— Stage 3 追加（多市场 / 汇率）—
+      fx: this.fx.snapshot(),
+      fxMove: this.fxMove || null,
+      openMarkets: this.calendar.openMarkets([...this.unlockedMarkets]),
+      unlockedMarkets: [...this.unlockedMarkets],
+      marketOpenFor: {
+        A_SHARE: this.calendar.isOpenFor('A_SHARE'),
+        ETF: this.calendar.isOpenFor('ETF'),
+        FUND: this.calendar.isOpenFor('FUND'),
+        HK: this.calendar.isOpenFor('HK'),
+        US: this.calendar.isOpenFor('US'),
+        CRYPTO: this.calendar.isOpenFor('CRYPTO'),
+      },
     }
   }
 
@@ -498,6 +634,8 @@ export class MarketSim {
       nextEventQueue: [...this.nextEventQueue],
       directedDrawn: [...this.directedDrawn],
       account: this.account.toJSON(),
+      fx: this.fx.toJSON(),
+      unlockedMarkets: [...this.unlockedMarkets],
       calendar: this.calendar.toJSON(),
       deck: this.deck.toJSON(),
       quotes: this.quotes.toJSON(),
@@ -506,7 +644,12 @@ export class MarketSim {
 
   loadFrom(data) {
     if (!data) return this
+    this.fx.loadFrom(data.fx)
+    this.account.setFx(this.fx)
     this.account.loadFrom(data.account)
+    if (Array.isArray(data.unlockedMarkets) && data.unlockedMarkets.length) {
+      this.unlockedMarkets = new Set(data.unlockedMarkets)
+    }
     this.calendar.loadFrom(data.calendar)
     this.deck.loadFrom(data.deck)
     this.quotes.loadFrom(data.quotes)
