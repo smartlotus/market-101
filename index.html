@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibegame</title>
+  <title>入市第一课</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    /* 画布外的页面底：暖纸色，与游戏内 UI 同一色系（避免出现「暖卡片浮在黑色虚空上」） */
+    body {
+      background: #C9BAA0;
+      display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    }
     #game-container { position: relative; }
     #game-container canvas { display: block; }
   </style>

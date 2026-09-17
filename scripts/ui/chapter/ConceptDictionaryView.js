@@ -40,8 +40,8 @@ const NEXT_CHAPTER_HINT = '下一章你会用到它'
 const FOLDED_HINT = '进阶 · 本章 A 级评级后展开'
 const ICON_BOOK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2 2 0 0 1 6 3.5h13v17H6a2 2 0 0 0-2 2z"/><path d="M19 20.5H6"/></svg>'
 const ICON_CLOSE = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
-const ICON_FOLD = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8B96A9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/><path d="M17 14l4 4M21 14l-4 4"/></svg>'
-const ICON_SEARCH = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6C7789" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'
+const ICON_FOLD = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8D7C5E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/><path d="M17 14l4 4M21 14l-4 4"/></svg>'
+const ICON_SEARCH = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A49477" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'
 
 export default class ConceptDictionaryView {
   /**

@@ -14,34 +14,34 @@
 export const THEME_CSS = `
 #broker-shell {
   /* —— 价格方向色（唯一来源）—— */
-  --up: #F5484A;
-  --down: #1DBA70;
+  --up: #C2402F;
+  --down: #2E7D5B;
   /* 方向色的半透明替身，供方向标签底色使用；由上面两个变量派生，不另写色值 */
   --up-soft: color-mix(in srgb, var(--up) 16%, transparent);
   --down-soft: color-mix(in srgb, var(--down) 16%, transparent);
 
   /* —— 委托结果色：与方向色解耦 —— 成交 = 蓝青（既非涨红也非跌绿），拒单 = 琥珀 —— */
-  --ok: #7FD3E8;
-  --ok-soft: rgba(79, 179, 201, 0.12);
-  --ok-line: #1F4A5A;
-  --reject: #F2CC8A;
-  --reject-soft: rgba(224, 163, 62, 0.18);
-  --reject-line: #6E5522;
+  --ok: #2F6E7A;
+  --ok-soft: rgba(47, 110, 122, 0.12);
+  --ok-line: #2F6E7A;
+  --reject: #8A5A12;
+  --reject-soft: rgba(138, 90, 18, 0.16);
+  --reject-line: #8A5A12;
 
-  --bg: #05070C;
-  --screen: #0B1018;
-  --panel: #101725;
-  --panel-2: #141B27;
-  --sunken: #0E1520;
-  --hair: #232D3F;
-  --hair-2: #1B2333;
-  --border: #26314A;
-  --text: #E6EAF2;
-  --text-2: #C6CDDA;
-  --muted: #8B96A9;
-  --dim: #6C7789;
-  --accent: #3D7EFF;
-  --gold: #E0A33E;
+  --bg: #D5C7AE;
+  --screen: #E2D7C2;
+  --panel: #FBF5E9;
+  --panel-2: #F1E8D6;
+  --sunken: #E7DCC7;
+  --hair: #C4B393;
+  --hair-2: #CFC0A1;
+  --border: #8A7350;
+  --text: #33291F;
+  --text-2: #57493A;
+  --muted: #7E6E56;
+  --dim: #A08B6C;
+  --accent: #3A6B8A;
+  --gold: #D89A2C;
 
   position: absolute;
   left: 0;
@@ -53,7 +53,7 @@ export const THEME_CSS = `
   display: grid;
   grid-template-rows: 62px minmax(0, 1fr) 206px;
   gap: 8px;
-  background: radial-gradient(1180px 560px at 50% -12%, #121B2B 0%, var(--bg) 64%);
+  background: radial-gradient(1180px 560px at 50% -12%, #DFD6C8 0%, var(--bg) 64%);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
@@ -84,7 +84,7 @@ export const THEME_CSS = `
   align-items: center;
   gap: 12px;
   padding: 0 14px;
-  background: linear-gradient(180deg, #131C2C, #0F1725);
+  background: linear-gradient(180deg, #DED6C7, #E1DACC);
   border: 1px solid var(--hair);
   border-radius: 10px;
 }
@@ -110,7 +110,7 @@ export const THEME_CSS = `
 #broker-shell button { font: inherit; pointer-events: auto; cursor: pointer; border: none; }
 #broker-shell button:focus-visible { outline: 1px solid var(--accent); outline-offset: 1px; }
 #broker-shell .cta {
-  background: linear-gradient(180deg, #4A88FF, #2F6BE0);
+  background: linear-gradient(180deg, #4A7C99, #3A6B8A);
   color: #fff;
   font-weight: 600;
   border-radius: 7px;
@@ -119,19 +119,19 @@ export const THEME_CSS = `
 }
 #broker-shell .cta:hover { filter: brightness(1.1); }
 #broker-shell .cta.closed {
-  background: linear-gradient(180deg, #3A4257, #2A3143);
+  background: linear-gradient(180deg, #C3B8A4, #CEC4B5);
   color: var(--text-2);
 }
 #broker-shell .ghost {
-  background: #182231;
+  background: #DBD2C2;
   color: var(--muted);
   border: 1px solid var(--hair);
   border-radius: 7px;
   padding: 7px 11px;
   white-space: nowrap;
 }
-#broker-shell .ghost:hover { color: var(--text-2); border-color: #33415A; }
-#broker-shell .ghost.arm { background: #3A2018; color: #FFB4A2; border-color: #6A3226; }
+#broker-shell .ghost:hover { color: var(--text-2); border-color: #C8BAA2; }
+#broker-shell .ghost.arm { background: #D9CFBE; color: #D9564A; border-color: #C7B9A0; }
 
 /* ---------- 中部三列 ---------- */
 #broker-shell .main {
@@ -158,8 +158,8 @@ export const THEME_CSS = `
   cursor: pointer;
   pointer-events: auto;
 }
-#broker-shell .qrow:hover { background: #16202F; }
-#broker-shell .qrow.sel { background: #182231; border-left-color: var(--accent); }
+#broker-shell .qrow:hover { background: #DDD4C4; }
+#broker-shell .qrow.sel { background: #DBD2C2; border-left-color: var(--accent); }
 #broker-shell .qrow .l1 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
 #broker-shell .qrow .l2 {
   display: flex;
@@ -178,7 +178,7 @@ export const THEME_CSS = `
 #broker-shell .mid-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
 #broker-shell .mid-name { font-size: 15px; font-weight: 600; }
 #broker-shell .mid-sub { font-size: 11px; color: var(--dim); }
-#broker-shell .mid-sub .sep { color: #39435A; margin: 0 5px; }
+#broker-shell .mid-sub .sep { color: #C2B7A3; margin: 0 5px; }
 #broker-shell .mid-price { display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; }
 #broker-shell .mid-price .px { font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
 #broker-shell .mid-price .chg { font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -191,17 +191,17 @@ export const THEME_CSS = `
   min-height: 132px;
   border: 1px solid var(--hair-2);
   border-radius: 8px;
-  background: linear-gradient(180deg, #0C121A, #0A0F16);
+  background: linear-gradient(180deg, #E5DFD3, #E7E1D6);
   overflow: hidden;
 }
-#broker-shell .chart-gutter { position: absolute; right: 0; top: 0; bottom: 0; width: 52px; border-left: 1px solid #16202D; }
+#broker-shell .chart-gutter { position: absolute; right: 0; top: 0; bottom: 0; width: 52px; border-left: 1px solid #DDD4C5; }
 #broker-shell .chart-plot { position: absolute; left: 0; right: 52px; top: 0; bottom: 0; }
-#broker-shell .chart-gridline { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed #1B2333; }
+#broker-shell .chart-gridline { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed #DAD0C0; }
 #broker-shell .chart-glabel {
   position: absolute;
   right: 6px;
   font-size: 10px;
-  color: #5A6478;
+  color: #AFA087;
   transform: translateY(-50%);
   font-variant-numeric: tabular-nums;
 }
@@ -241,7 +241,7 @@ export const THEME_CSS = `
   left: 8px;
   top: 5px;
   font-size: 10px;
-  color: #4C5769;
+  color: #B8AB94;
   letter-spacing: 0.4px;
 }
 
@@ -280,7 +280,7 @@ export const THEME_CSS = `
   flex: 1;
   padding: 7px 0;
   border-radius: 6px;
-  background: #182231;
+  background: #DBD2C2;
   color: var(--muted);
   border: 1px solid var(--hair);
   font-weight: 500;
@@ -290,7 +290,7 @@ export const THEME_CSS = `
 #broker-shell .seg button.on.buy { background: var(--up); }
 #broker-shell .seg button.on.sell { background: var(--down); }
 #broker-shell .seg.small button { padding: 4px 0; font-size: 11.5px; }
-#broker-shell .seg.small button.on { background: #243149; color: var(--text); }
+#broker-shell .seg.small button.on { background: #D1C5B1; color: var(--text); }
 #broker-shell .field {
   display: flex;
   align-items: center;
@@ -333,11 +333,11 @@ export const THEME_CSS = `
 }
 #broker-shell .submit.sell { background: var(--down); }
 #broker-shell .submit:hover:not(:disabled) { filter: brightness(1.08); }
-#broker-shell .submit:disabled { background: #1B2433; color: #5A6478; cursor: not-allowed; }
+#broker-shell .submit:disabled { background: #DAD0C0; color: #AFA087; cursor: not-allowed; }
 #broker-shell .ticket .result { font-size: 11.5px; line-height: 1.55; border-radius: 6px; padding: 6px 8px; display: none; }
 #broker-shell .ticket .result.show { display: block; }
 #broker-shell .ticket .result.ok { background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok-line); }
-#broker-shell .ticket .result.warn { background: rgba(224, 163, 62, 0.1); color: #E8C078; border: 1px solid #4A3A18; }
+#broker-shell .ticket .result.warn { background: rgba(224, 163, 62, 0.1); color: #B8862C; border: 1px solid #4A3A18; }
 #broker-shell .ticket .result.bad { background: var(--reject-soft); color: var(--reject); border: 1px solid var(--reject-line); }
 
 /* ---------- 底部：持仓 + 导师 ---------- */
@@ -348,7 +348,7 @@ export const THEME_CSS = `
 #broker-shell .pos-head .title { color: var(--muted); }
 #broker-shell .ptable { display: grid; grid-template-columns: 1.6fr 0.7fr 1fr 1fr 1.1fr 0.9fr; gap: 8px; }
 #broker-shell .ptable.hd { color: var(--dim); font-size: 11px; padding-bottom: 4px; border-bottom: 1px solid var(--hair-2); }
-#broker-shell .ptable.rw { padding: 5px 0; font-size: 12px; font-variant-numeric: tabular-nums; border-bottom: 1px solid #141B27; }
+#broker-shell .ptable.rw { padding: 5px 0; font-size: 12px; font-variant-numeric: tabular-nums; border-bottom: 1px solid #DFD7C9; }
 #broker-shell .ptable.rw .nm { color: var(--text-2); }
 #broker-shell .ptable.rw .nm em { font-style: normal; color: var(--dim); font-size: 11px; }
 #broker-shell .pos-body { flex: 1; min-height: 0; overflow-y: auto; }
@@ -372,6 +372,6 @@ export const THEME_CSS = `
 #broker-shell .mentor .foot { margin-top: auto; font-size: 10.5px; color: var(--dim); }
 
 #broker-shell ::-webkit-scrollbar { width: 6px; height: 6px; }
-#broker-shell ::-webkit-scrollbar-thumb { background: #2A3546; border-radius: 3px; }
+#broker-shell ::-webkit-scrollbar-thumb { background: #D0C4B0; border-radius: 3px; }
 #broker-shell ::-webkit-scrollbar-track { background: transparent; }
 `

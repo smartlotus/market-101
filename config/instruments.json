@@ -1,11 +1,36 @@
 {
+  "note": "标的宇宙。所有起始价均为本作**虚构教学值**，不代表任何真实报价。继承 Stage 0 的 7 只 A 股（原有字段逐字未改，仅新增 market/currency/lotSize/tick/unlockChapter），并按 GDD 的解锁阶梯补入 ETF / 公募基金 / 港股 / 美股 / 加密货币。港股每手股数照 GDD 清单（腾讯 100 / 美团 100 / 小米 200 / 港交所 100 / 友邦 500）。unlockChapter 决定该标的在哪一章解锁；未解锁的标的在自选列表里**可见但不可交易**（引导，非禁用——见 prd R3）。",
+  "lotNote": "lotSize=null 表示该市场按金额下单（场外基金、加密货币），不做「整手」校验。",
   "instruments": [
-    { "id": "600519", "code": "600519", "name": "贵州茅台", "board": "上交所主板", "industry": "白酒/蓝筹", "startPrice": 1480.00, "limitPct": 0.10 },
-    { "id": "601398", "code": "601398", "name": "工商银行", "board": "上交所主板", "industry": "银行", "startPrice": 6.20, "limitPct": 0.10 },
-    { "id": "600036", "code": "600036", "name": "招商银行", "board": "上交所主板", "industry": "银行/金融", "startPrice": 36.80, "limitPct": 0.10 },
-    { "id": "000858", "code": "000858", "name": "五粮液", "board": "深交所主板", "industry": "白酒", "startPrice": 148.00, "limitPct": 0.10 },
-    { "id": "000651", "code": "000651", "name": "格力电器", "board": "深交所主板", "industry": "家电", "startPrice": 39.50, "limitPct": 0.10 },
-    { "id": "300750", "code": "300750", "name": "宁德时代", "board": "创业板", "industry": "新能源/电池", "startPrice": 215.00, "limitPct": 0.20 },
-    { "id": "688981", "code": "688981", "name": "中芯国际", "board": "科创板", "industry": "半导体/芯片", "startPrice": 62.50, "limitPct": 0.20 }
+    { "id": "600519", "code": "600519", "name": "贵州茅台", "market": "A_SHARE", "board": "上交所主板", "industry": "白酒/蓝筹", "currency": "CNY", "startPrice": 1480.00, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+    { "id": "601398", "code": "601398", "name": "工商银行", "market": "A_SHARE", "board": "上交所主板", "industry": "银行", "currency": "CNY", "startPrice": 6.20, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+    { "id": "600036", "code": "600036", "name": "招商银行", "market": "A_SHARE", "board": "上交所主板", "industry": "银行/金融", "currency": "CNY", "startPrice": 36.80, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+    { "id": "000858", "code": "000858", "name": "五粮液", "market": "A_SHARE", "board": "深交所主板", "industry": "白酒", "currency": "CNY", "startPrice": 148.00, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+    { "id": "000651", "code": "000651", "name": "格力电器", "market": "A_SHARE", "board": "深交所主板", "industry": "家电", "currency": "CNY", "startPrice": 39.50, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+    { "id": "300750", "code": "300750", "name": "宁德时代", "market": "A_SHARE", "board": "创业板", "industry": "新能源/电池", "currency": "CNY", "startPrice": 215.00, "limitPct": 0.20, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+    { "id": "688981", "code": "688981", "name": "中芯国际", "market": "A_SHARE", "board": "科创板", "industry": "半导体/芯片", "currency": "CNY", "startPrice": 62.50, "limitPct": 0.20, "lotSize": 100, "tick": 0.01, "unlockChapter": 1 },
+
+    { "id": "510300", "code": "510300", "name": "沪深300ETF", "market": "ETF", "board": "上交所", "industry": "宽基指数", "currency": "CNY", "startPrice": 3.856, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 3,
+      "teach": "跟踪沪深300指数。买它等于一次买入三百家公司，不必猜对某一只。" },
+    { "id": "510050", "code": "510050", "name": "50ETF", "market": "ETF", "board": "上交所", "industry": "宽基指数", "currency": "CNY", "startPrice": 2.611, "limitPct": 0.10, "lotSize": 100, "tick": 0.01, "unlockChapter": 3,
+      "teach": "跟踪上证50指数；它同时是第八章期权的唯一标的。" },
+
+    { "id": "110020", "code": "110020", "name": "沪深300指数基金", "market": "FUND", "board": "场外", "industry": "指数型", "currency": "CNY", "startPrice": 1.5000, "limitPct": null, "lotSize": null, "tick": 0.0001, "unlockChapter": 3, "trackedInstrumentId": "510300", "minAmount": 100,
+      "teach": "场外基金：未知价交易，按当日收市后净值成交；100 元起，适合定投。" },
+    { "id": "000187", "code": "000187", "name": "安稳纯债基金", "market": "FUND", "board": "场外", "industry": "债券型", "currency": "CNY", "startPrice": 1.2000, "limitPct": null, "lotSize": null, "tick": 0.0001, "unlockChapter": 3, "trackedInstrumentId": null, "minAmount": 100, "navVolatility": 0.0012,
+      "teach": "债基波动远小于股票基金——用来讲「风险与收益匹配」。" },
+
+    { "id": "00700", "code": "00700", "name": "腾讯控股", "market": "HK", "board": "港交所主板", "industry": "互联网", "currency": "HKD", "startPrice": 412.60, "limitPct": null, "lotSize": 100, "tick": 0.01, "unlockChapter": 5 },
+    { "id": "03690", "code": "03690", "name": "美团-W", "market": "HK", "board": "港交所主板", "industry": "本地生活", "currency": "HKD", "startPrice": 128.40, "limitPct": null, "lotSize": 100, "tick": 0.01, "unlockChapter": 5 },
+    { "id": "01810", "code": "01810", "name": "小米集团-W", "market": "HK", "board": "港交所主板", "industry": "消费电子", "currency": "HKD", "startPrice": 18.62, "limitPct": null, "lotSize": 200, "tick": 0.01, "unlockChapter": 5 },
+    { "id": "00388", "code": "00388", "name": "香港交易所", "market": "HK", "board": "港交所主板", "industry": "金融基础设施", "currency": "HKD", "startPrice": 286.00, "limitPct": null, "lotSize": 100, "tick": 0.01, "unlockChapter": 5 },
+    { "id": "01299", "code": "01299", "name": "友邦保险", "market": "HK", "board": "港交所主板", "industry": "保险", "currency": "HKD", "startPrice": 62.40, "limitPct": null, "lotSize": 500, "tick": 0.01, "unlockChapter": 5 },
+
+    { "id": "AAPL", "code": "AAPL", "name": "苹果", "market": "US", "board": "NASDAQ", "industry": "消费电子", "currency": "USD", "startPrice": 232.50, "limitPct": null, "lotSize": 1, "tick": 0.01, "unlockChapter": 6 },
+    { "id": "TSLA", "code": "TSLA", "name": "特斯拉", "market": "US", "board": "NASDAQ", "industry": "汽车/新能源", "currency": "USD", "startPrice": 248.90, "limitPct": null, "lotSize": 1, "tick": 0.01, "unlockChapter": 6 },
+    { "id": "NVDA", "code": "NVDA", "name": "英伟达", "market": "US", "board": "NASDAQ", "industry": "半导体", "currency": "USD", "startPrice": 138.60, "limitPct": null, "lotSize": 1, "tick": 0.01, "unlockChapter": 6 },
+
+    { "id": "BTC", "code": "BTC", "name": "比特币", "market": "CRYPTO", "board": "加密市场", "industry": "数字货币", "currency": "USDT", "startPrice": 68000.0000, "limitPct": null, "lotSize": null, "tick": 0.0001, "unlockChapter": 7, "minAmount": 100 },
+    { "id": "ETH", "code": "ETH", "name": "以太坊", "market": "CRYPTO", "board": "加密市场", "industry": "数字货币", "currency": "USDT", "startPrice": 3200.0000, "limitPct": null, "lotSize": null, "tick": 0.0001, "unlockChapter": 7, "minAmount": 100 }
   ]
 }

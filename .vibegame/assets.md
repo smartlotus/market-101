@@ -62,6 +62,14 @@
 
 ## Missing / Blocked
 
+> **2026-09-17 更新：Codex 生图额度已耗尽。** 批量脚本 `assets/artifacts/batch_gen.py` 已备好 17 个素材的 prompt
+> （6 张导师表情 + 4 张场景 + 1 张黑天鹅 + 6 枚概念徽章），逐张重试 3 次后全部失败，
+> 末次返回官方限流：`You've hit your usage limit ... try again at **Sep 19th, 2026 6:13 PM**`。
+> **恢复时间：2026-09-19 18:13**。届时可原地重跑（脚本**断点续跑**，已完成的会跳过）：
+> `cd games/market-101 && "$(uv tool dir --bin)/vibegame" python assets/artifacts/batch_gen.py`
+> 进度与失败原因记录在 `.vibegame/logs/art-batch.jsonl`。
+> 在此之前，下列素材一律沿用**代码绘制**实现，不得用占位色块充数。
+
 - `mentor_expressions`（导师表情集：讲解 / 欣慰 / 提醒 / 偷笑 / 严肃，v2 新增：示弱·为难 / 告别·释然）——**未开始**，属于后续任务。
 - `mentor_distant`（导师侧影/背影）、`scene_graduation`（结业证书场景）——未开始。
 - `scene_office`（导师办公室）、`scene_cafe`（咖啡馆）、`scene_trading_floor`（交易大厅）、`scene_exchange`（交易所大厅）、`scene_late_night`（深夜书桌）、`event_black_swan`（黑天鹅插画）——未开始。

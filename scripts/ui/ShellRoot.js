@@ -38,17 +38,17 @@ const SHELL_EXT_CSS = `
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: radial-gradient(880px 460px at 50% 42%, #17202F 0%, rgba(5, 7, 12, 0.88) 72%);
+  background: radial-gradient(880px 460px at 50% 42%, #DCD3C4 0%, rgba(235, 230, 221, 0.88) 72%);
   pointer-events: auto;
 }
 #broker-shell[data-shell-mode="openAccount"] .shell-gate { display: flex; }
 #broker-shell .shell-gate .gate-card {
   width: 430px;
   padding: 22px 24px 20px;
-  background: linear-gradient(180deg, #131C2C, #0F1725);
+  background: linear-gradient(180deg, #DED6C7, #E1DACC);
   border: 1px solid var(--hair);
   border-radius: 12px;
-  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 18px 46px rgba(239, 236, 231, 0.55);
 }
 #broker-shell .shell-gate .hd { display: flex; align-items: baseline; gap: 9px; }
 #broker-shell .shell-gate .hd .t { font-size: 15px; font-weight: 600; }
@@ -76,7 +76,7 @@ const SHELL_EXT_CSS = `
   flex: 1;
   padding: 10px 0;
   border-radius: 8px;
-  background: linear-gradient(180deg, #4A88FF, #2F6BE0);
+  background: linear-gradient(180deg, #8A7551, #A48C64);
   color: #fff;
   font-weight: 600;
 }
@@ -124,7 +124,7 @@ const SHELL_EXT_CSS = `
 /* 顶栏全局菜单（PRD §3.2 / §4） */
 #broker-shell .topbar .menu-wrap { position: relative; }
 #broker-shell .topbar .menu-btn { position: relative; }
-#broker-shell .topbar .menu-btn.on { color: var(--text); border-color: #33415A; }
+#broker-shell .topbar .menu-btn.on { color: var(--text); border-color: #C8BAA2; }
 #broker-shell .gmenu {
   position: absolute;
   right: 0;
@@ -132,10 +132,10 @@ const SHELL_EXT_CSS = `
   z-index: 6;
   width: 232px;
   padding: 8px;
-  background: #101725;
+  background: #E1D9CC;
   border: 1px solid var(--hair);
   border-radius: 10px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 14px 34px rgba(239, 236, 231, 0.6);
   pointer-events: auto;
 }
 #broker-shell .gmenu.ch-hidden { display: none; }
@@ -150,9 +150,9 @@ const SHELL_EXT_CSS = `
   color: var(--text-2);
   font-size: 12px;
 }
-#broker-shell .gmenu button:hover { background: #182231; color: var(--text); }
-#broker-shell .gmenu button.on { background: #182231; color: var(--text); font-weight: 600; border-left: 2px solid var(--accent); }
-#broker-shell .gmenu button.arm { background: #3A2018; color: #FFB4A2; }
+#broker-shell .gmenu button:hover { background: #DBD2C2; color: var(--text); }
+#broker-shell .gmenu button.on { background: #DBD2C2; color: var(--text); font-weight: 600; border-left: 2px solid var(--accent); }
+#broker-shell .gmenu button.arm { background: #D9CFBE; color: #605138; }
 #broker-shell .gmenu .sep { height: 1px; background: var(--hair-2); margin: 6px 2px; }
 
 /* 节拍声明的顶栏强调（beat.highlight，节拍 1.6 = 「进入下一交易日」）。
@@ -161,7 +161,7 @@ const SHELL_EXT_CSS = `
 #broker-shell .topbar .cta.hl {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(224, 163, 62, 0.16), 0 6px 16px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 4px rgba(224, 163, 62, 0.16), 0 6px 16px rgba(239, 236, 231, 0.45);
   animation: broker-cta-hl 1400ms ease-in-out infinite;
 }
 @keyframes broker-cta-hl {

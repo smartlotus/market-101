@@ -17,40 +17,40 @@
 /** 与 Stage 0 `scripts/ui/theme.js` 逐字相同的色板 + 章节层追加的几个中性色。 */
 const PALETTE = `
   /* —— 价格方向色（唯一来源）—— */
-  --up: #F5484A;
-  --down: #1DBA70;
+  --up: #C2402F;
+  --down: #2E7D5B;
   --up-soft: color-mix(in srgb, var(--up) 16%, transparent);
   --down-soft: color-mix(in srgb, var(--down) 16%, transparent);
 
   /* —— 委托结果色：与方向色解耦 —— 成交 = 蓝青，拒单 = 琥珀 —— */
-  --ok: #7FD3E8;
-  --ok-soft: rgba(79, 179, 201, 0.12);
-  --ok-line: #1F4A5A;
-  --reject: #F2CC8A;
-  --reject-soft: rgba(224, 163, 62, 0.18);
-  --reject-line: #6E5522;
+  --ok: #2F6E7A;
+  --ok-soft: rgba(47, 110, 122, 0.12);
+  --ok-line: #2F6E7A;
+  --reject: #8A5A12;
+  --reject-soft: rgba(138, 90, 18, 0.16);
+  --reject-line: #8A5A12;
 
-  --bg: #05070C;
-  --screen: #0B1018;
-  --panel: #101725;
-  --panel-2: #141B27;
-  --sunken: #0E1520;
-  --hair: #232D3F;
-  --hair-2: #1B2333;
-  --border: #26314A;
-  --text: #E6EAF2;
-  --text-2: #C6CDDA;
-  --muted: #8B96A9;
-  --dim: #6C7789;
-  --accent: #3D7EFF;
-  --gold: #E0A33E;
+  --bg: #D5C7AE;
+  --screen: #E2D7C2;
+  --panel: #FBF5E9;
+  --panel-2: #F1E8D6;
+  --sunken: #E7DCC7;
+  --hair: #C4B393;
+  --hair-2: #CFC0A1;
+  --border: #8A7350;
+  --text: #33291F;
+  --text-2: #57493A;
+  --muted: #7E6E56;
+  --dim: #A08B6C;
+  --accent: #3A6B8A;
+  --gold: #D89A2C;
 
   /* —— 章节层专用（场景底 / 分档）—— */
   --scene-warm: #F0D9A8;
   --scene-marble: #C9AE83;
-  --tier-green: #1DBA70;
-  --tier-yellow: #E0A33E;
-  --tier-red: #F5484A;
+  --tier-green: #2E7D5B;
+  --tier-yellow: #D89A2C;
+  --tier-red: #C2402F;
 `
 
 const FONT_STACK = `-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
@@ -86,7 +86,7 @@ ${PALETTE}
 
 /* 通用按钮：与券商壳 .cta / .ghost 同一手感 */
 #chapter-root .ch-btn {
-  background: linear-gradient(180deg, #4A88FF, #2F6BE0);
+  background: linear-gradient(180deg, #4A7C99, #3A6B8A);
   color: #fff;
   font-weight: 600;
   border-radius: 7px;
@@ -95,14 +95,14 @@ ${PALETTE}
 }
 #chapter-root .ch-btn:hover { filter: brightness(1.1); }
 #chapter-root .ch-btn.ghost {
-  background: #182231;
+  background: #DBD2C2;
   color: var(--text-2);
   border: 1px solid var(--hair);
   font-weight: 500;
 }
-#chapter-root .ch-btn.ghost:hover { border-color: #33415A; color: var(--text); }
+#chapter-root .ch-btn.ghost:hover { border-color: #C8BAA2; color: var(--text); }
 #chapter-root .ch-btn.gold {
-  background: linear-gradient(180deg, #E9B75A, #CE8F27);
+  background: linear-gradient(180deg, #B8862C, #A8721F);
   color: #2A1D06;
 }
 #chapter-root .ch-btn.sm { padding: 5px 10px; font-size: 11.5px; border-radius: 6px; }
@@ -127,11 +127,11 @@ ${PALETTE}
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(5, 7, 12, 0.86) 0%, rgba(5, 7, 12, 0.22) 34%, rgba(5, 7, 12, 0.9) 100%),
+    linear-gradient(180deg, rgba(235, 230, 221, 0.86) 0%, rgba(235, 230, 221, 0.22) 34%, rgba(235, 230, 221, 0.9) 100%),
     radial-gradient(760px 420px at 50% 46%, rgba(240, 217, 168, 0.12) 0%, transparent 70%);
 }
 #chapter-root .ch-scene.band .ch-scene-veil {
-  background: linear-gradient(180deg, rgba(5, 7, 12, 0.96) 0%, rgba(5, 7, 12, 0.72) 60%);
+  background: linear-gradient(180deg, rgba(235, 230, 221, 0.96) 0%, rgba(235, 230, 221, 0.72) 60%);
 }
 
 /* —— 代码绘制的场景底（manifest key 缺省时的兜底，plan R7）—— */
@@ -209,7 +209,7 @@ ${PALETTE}
   border-radius: 4px;
   background:
     repeating-linear-gradient(90deg, rgba(240, 217, 168, 0.14) 0 2px, transparent 2px 26px),
-    linear-gradient(180deg, rgba(20, 24, 30, 0.9), rgba(12, 15, 20, 0.94));
+    linear-gradient(180deg, rgba(223, 218, 208, 0.9), rgba(231, 225, 214, 0.94));
   border: 1px solid rgba(240, 217, 168, 0.18);
 }
 /* 兜底用的通用室内底：无柱子，只有纵深与光池（场景 id 未知时也不出现空白矩形） */
@@ -218,8 +218,8 @@ ${PALETTE}
 #chapter-root .ch-draw.generic .grille { display: none; }
 #chapter-root .ch-draw.generic .wall {
   background:
-    radial-gradient(760px 340px at 50% 88%, rgba(160, 190, 230, 0.14) 0%, transparent 72%),
-    linear-gradient(180deg, #141A24 0%, #1C2432 60%, #101620 100%);
+    radial-gradient(760px 340px at 50% 88%, rgba(109, 92, 64, 0.14) 0%, transparent 72%),
+    linear-gradient(180deg, #E0D8CA 0%, #DAD0C0 60%, #E2DBCE 100%);
 }
 
 #chapter-root .ch-scene-caption {
@@ -230,7 +230,7 @@ ${PALETTE}
   align-items: baseline;
   gap: 9px;
   color: var(--text-2);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 10px rgba(239, 236, 231, 0.8);
 }
 #chapter-root .ch-scene-caption .who { font-size: 15px; font-weight: 600; }
 #chapter-root .ch-scene-caption .where { font-size: 11px; color: var(--dim); }
@@ -254,7 +254,7 @@ ${PALETTE}
   height: 186px;
   border-radius: 4px;
   background: linear-gradient(174deg, #FBF3E0 0%, #EADFC4 100%);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(255, 255, 255, 0.16) inset;
+  box-shadow: 0 14px 34px rgba(239, 236, 231, 0.62), 0 0 0 1px rgba(49, 43, 33, 0.16) inset;
   transition: transform 140ms ease-out, box-shadow 140ms ease-out;
 }
 #chapter-root .ch-prop .paper::before {
@@ -283,14 +283,14 @@ ${PALETTE}
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 2px solid rgba(178, 58, 58, 0.72);
-  background: rgba(178, 58, 58, 0.14);
+  border: 2px solid rgba(174, 153, 116, 0.72);
+  background: rgba(174, 153, 116, 0.14);
 }
-#chapter-root .ch-prop:hover .paper { transform: translateY(-5px) rotate(-1.2deg); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); }
+#chapter-root .ch-prop:hover .paper { transform: translateY(-5px) rotate(-1.2deg); box-shadow: 0 20px 40px rgba(239, 236, 231, 0.7); }
 #chapter-root .ch-prop .cap {
   font-size: 12px;
   color: var(--text);
-  background: rgba(8, 11, 17, 0.82);
+  background: rgba(233, 227, 217, 0.82);
   border: 1px solid var(--hair);
   border-radius: 999px;
   padding: 3px 11px;
@@ -314,8 +314,8 @@ ${PALETTE}
   border-radius: 14px;
   border: 1px solid var(--border);
   background:
-    linear-gradient(180deg, rgba(20, 27, 39, 0.96) 0%, rgba(12, 17, 25, 0.97) 100%);
-  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    linear-gradient(180deg, rgba(223, 215, 201, 0.96) 0%, rgba(229, 223, 212, 0.97) 100%);
+  box-shadow: 0 22px 54px rgba(239, 236, 231, 0.62), 0 0 0 1px rgba(49, 43, 33, 0.03) inset;
   pointer-events: auto;
 }
 #chapter-root .ch-dialogue.bandless { bottom: 78px; }
@@ -328,7 +328,7 @@ ${PALETTE}
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--hair);
-  background: linear-gradient(180deg, #1A2333, #0F1622);
+  background: linear-gradient(180deg, #DAD1C0, #E2DBCE);
 }
 #chapter-root .ch-portrait {
   width: 100%;
@@ -385,11 +385,11 @@ ${PALETTE}
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  background: #182231;
+  background: #DBD2C2;
   border: 1px solid var(--hair);
   color: var(--muted);
 }
-#chapter-root .ch-tool:hover { color: var(--text); border-color: #33415A; }
+#chapter-root .ch-tool:hover { color: var(--text); border-color: #C8BAA2; }
 #chapter-root .ch-tool.on { color: var(--gold); border-color: #4A3A18; background: #221C11; }
 #chapter-root .ch-tool svg { display: block; }
 
@@ -442,7 +442,7 @@ ${PALETTE}
   font-size: 12.5px;
   line-height: 1.6;
 }
-#chapter-root .ch-opt:hover { border-color: #33415A; color: var(--text); background: #131C2B; }
+#chapter-root .ch-opt:hover { border-color: #C8BAA2; color: var(--text); background: #DED6C8; }
 #chapter-root .ch-opt .mk {
   flex: 0 0 15px;
   height: 15px;
@@ -450,15 +450,15 @@ ${PALETTE}
   border-radius: 50%;
   border: 1px solid var(--dim);
 }
-#chapter-root .ch-opt.picked { border-color: var(--accent); background: #16202F; color: var(--text); }
-#chapter-root .ch-opt.picked .mk { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 3px rgba(61, 126, 255, 0.18) inset; }
+#chapter-root .ch-opt.picked { border-color: var(--accent); background: #DDD4C4; color: var(--text); }
+#chapter-root .ch-opt.picked .mk { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 3px rgba(144, 122, 85, 0.18) inset; }
 #chapter-root .ch-feedback {
   margin-top: 2px;
   padding: 9px 12px;
   border-radius: 8px;
   background: var(--ok-soft);
   border: 1px solid var(--ok-line);
-  color: #CFEAF3;
+  color: #DCEBEE;
   font-size: 12.5px;
   line-height: 1.68;
 }
@@ -488,8 +488,8 @@ ${PALETTE}
   pointer-events: auto;
   border-radius: 11px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(20, 27, 39, 0.95), rgba(13, 18, 27, 0.96));
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, rgba(223, 215, 201, 0.95), rgba(229, 222, 210, 0.96));
+  box-shadow: 0 14px 34px rgba(239, 236, 231, 0.5);
   padding: 12px 13px;
 }
 #chapter-root .ch-card .hd { display: flex; align-items: baseline; gap: 8px; }
@@ -500,7 +500,7 @@ ${PALETTE}
 #chapter-root .ch-chip {
   font-size: 10.5px;
   color: var(--text-2);
-  background: #182231;
+  background: #DBD2C2;
   border: 1px solid var(--hair);
   border-radius: 4px;
   padding: 1px 6px;
@@ -530,9 +530,9 @@ ${PALETTE}
   flex-direction: column;
   gap: 8px;
 }
-#chapter-root .ch-tier .line { font-size: 12px; color: #E8C078; line-height: 1.6; }
-#chapter-root .ch-tier.red { border-color: #5A2226; background: rgba(245, 72, 74, 0.12); }
-#chapter-root .ch-tier.red .line { color: #F5A0A1; }
+#chapter-root .ch-tier .line { font-size: 12px; color: #B8862C; line-height: 1.6; }
+#chapter-root .ch-tier.red { border-color: #CDC0AA; background: rgba(144, 122, 84, 0.12); }
+#chapter-root .ch-tier.red .line { color: #C2402F; }
 #chapter-root .ch-tier button { align-self: flex-start; }
 #chapter-root .ch-owed { margin-top: 10px; border-top: 1px solid var(--hair-2); padding-top: 8px; }
 #chapter-root .ch-owed .k { font-size: 10.5px; color: var(--dim); }
@@ -565,14 +565,14 @@ ${PALETTE}
   align-items: center;
   gap: 7px;
   margin-top: 2px;
-  background: #182231;
+  background: #DBD2C2;
   color: var(--text-2);
   border: 1px solid var(--hair);
   border-radius: 8px;
   padding: 7px 11px;
   font-size: 12px;
 }
-#chapter-root .ch-dict-entry:hover { border-color: #33415A; color: var(--text); }
+#chapter-root .ch-dict-entry:hover { border-color: #C8BAA2; color: var(--text); }
 
 /* 导师对话历史入口（与词典入口同一款式、同一层，不暂停游戏） */
 #chapter-root .ch-hist-entry {
@@ -582,14 +582,14 @@ ${PALETTE}
   align-items: center;
   gap: 7px;
   margin-top: 2px;
-  background: #182231;
+  background: #DBD2C2;
   color: var(--text-2);
   border: 1px solid var(--hair);
   border-radius: 8px;
   padding: 7px 11px;
   font-size: 12px;
 }
-#chapter-root .ch-hist-entry:hover { border-color: #33415A; color: var(--text); }
+#chapter-root .ch-hist-entry:hover { border-color: #C8BAA2; color: var(--text); }
 
 /* ==========================================================================
    作用域二：面板层（ChapterOverlay 挂到 #game-container，不是 #chapter-root 的后代）
@@ -597,7 +597,7 @@ ${PALETTE}
 .ch-scrim {
   position: absolute;
   inset: 0;
-  background: rgba(3, 5, 9, 0.74);
+  background: rgba(237, 232, 224, 0.74);
   backdrop-filter: blur(2.5px);
   z-index: 20;
 }
@@ -612,8 +612,8 @@ ${PALETTE}
   border-radius: 14px !important;
   border: 1px solid var(--border) !important;
   background:
-    linear-gradient(180deg, rgba(20, 27, 39, 0.99) 0%, rgba(11, 16, 24, 0.995) 100%) !important;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(255, 255, 255, 0.04) inset !important;
+    linear-gradient(180deg, rgba(223, 215, 201, 0.99) 0%, rgba(230, 224, 213, 0.995) 100%) !important;
+  box-shadow: 0 30px 80px rgba(239, 236, 231, 0.72), 0 0 0 1px rgba(49, 43, 33, 0.04) inset !important;
   overflow: hidden;
   color: var(--text);
   font-family: ${FONT_STACK};
@@ -634,7 +634,7 @@ ${PALETTE}
   gap: 10px;
   padding: 14px 20px 12px;
   border-bottom: 1px solid var(--hair-2);
-  background: linear-gradient(180deg, rgba(26, 35, 50, 0.9), rgba(17, 23, 34, 0.6));
+  background: linear-gradient(180deg, rgba(219, 209, 193, 0.9), rgba(226, 218, 205, 0.6));
 }
 .ch-panel .ch-phd .t { font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: 0.4px; }
 .ch-panel .ch-phd .kind { font-size: 10.5px; color: var(--dim); border: 1px solid var(--hair); border-radius: 4px; padding: 0 6px; line-height: 17px; }
@@ -655,13 +655,13 @@ ${PALETTE}
   gap: 9px;
   padding: 12px 20px 14px;
   border-top: 1px solid var(--hair-2);
-  background: rgba(9, 13, 20, 0.7);
+  background: rgba(232, 226, 215, 0.7);
 }
 .ch-panel .ch-pfoot .spacer { margin-left: auto; }
 .ch-panel .ch-pfoot .note { font-size: 11px; color: var(--dim); }
 
 .ch-panel .ch-btn {
-  background: linear-gradient(180deg, #4A88FF, #2F6BE0);
+  background: linear-gradient(180deg, #4A7C99, #3A6B8A);
   color: #fff;
   font-weight: 600;
   border-radius: 7px;
@@ -669,16 +669,16 @@ ${PALETTE}
   white-space: nowrap;
 }
 .ch-panel .ch-btn:hover { filter: brightness(1.1); }
-.ch-panel .ch-btn.ghost { background: #182231; color: var(--text-2); border: 1px solid var(--hair); font-weight: 500; }
-.ch-panel .ch-btn.ghost:hover { border-color: #33415A; color: var(--text); }
-.ch-panel .ch-btn.gold { background: linear-gradient(180deg, #E9B75A, #CE8F27); color: #2A1D06; }
+.ch-panel .ch-btn.ghost { background: #DBD2C2; color: var(--text-2); border: 1px solid var(--hair); font-weight: 500; }
+.ch-panel .ch-btn.ghost:hover { border-color: #C8BAA2; color: var(--text); }
+.ch-panel .ch-btn.gold { background: linear-gradient(180deg, #B8862C, #A8721F); color: #2A1D06; }
 .ch-panel .ch-btn.sm { padding: 5px 11px; font-size: 11.5px; border-radius: 6px; }
 
 /* —— 块：通用 —— */
 .ch-panel .ch-blk { position: relative; }
 /* 单条目块（text / bigNumber / formula / 卡片）的读标记落在整块右上角 */
 .ch-panel .ch-blk.readable { cursor: pointer; border-radius: 9px; border-left: 3px solid transparent; padding-left: 5px; }
-.ch-panel .ch-blk.readable:hover { background: rgba(24, 34, 49, 0.55); }
+.ch-panel .ch-blk.readable:hover { background: rgba(219, 210, 194, 0.55); }
 .ch-panel .ch-blk.readable.on { border-left-color: var(--ok-line); }
 .ch-panel .ch-blk > .mk,
 .ch-panel .ch-ev > .mk { position: absolute; right: 0; top: 0; display: block; }
@@ -689,7 +689,7 @@ ${PALETTE}
 .ch-panel .ch-big {
   border-radius: 11px;
   border: 1px solid var(--hair);
-  background: linear-gradient(180deg, #131C2B, #0D141F);
+  background: linear-gradient(180deg, #DED6C8, #E4DCD0);
   padding: 13px 16px;
 }
 .ch-panel .ch-big .lab { font-size: 11px; color: var(--dim); }
@@ -713,8 +713,8 @@ ${PALETTE}
 .ch-panel .ch-kvr .v { margin-left: auto; font-size: 14px; color: var(--text); font-variant-numeric: tabular-nums; }
 .ch-panel .ch-kvr .mk { flex: 0 0 16px; height: 16px; }
 .ch-panel .ch-kv.readable .ch-kvr { cursor: pointer; border-left-color: var(--hair); }
-.ch-panel .ch-kv.readable .ch-kvr:hover { background: #16202F; }
-.ch-panel .ch-kv.readable .ch-kvr.on { border-left-color: var(--ok-line); background: #101B24; }
+.ch-panel .ch-kv.readable .ch-kvr:hover { background: #DDD4C4; }
+.ch-panel .ch-kv.readable .ch-kvr.on { border-left-color: var(--ok-line); background: #E1DACC; }
 .ch-panel .ch-kvr.unresolved .v { color: var(--dim); }
 
 .ch-panel .ch-list { display: flex; flex-direction: column; gap: 6px; }
@@ -736,7 +736,7 @@ ${PALETTE}
   position: relative;
   border-radius: 10px;
   border: 1px solid var(--hair);
-  background: linear-gradient(180deg, #131C2B, #0E1520);
+  background: linear-gradient(180deg, #DED6C8, #E3DCCF);
   padding: 12px 14px;
 }
 /* 读标记：卡片类的标记落在右上角，行类是行尾（图标 only，不新增文案） */
@@ -744,8 +744,8 @@ ${PALETTE}
 .ch-panel .ch-card-blk.readable .hd { padding-right: 22px; }
 .ch-panel .ch-card-blk.hl { border-color: var(--hair); cursor: pointer; border-left: 3px solid transparent; }
 .ch-panel .ch-card-blk.readable { cursor: pointer; border-left: 3px solid var(--hair); }
-.ch-panel .ch-card-blk.readable:hover { background: #16202F; }
-.ch-panel .ch-card-blk.readable.on { border-left-color: var(--ok-line); background: #101B24; }
+.ch-panel .ch-card-blk.readable:hover { background: #DDD4C4; }
+.ch-panel .ch-card-blk.readable.on { border-left-color: var(--ok-line); background: #E1DACC; }
 .ch-panel .ch-card-blk .hd { display: flex; align-items: center; gap: 8px; }
 .ch-panel .ch-card-blk .hd .t { font-size: 13.5px; font-weight: 600; color: var(--text); }
 .ch-panel .ch-card-blk .hd .tag { font-size: 10.5px; color: var(--gold); border: 1px solid #4A3A18; border-radius: 4px; padding: 0 6px; line-height: 16px; }
@@ -757,7 +757,7 @@ ${PALETTE}
 .ch-panel .ch-chip {
   font-size: 10.5px;
   color: var(--text-2);
-  background: #182231;
+  background: #DBD2C2;
   border: 1px solid var(--hair);
   border-radius: 4px;
   padding: 1px 6px;
@@ -773,7 +773,7 @@ ${PALETTE}
 .ch-panel .ch-formula .expr {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 12.5px;
-  color: #CFEAF3;
+  color: #DCEBEE;
   line-height: 1.8;
   white-space: pre-wrap;
   word-break: break-word;
@@ -788,7 +788,7 @@ ${PALETTE}
   padding: 11px 13px;
   border-left: 3px solid var(--hair-2);
 }
-.ch-panel .ch-step.on { border-left-color: var(--accent); background: #121C2B; }
+.ch-panel .ch-step.on { border-left-color: var(--accent); background: #DFD6C8; }
 .ch-panel .ch-step .t { font-size: 12.5px; font-weight: 600; color: var(--text); }
 .ch-panel .ch-step .x { font-size: 12.5px; color: var(--text-2); line-height: 1.74; margin-top: 5px; }
 .ch-panel .ch-step .n { font-size: 10.5px; color: var(--dim); font-variant-numeric: tabular-nums; }
@@ -808,16 +808,16 @@ ${PALETTE}
   line-height: 1.68;
   text-align: left;
 }
-.ch-panel .ch-opt:hover { border-color: #33415A; color: var(--text); background: #131C2B; }
+.ch-panel .ch-opt:hover { border-color: #C8BAA2; color: var(--text); background: #DED6C8; }
 .ch-panel .ch-opt .mk { flex: 0 0 15px; height: 15px; margin-top: 3px; border-radius: 50%; border: 1px solid var(--dim); }
-.ch-panel .ch-opt.picked { border-color: var(--accent); background: #16202F; color: var(--text); }
+.ch-panel .ch-opt.picked { border-color: var(--accent); background: #DDD4C4; color: var(--text); }
 .ch-panel .ch-opt.picked .mk { border-color: var(--accent); background: var(--accent); }
 .ch-panel .ch-feedback {
   padding: 10px 13px;
   border-radius: 9px;
   background: var(--ok-soft);
   border: 1px solid var(--ok-line);
-  color: #CFEAF3;
+  color: #DCEBEE;
   font-size: 12.5px;
   line-height: 1.72;
 }
@@ -840,21 +840,21 @@ ${PALETTE}
   min-width: 76px;
 }
 .ch-panel .ch-grade .g { font-size: 18px; font-weight: 600; color: var(--text-2); }
-.ch-panel .ch-grade.on { border-color: var(--accent); background: #16202F; }
+.ch-panel .ch-grade.on { border-color: var(--accent); background: #DDD4C4; }
 .ch-panel .ch-grade.on .g { color: var(--text); }
 .ch-panel .ch-grade .r { font-size: 10.5px; color: var(--dim); font-variant-numeric: tabular-nums; }
 
 /* 词典面板（挂在 #chapter-root 下，不暂停游戏） */
 #chapter-root .ch-dict { position: absolute; inset: 0; pointer-events: auto; display: flex; align-items: center; justify-content: center; }
-#chapter-root .ch-dict .veil { position: absolute; inset: 0; background: rgba(3, 5, 9, 0.72); backdrop-filter: blur(2px); }
+#chapter-root .ch-dict .veil { position: absolute; inset: 0; background: rgba(237, 232, 224, 0.72); backdrop-filter: blur(2px); }
 #chapter-root .ch-dict .sheet {
   position: relative;
   width: 1020px;
   height: 660px;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(20, 27, 39, 0.99), rgba(10, 15, 22, 0.995));
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.72);
+  background: linear-gradient(180deg, rgba(223, 215, 201, 0.99), rgba(231, 225, 214, 0.995));
+  box-shadow: 0 30px 80px rgba(239, 236, 231, 0.72);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -894,12 +894,12 @@ ${PALETTE}
 #chapter-root .ch-dict .tab {
   font-size: 12px;
   color: var(--muted);
-  background: #182231;
+  background: #DBD2C2;
   border: 1px solid var(--hair);
   border-radius: 7px;
   padding: 6px 13px;
 }
-#chapter-root .ch-dict .tab.on { color: #fff; background: #243149; border-color: #33415A; font-weight: 600; }
+#chapter-root .ch-dict .tab.on { color: #fff; background: #D1C5B1; border-color: #C8BAA2; font-weight: 600; }
 #chapter-root .ch-dict .body { flex: 1; min-height: 0; display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 0; }
 #chapter-root .ch-dict .idx {
   border-right: 1px solid var(--hair-2);
@@ -921,8 +921,8 @@ ${PALETTE}
   align-items: center;
   gap: 7px;
 }
-#chapter-root .ch-dict .entry:hover { background: #16202F; color: var(--text); }
-#chapter-root .ch-dict .entry.on { background: #16202F; border-color: var(--hair); color: var(--text); font-weight: 600; }
+#chapter-root .ch-dict .entry:hover { background: #DDD4C4; color: var(--text); }
+#chapter-root .ch-dict .entry.on { background: #DDD4C4; border-color: var(--hair); color: var(--text); font-weight: 600; }
 #chapter-root .ch-dict .entry .tag { margin-left: auto; font-size: 10px; color: var(--gold); }
 /* 「下一章你会用到它」只是指路：**不加禁用、不加灰行**（PRD §3），故颜色照常，只加一个标签 */
 #chapter-root .ch-dict .entry .tag.next { color: var(--muted); margin-left: 6px; }
@@ -950,7 +950,7 @@ ${PALETTE}
 #chapter-root .ch-dict .ch-formula .expr {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 12.5px;
-  color: #CFEAF3;
+  color: #DCEBEE;
   line-height: 1.8;
   white-space: pre-wrap;
   word-break: break-word;
@@ -961,13 +961,13 @@ ${PALETTE}
 #chapter-root .ch-dict .ch-grades { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
 #chapter-root .ch-dict .ch-grade { border: 1px solid var(--hair); border-radius: 8px; padding: 7px 11px; background: var(--sunken); min-width: 104px; }
 #chapter-root .ch-dict .ch-grade .g { font-size: 18px; font-weight: 600; color: var(--text-2); }
-#chapter-root .ch-dict .ch-grade.on { border-color: var(--accent); background: #16202F; }
+#chapter-root .ch-dict .ch-grade.on { border-color: var(--accent); background: #DDD4C4; }
 #chapter-root .ch-dict .ch-grade.on .g { color: var(--text); }
 #chapter-root .ch-dict .ch-grade .r { font-size: 10.5px; color: var(--dim); font-variant-numeric: tabular-nums; line-height: 1.6; }
 #chapter-root .ch-dict .ch-chip {
   font-size: 10.5px;
   color: var(--text-2);
-  background: #182231;
+  background: #DBD2C2;
   border: 1px solid var(--hair);
   border-radius: 4px;
   padding: 1px 6px;
@@ -977,7 +977,7 @@ ${PALETTE}
 #chapter-root .ch-dict .idx::-webkit-scrollbar,
 #chapter-root .ch-dict .detail::-webkit-scrollbar { width: 6px; }
 #chapter-root .ch-dict .idx::-webkit-scrollbar-thumb,
-#chapter-root .ch-dict .detail::-webkit-scrollbar-thumb { background: #2A3546; border-radius: 3px; }
+#chapter-root .ch-dict .detail::-webkit-scrollbar-thumb { background: #D0C4B0; border-radius: 3px; }
 
 /* ---- 导师对话历史（复用词典的浮层骨架，换成一段一段的台词）---- */
 #chapter-root .ch-hist .hist-settings { display: flex; gap: 6px; padding: 12px 18px 0; }
@@ -1002,21 +1002,21 @@ ${PALETTE}
   padding: 16px 15px;
 }
 #chapter-root .ch-hist .hist-body::-webkit-scrollbar { width: 6px; }
-#chapter-root .ch-hist .hist-body::-webkit-scrollbar-thumb { background: #2A3546; border-radius: 3px; }
+#chapter-root .ch-hist .hist-body::-webkit-scrollbar-thumb { background: #D0C4B0; border-radius: 3px; }
 
 /* ---- 对话层的「随时可以问他」两问（字面来自数据 copy.askBack）---- */
 #chapter-root .ch-dialogue .ch-askbox { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
 #chapter-root .ch-dialogue .ch-askbox .ch-question { width: 100%; font-size: 12px; color: var(--muted); }
 #chapter-root .ch-dialogue .ch-askbox .ch-ask-opt {
   pointer-events: auto;
-  background: #182231;
+  background: #DBD2C2;
   color: var(--text-2);
   border: 1px solid var(--hair);
   border-radius: 20px;
   padding: 6px 13px;
   font-size: 12px;
 }
-#chapter-root .ch-dialogue .ch-askbox .ch-ask-opt:hover { border-color: #33415A; color: var(--text); }
+#chapter-root .ch-dialogue .ch-askbox .ch-ask-opt:hover { border-color: #C8BAA2; color: var(--text); }
 
 /* ---- 进度与解锁（PRD §5）---- 复用词典的浮层骨架（.ch-dict .sheet），正文换成四段清单 ---- */
 #chapter-root .ch-prog .body.prog-body { display: block; overflow-y: auto; padding: 6px 20px 22px; }
@@ -1073,7 +1073,7 @@ ${PALETTE}
 }
 #chapter-root .ch-prog .prog-note { margin-top: 18px; }
 #chapter-root .ch-prog .body.prog-body::-webkit-scrollbar { width: 6px; }
-#chapter-root .ch-prog .body.prog-body::-webkit-scrollbar-thumb { background: #2A3546; border-radius: 3px; }
+#chapter-root .ch-prog .body.prog-body::-webkit-scrollbar-thumb { background: #D0C4B0; border-radius: 3px; }
 
 /* ---- 净值曲线 + 结业评定（PRD §6）---- 曲线全部 DOM/CSS/SVG，轴标签与数值都是 DOM 文本 ---- */
 #chapter-root .ch-nav .body.nav-body { display: block; overflow-y: auto; padding: 6px 20px 22px; }
@@ -1118,7 +1118,7 @@ ${PALETTE}
   transform: translateY(-50%);
   font-size: 10.5px;
   color: var(--gold);
-  background: rgba(5, 7, 12, 0.82);
+  background: rgba(235, 230, 221, 0.82);
   border: 1px solid var(--reject-line);
   border-radius: 6px;
   padding: 1px 6px;
@@ -1230,7 +1230,7 @@ ${PALETTE}
   line-height: 1.78;
 }
 #chapter-root .ch-nav .body.nav-body::-webkit-scrollbar { width: 6px; }
-#chapter-root .ch-nav .body.nav-body::-webkit-scrollbar-thumb { background: #2A3546; border-radius: 3px; }
+#chapter-root .ch-nav .body.nav-body::-webkit-scrollbar-thumb { background: #D0C4B0; border-radius: 3px; }
 
 /* ==========================================================================
    第四章「隔壁的三栋楼」—— 全部由代码绘制（无位图、无 canvas）
@@ -1243,7 +1243,7 @@ ${PALETTE}
   right: 0;
   top: 0;
   height: 62%;
-  background: linear-gradient(180deg, #0B1220 0%, #16203A 58%, #22304E 100%);
+  background: linear-gradient(180deg, #E4DDD1 0%, #D9D0BF 58%, #D0C4B0 100%);
 }
 #chapter-root .ch-draw .glow {
   position: absolute;
@@ -1259,8 +1259,8 @@ ${PALETTE}
   position: absolute;
   top: 26%;
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, #1A2436 0%, #131B29 100%);
-  border: 1px solid rgba(120, 145, 190, 0.14);
+  background: linear-gradient(180deg, #D9D0BF 0%, #DFD7C9 100%);
+  border: 1px solid rgba(147, 125, 86, 0.14);
 }
 #chapter-root .ch-draw .pave {
   position: absolute;
@@ -1268,7 +1268,7 @@ ${PALETTE}
   right: 0;
   bottom: 26%;
   height: 10%;
-  background: linear-gradient(180deg, #2A2C33, #1D1F25);
+  background: linear-gradient(180deg, #D2CABC, #DBD4C8);
 }
 #chapter-root .ch-draw .kerb {
   position: absolute;
@@ -1287,9 +1287,9 @@ ${PALETTE}
   height: 232px;
   display: block;
   border-radius: 4px 4px 2px 2px;
-  background: linear-gradient(180deg, #33405A 0%, #26314A 46%, #1C2536 100%);
-  border: 1px solid rgba(150, 175, 220, 0.22);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.66);
+  background: linear-gradient(180deg, #C8BAA2 0%, #D0C4B0 46%, #D9CFBE 100%);
+  border: 1px solid rgba(118, 101, 70, 0.22);
+  box-shadow: 0 18px 40px rgba(239, 236, 231, 0.66);
   transition: transform 140ms ease-out, box-shadow 140ms ease-out, border-color 140ms ease-out;
 }
 #chapter-root .ch-prop.tower .facade .roof {
@@ -1299,7 +1299,7 @@ ${PALETTE}
   top: -13px;
   height: 13px;
   border-radius: 3px;
-  background: linear-gradient(180deg, #6E7A93, #38425A);
+  background: linear-gradient(180deg, #A18F71, #C2B7A4);
 }
 #chapter-root .ch-prop.tower .facade .sign {
   position: absolute;
@@ -1330,8 +1330,8 @@ ${PALETTE}
 #chapter-root .ch-prop.tower .facade .win i {
   height: 17px;
   border-radius: 2px;
-  background: linear-gradient(180deg, rgba(224, 163, 62, 0.30), rgba(140, 175, 235, 0.16));
-  box-shadow: 0 0 0 1px rgba(150, 175, 220, 0.12) inset;
+  background: linear-gradient(180deg, rgba(224, 163, 62, 0.30), rgba(116, 98, 68, 0.16));
+  box-shadow: 0 0 0 1px rgba(118, 101, 70, 0.12) inset;
 }
 #chapter-root .ch-prop.tower .facade .door {
   position: absolute;
@@ -1341,8 +1341,8 @@ ${PALETTE}
   height: 52px;
   transform: translateX(-50%);
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, #2E3A52, #151C28);
-  border: 1px solid rgba(150, 175, 220, 0.22);
+  background: linear-gradient(180deg, #CCBFA8, #DFD6C8);
+  border: 1px solid rgba(118, 101, 70, 0.22);
   border-bottom: none;
 }
 #chapter-root .ch-prop.tower .facade .steps {
@@ -1353,12 +1353,12 @@ ${PALETTE}
   height: 7px;
   transform: translateX(-50%);
   border-radius: 0 0 3px 3px;
-  background: linear-gradient(180deg, #2B303B, #1A1E26);
+  background: linear-gradient(180deg, #D0C7B8, #DBD5C9);
 }
 #chapter-root .ch-prop.tower:hover .facade {
   transform: translateY(-6px);
   border-color: var(--ok-line);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.72);
+  box-shadow: 0 24px 48px rgba(239, 236, 231, 0.72);
 }
 #chapter-root .ch-prop.tower.on .facade { filter: brightness(0.94); }
 #chapter-root .ch-prop.tower .cap { margin-top: 12px; }
@@ -1370,8 +1370,8 @@ ${PALETTE}
   flex: 0 0 132px;
   height: 196px;
   border-radius: 4px;
-  background: linear-gradient(180deg, #33405A 0%, #26314A 46%, #1C2536 100%);
-  border: 1px solid rgba(150, 175, 220, 0.22);
+  background: linear-gradient(180deg, #C8BAA2 0%, #D0C4B0 46%, #D9CFBE 100%);
+  border: 1px solid rgba(118, 101, 70, 0.22);
 }
 .ch-panel .ch-tower .facade .roof {
   position: absolute;
@@ -1380,7 +1380,7 @@ ${PALETTE}
   top: -11px;
   height: 11px;
   border-radius: 3px;
-  background: linear-gradient(180deg, #6E7A93, #38425A);
+  background: linear-gradient(180deg, #A18F71, #C2B7A4);
 }
 .ch-panel .ch-tower .facade .sign {
   position: absolute;
@@ -1410,7 +1410,7 @@ ${PALETTE}
 .ch-panel .ch-tower .facade .win i {
   height: 15px;
   border-radius: 2px;
-  background: linear-gradient(180deg, rgba(224, 163, 62, 0.30), rgba(140, 175, 235, 0.16));
+  background: linear-gradient(180deg, rgba(224, 163, 62, 0.30), rgba(116, 98, 68, 0.16));
 }
 .ch-panel .ch-tower .facade .door {
   position: absolute;
@@ -1420,8 +1420,8 @@ ${PALETTE}
   height: 44px;
   transform: translateX(-50%);
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, #2E3A52, #151C28);
-  border: 1px solid rgba(150, 175, 220, 0.22);
+  background: linear-gradient(180deg, #CCBFA8, #DFD6C8);
+  border: 1px solid rgba(118, 101, 70, 0.22);
   border-bottom: none;
 }
 .ch-panel .ch-tower .facade .base {
@@ -1431,7 +1431,7 @@ ${PALETTE}
   width: 62px;
   height: 6px;
   transform: translateX(-50%);
-  background: linear-gradient(180deg, #2B303B, #1A1E26);
+  background: linear-gradient(180deg, #D0C7B8, #DBD5C9);
 }
 .ch-panel .ch-tower .bd { flex: 1; min-width: 0; }
 .ch-panel .ch-tower .nm { font-size: 15px; font-weight: 600; color: var(--text); }
@@ -1442,7 +1442,7 @@ ${PALETTE}
   margin-top: 12px;
   display: flex;
   gap: 8px;
-  border-left: 2px solid #33415A;
+  border-left: 2px solid #C8BAA2;
   padding-left: 10px;
 }
 .ch-panel .ch-tower .say .who { flex: 0 0 auto; font-size: 12px; color: var(--gold); }
@@ -1473,10 +1473,10 @@ ${PALETTE}
   display: block;
   height: 8px;
   border-radius: 2px;
-  background: linear-gradient(90deg, #3A4763, #4E5D7E);
+  background: linear-gradient(90deg, #C4B49A, #B1A289);
   min-width: 4px;
 }
-.ch-panel .ch-book .bk-col.bids .bk-row .bar { background: linear-gradient(90deg, #35405A, #46536F); }
+.ch-panel .ch-book .bk-col.bids .bk-row .bar { background: linear-gradient(90deg, #C8B9A1, #B8AB94); }
 .ch-panel .ch-book .bk-deal { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .ch-panel .ch-book .bk-note { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.78; }
 
@@ -1497,9 +1497,9 @@ ${PALETTE}
   color: var(--text-2);
   text-align: left;
 }
-.ch-panel .ch-mg .mg-card:hover { background: #16202F; }
-.ch-panel .ch-mg .mg-card.picked { border-color: var(--accent); border-left-color: var(--accent); background: #14203A; }
-.ch-panel .ch-mg .mg-card.done { border-left-color: var(--ok-line); background: #101B24; }
+.ch-panel .ch-mg .mg-card:hover { background: #DDD4C4; }
+.ch-panel .ch-mg .mg-card.picked { border-color: var(--accent); border-left-color: var(--accent); background: #DAD0C0; }
+.ch-panel .ch-mg .mg-card.done { border-left-color: var(--ok-line); background: #E1DACC; }
 .ch-panel .ch-mg .mg-card .nm { font-size: 13px; font-weight: 600; color: var(--text); }
 .ch-panel .ch-mg .mg-card .sub { font-size: 10.5px; color: var(--dim); }
 .ch-panel .ch-mg .mg-card .mk { font-size: 10.5px; color: var(--ok); }
@@ -1516,7 +1516,7 @@ ${PALETTE}
   font-size: 12.5px;
   line-height: 1.7;
 }
-.ch-panel .ch-mg .mg-target:hover { background: #16202F; border-color: var(--hair); }
+.ch-panel .ch-mg .mg-target:hover { background: #DDD4C4; border-color: var(--hair); }
 
 /* —— 面板内：流程走查（flowWalk 块）—— */
 .ch-panel .ch-fw .fw-prompt { font-size: 13px; color: var(--text); line-height: 1.8; }
@@ -1528,7 +1528,7 @@ ${PALETTE}
   align-items: center;
   gap: 10px;
   border: 1px solid var(--ok-line);
-  background: #101B24;
+  background: #E1DACC;
   border-radius: 9px;
   padding: 8px 11px;
 }
@@ -1549,8 +1549,8 @@ ${PALETTE}
   font-size: 12.5px;
   text-align: left;
 }
-.ch-panel .ch-fw .fw-card:hover { background: #16202F; }
-.ch-panel .ch-fw .fw-card.done { border-color: var(--ok-line); background: #101B24; color: var(--ok); }
+.ch-panel .ch-fw .fw-card:hover { background: #DDD4C4; }
+.ch-panel .ch-fw .fw-card.done { border-color: var(--ok-line); background: #E1DACC; color: var(--ok); }
 `
 
 export default CHAPTER_THEME_CSS

@@ -7,7 +7,7 @@
     "height": 810,
     "scaleMode": "FIT",
     "pixelArt": false,
-    "backgroundColor": "#080B12",
+    "backgroundColor": "#D5C7AE",
     "physics": {
       "gravity": { "x": 0, "y": 0 },
       "debug": false
