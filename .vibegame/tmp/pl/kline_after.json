@@ -1,0 +1,10 @@
+{
+  "result": {
+    "klinesCount": 0,
+    "beatId": "1.5",
+    "chartChildren": 4,
+    "emptyDisplay": "flex",
+    "emptyText": "\u6682\u65e0\u8db3\u591f\u7684 K \u7ebf\u6570\u636e",
+    "chartHTML": "<div class=\"chart-caption\">\u65e5K</div><div class=\"chart-plot\"></div><div class=\"chart-gutter\"></div><div class=\"chart-empty\" style=\"display: flex;\">\u6682\u65e0\u8db3\u591f\u7684 K \u7ebf\u6570\u636e</div>"
+  }
+}

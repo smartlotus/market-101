@@ -1,0 +1,235 @@
+{
+  "result": {
+    "dom": {
+      "open": true,
+      "prompt": "\u4f60\u4e70\u5165\u7684\u90a3\u53ea ETF\uff0c\u4ece\u4f60\u70b9\u4e0b\u6309\u94ae\u5230\u4efd\u989d\u771f\u6b63\u5f52\u4f60\uff0c\u7ecf\u8fc7\u4e86\u54ea\u51e0\u4e2a\u73af\u8282\uff1f\u6309\u987a\u5e8f\u70b9\u51fa\u6765\u3002",
+      "progText": "\u5df2\u6309\u987a\u5e8f\u8d70\u5b8c 0/7",
+      "empty": "\u8fd8\u6ca1\u8d70\u51fa\u7b2c\u4e00\u6b65\u3002",
+      "pool": [
+        "T+2 \u4ea4\u6536\uff1a\u80a1\u7968\u767b\u8bb0\u5230\u4f60\u540d\u4e0b",
+        "\u5238\u5546\u628a\u59d4\u6258\u9001\u5230\u4ea4\u6613\u6240",
+        "\u76d1\u7ba1\u673a\u6784\u770b\u8fd9\u4e00\u8def\u7684\u8d26",
+        "\u4f60\u70b9\u4e0b\u300c\u4e70\u5165\u300d",
+        "\u5b58\u7ba1\u8d26\u6237\u628a\u94b1\u5212\u7ed9\u5bf9\u624b\u65b9",
+        "\u4ea4\u6613\u6240\u64ae\u5408\u6210\u4ea4",
+        "\u6e05\u7b97\u673a\u6784\u7b97\u6e05\u8c01\u6b20\u8c01\u591a\u5c11"
+      ],
+      "poolIds": [
+        "register",
+        "broker",
+        "regulate",
+        "buy",
+        "custody",
+        "match",
+        "clearing"
+      ],
+      "canvasOrImg": 0,
+      "unresolved": 0
+    },
+    "start": {
+      "tag": "4.4 \u8d77\u70b9",
+      "beatId": "4.4",
+      "req": [
+        "4.4.flow.done=false"
+      ],
+      "flow": {
+        "index": 0,
+        "done": []
+      }
+    },
+    "wrongFirst": {
+      "ok": false,
+      "reason": "out_of_order",
+      "expected": "buy"
+    },
+    "wrongFirstStateUnchanged": true,
+    "afterWrongFirst": {
+      "tag": "4.4 \u9519\u5e8f\u7b2c\u4e00\u6b65\u4e4b\u540e",
+      "beatId": "4.4",
+      "req": [
+        "4.4.flow.done=false"
+      ],
+      "flow": {
+        "index": 0,
+        "done": []
+      }
+    },
+    "stillNoSteps": true,
+    "steps1": [
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "buy",
+        "index": 1,
+        "total": 7,
+        "done": [
+          "buy"
+        ],
+        "requirementId": null,
+        "complete": false
+      },
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "broker",
+        "index": 2,
+        "total": 7,
+        "done": [
+          "buy",
+          "broker"
+        ],
+        "requirementId": null,
+        "complete": false
+      },
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "match",
+        "index": 3,
+        "total": 7,
+        "done": [
+          "buy",
+          "broker",
+          "match"
+        ],
+        "requirementId": null,
+        "complete": false
+      }
+    ],
+    "afterThree": {
+      "tag": "4.4 \u8d70\u5bf9\u4e09\u6b65",
+      "beatId": "4.4",
+      "req": [
+        "4.4.flow.done=false"
+      ],
+      "flow": {
+        "index": 3,
+        "done": [
+          "buy",
+          "broker",
+          "match"
+        ]
+      }
+    },
+    "wrongMiddle": {
+      "ok": false,
+      "reason": "out_of_order",
+      "expected": "clearing"
+    },
+    "afterWrongMiddle": {
+      "tag": "4.4 \u4e2d\u95f4\u9519\u5e8f\u4e4b\u540e",
+      "beatId": "4.4",
+      "req": [
+        "4.4.flow.done=false"
+      ],
+      "flow": {
+        "index": 3,
+        "done": [
+          "buy",
+          "broker",
+          "match"
+        ]
+      }
+    },
+    "keptThree": true,
+    "wrongNotRecorded": true,
+    "steps2": [
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "clearing",
+        "index": 4,
+        "total": 7,
+        "done": [
+          "buy",
+          "broker",
+          "match",
+          "clearing"
+        ],
+        "requirementId": null,
+        "complete": false
+      },
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "custody",
+        "index": 5,
+        "total": 7,
+        "done": [
+          "buy",
+          "broker",
+          "match",
+          "clearing",
+          "custody"
+        ],
+        "requirementId": null,
+        "complete": false
+      },
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "register",
+        "index": 6,
+        "total": 7,
+        "done": [
+          "buy",
+          "broker",
+          "match",
+          "clearing",
+          "custody",
+          "register"
+        ],
+        "requirementId": null,
+        "complete": false
+      },
+      {
+        "ok": true,
+        "walkId": "orderFlow",
+        "stepId": "regulate",
+        "index": 7,
+        "total": 7,
+        "done": [
+          "buy",
+          "broker",
+          "match",
+          "clearing",
+          "custody",
+          "register",
+          "regulate"
+        ],
+        "requirementId": "4.4.flow.done",
+        "complete": true
+      }
+    ],
+    "after44": {
+      "tag": "4.4 \u8d70\u5b8c",
+      "beatId": "4.5",
+      "req": [
+        "4.5.ifNoRule=false"
+      ],
+      "flow": {
+        "index": 7,
+        "done": [
+          "buy",
+          "broker",
+          "match",
+          "clearing",
+          "custody",
+          "register",
+          "regulate"
+        ]
+      }
+    },
+    "rail": {
+      "steps": [
+        "\u4f60\u70b9\u4e0b\u300c\u4e70\u5165\u300d",
+        "\u5238\u5546\u628a\u59d4\u6258\u9001\u5230\u4ea4\u6613\u6240",
+        "\u4ea4\u6613\u6240\u64ae\u5408\u6210\u4ea4",
+        "\u6e05\u7b97\u673a\u6784\u7b97\u6e05\u8c01\u6b20\u8c01\u591a\u5c11",
+        "\u5b58\u7ba1\u8d26\u6237\u628a\u94b1\u5212\u7ed9\u5bf9\u624b\u65b9",
+        "T+2 \u4ea4\u6536\uff1a\u80a1\u7968\u767b\u8bb0\u5230\u4f60\u540d\u4e0b"
+      ],
+      "hasCuo": false
+    }
+  }
+}

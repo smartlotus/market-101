@@ -1,0 +1,24 @@
+{
+  "id": 3,
+  "name": "一篮子里的一颗蛋",
+  "implemented": false,
+  "situation": "同事都在押一只股票，你觉得太吓人",
+  "preview": "先别选公司。先选方法。",
+  "rated": true,
+  "noScoreLabel": null,
+  "goalCard": null,
+  "savePoints": [],
+  "directedEvents": [
+    "M02",
+    "I02"
+  ],
+  "pinnedEvents": [],
+  "directedQueue": [
+    "M02",
+    "I02"
+  ],
+  "choices": {},
+  "panels": {},
+  "chapterEnd": null,
+  "beats": []
+}

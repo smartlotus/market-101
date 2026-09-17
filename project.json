@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "engine": "vibegame@0.1.0",
   "settings": {
-    "width": 1280,
-    "height": 720,
+    "width": 1440,
+    "height": 810,
+    "scaleMode": "FIT",
     "pixelArt": false,
-    "backgroundColor": "#000000",
+    "backgroundColor": "#080B12",
     "physics": {
       "gravity": { "x": 0, "y": 0 },
       "debug": false

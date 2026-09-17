@@ -1,0 +1,81 @@
+{
+  "result": {
+    "afterEnter": {
+      "mode": "chapter",
+      "win": {
+        "open": true,
+        "cum": 0
+      }
+    },
+    "afterGoto": {
+      "mode": "chapter",
+      "win": {
+        "open": true,
+        "cum": 0
+      }
+    },
+    "afterBuy": {
+      "NAV": 99993.66
+    },
+    "afterSettle": {
+      "ri": {
+        "navStart": 99993.66,
+        "navNow": 99993.66,
+        "feesInWindow": 0,
+        "notionalInWindow": 0,
+        "externalInjectionInWindow": 0,
+        "excludedPnl": 0,
+        "costPenaltyHalf": false,
+        "adjustedNavSeries": [
+          99993.66
+        ],
+        "baseScore": 50,
+        "ddPenalty": 0,
+        "costPenalty": 0,
+        "gradeLine": "\u8fd9\u4e00\u7ae0\u8d70\u5b8c\u4e86\u3002",
+        "gradeLabel": "\u5e38\u89c4\u63a8\u8fdb",
+        "marketMoveRowLabel": "\u672c\u7ae0\u5927\u76d8\u540c\u671f\u6da8\u8dcc\uff08\u5bf9\u7167\uff0c\u4e0d\u8ba1\u5206\uff09",
+        "beatenMarketLine": "",
+        "marketDays": 0,
+        "graded": true
+      },
+      "win": {
+        "open": true,
+        "cum": 0
+      }
+    },
+    "topUp": {
+      "r": {
+        "navBefore": 99993.66,
+        "injection": 6.34
+      },
+      "cum": 6.34
+    },
+    "afterTopUpSettle": {
+      "ri": {
+        "navStart": 99993.66,
+        "navNow": 100000,
+        "feesInWindow": 0,
+        "notionalInWindow": 0,
+        "externalInjectionInWindow": 0,
+        "excludedPnl": 0,
+        "costPenaltyHalf": false,
+        "adjustedNavSeries": [
+          99993.66,
+          99987.32,
+          99993.66
+        ],
+        "baseScore": 50,
+        "ddPenalty": 0,
+        "costPenalty": 0,
+        "gradeLine": "\u8fd9\u4e00\u7ae0\u8d70\u5b8c\u4e86\u3002",
+        "gradeLabel": "\u5e38\u89c4\u63a8\u8fdb",
+        "marketMoveRowLabel": "\u672c\u7ae0\u5927\u76d8\u540c\u671f\u6da8\u8dcc\uff08\u5bf9\u7167\uff0c\u4e0d\u8ba1\u5206\uff09",
+        "beatenMarketLine": "",
+        "marketDays": 0,
+        "graded": true
+      },
+      "cum": 6.34
+    }
+  }
+}

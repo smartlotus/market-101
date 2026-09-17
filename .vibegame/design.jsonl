@@ -1,1 +1,11 @@
 {"file": ".vibegame/spec/design/index.md", "reason": "Design theory index"}
+{"file": ".vibegame/spec/design/theories/core-frameworks.md", "reason": "MDA 顶层推导目标体验(Discovery/Serious)→动态→机制；core-loop 定义回合制交易日闭环；Magic Circle 解释拟真操作逻辑向真实技能迁移"}
+{"file": ".vibegame/spec/design/theories/player-motivation.md", "reason": "Four Types of Fun 定 Easy+Serious+轻度Hard 组合；Koster 游戏即低风险学习→教学须可见；intrinsic>extrinsic→弱化排行榜；flow→回合制去时间焦虑"}
+{"file": ".vibegame/spec/design/theories/player-types.md", "reason": "Bartle Explorer 型主导——设计服务于'理解金融世界'的探索欲，而非竞技"}
+{"file": ".vibegame/spec/design/theories/mechanism-design.md", "reason": "确定性原则支撑期权透明定价模型；puzzle 原则支撑'安全失败'拒单即教学"}
+{"file": ".vibegame/spec/design/theories/feedback-loops.md", "reason": "负反馈思路支撑 no-dead-end/可重置本金，避免'越亏越绝望'的正反馈崩坏。v2.1 追加核心用法：用户裁决「进度与盈亏相关联」正是 rich-get-richer 正反馈温床，theory 的四条解法被逐条落成【反正反馈五锁】——配负反馈(L1 同章相对口径,切断累积劣势)、limit magnitude(L5 上限与压缩)、cosmetic rewards(L3 评级只给内容不给资源)、help the laggard(L4 D级补救节拍)。结论：不回避需求，而是给需求装限制器"}
+{"file": ".vibegame/spec/design/theories/challenge-design.md", "reason": "辅助系统原则支撑导师非侵入式引导；skill-game 高门槛须配 assist"}
+{"file": ".vibegame/spec/design/theories/game-fairness.md", "reason": "honor game contract→不藏暗随机、不藏惩罚；难度曲线公平→分层解锁"}
+{"file": ".vibegame/spec/design/theories/information-design.md", "reason": "完美信息亚型→行情由可见事件驱动、随机性透明，支撑'信息透明'设计哲学。v2.0 追加用法：线性主线只决定'引入顺序'，绝不隐藏当下状态/价格/原因"}
+{"file": ".vibegame/spec/design/theories/hidden-narrative.md", "reason": "【v2.1 起已弃用，勿照此设计】v2.0 曾用它设计导师周老师的隐藏层（表层=无害的退休老券商，隐藏层=他因'以为自己懂了'付出过代价），但用户裁决「导师不要隐藏」将其整体撤销。保留此条只为记录否决理由：导师的隐藏层是 Design Philosophy「信息透明，绝不隐藏」唯一的例外，移除后该契约第一次做到没有例外。叙事重量改由玩家自己的弧线承担（七次章末评级 + 期末净值与第一章活期存单的对照）——不得用其他反转/秘密/延迟揭晓替补"}
+{"file": ".vibegame/spec/design/theories/core-frameworks.md#goal-hierarchy", "reason": "v2.0 改版的直接理论动因：v1.0 沙盒只有'微观目标(下这一单)'与空泛的'主线目标(毕业)'，缺中观(章)与子(节拍)两层→玩家不知道'现在该干嘛'→只能反复看图表。章节结构直接补齐这两层"}

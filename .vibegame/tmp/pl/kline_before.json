@@ -1,0 +1,13 @@
+{
+  "result": {
+    "before": {
+      "klinesCount": 31,
+      "candles": 105,
+      "chartChildren": 4,
+      "emptyDisplay": "none",
+      "emptyText": "\u6682\u65e0\u8db3\u591f\u7684 K \u7ebf\u6570\u636e",
+      "chartHTML": "<div class=\"chart-caption\">\u65e5K</div><div class=\"chart-plot\"><div class=\"chart-gridline\" style=\"top: 94%;\"></div><div class=\"chart-gridline\" style=\"top: 50%;\"></div><div class=\"chart-gridline\" style=\"top: 6%;\"></div><div class=\"k-candle dir-flat\" style=\"left: 1.613%; width: 3.226%;\"><div class=\"k-wick"
+    },
+    "tag": "saved at 1.4"
+  }
+}

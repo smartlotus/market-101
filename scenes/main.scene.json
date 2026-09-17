@@ -2,6 +2,191 @@
   "name": "Main",
   "root": {
     "name": "Root",
-    "children": []
+    "children": [
+      {
+        "id": "chapter-overlay",
+        "name": "ChapterOverlay",
+        "tags": ["overlay"],
+        "script": "ChapterOverlay",
+        "config": {
+          "style": {
+            "containerId": "game-container"
+          },
+          "menus": [
+            {
+              "id": "panel.deposit",
+              "title": "活期存单",
+              "kind": "sceneCloseup",
+              "pausesGame": true,
+              "panelWidth": 560,
+              "panelHeight": 430,
+              "buttons": []
+            },
+            {
+              "id": "panel.conceptCards",
+              "title": "这三张卡先收着",
+              "kind": "conceptCards",
+              "pausesGame": true,
+              "panelWidth": 1080,
+              "panelHeight": 620,
+              "buttons": []
+            },
+            {
+              "id": "panel.review",
+              "title": "这一笔的完整拆解",
+              "kind": "tradeReview",
+              "pausesGame": true,
+              "panelWidth": 700,
+              "panelHeight": 540,
+              "buttons": []
+            },
+            {
+              "id": "panel.confirm",
+              "title": "章末确认",
+              "kind": "understandingCheck",
+              "pausesGame": true,
+              "panelWidth": 720,
+              "panelHeight": 540,
+              "buttons": []
+            },
+            {
+              "id": "panel.ruleCards",
+              "title": "四张规则卡",
+              "kind": "ruleCards",
+              "pausesGame": true,
+              "panelWidth": 1120,
+              "panelHeight": 660,
+              "buttons": []
+            },
+            {
+              "id": "panel.eventCard",
+              "title": "今天的新闻",
+              "kind": "eventCard",
+              "pausesGame": true,
+              "panelWidth": 640,
+              "panelHeight": 470,
+              "buttons": []
+            },
+            {
+              "id": "panel.settlement",
+              "title": "章末结算",
+              "kind": "settlement",
+              "pausesGame": true,
+              "panelWidth": 880,
+              "panelHeight": 690,
+              "buttons": []
+            },
+            {
+              "id": "panel.extraSegment",
+              "title": "本章附加段",
+              "kind": "extraSegment",
+              "pausesGame": true,
+              "panelWidth": 860,
+              "panelHeight": 640,
+              "buttons": []
+            },
+            {
+              "id": "panel.tower.exchange",
+              "title": "第一栋：交易所",
+              "kind": "tower",
+              "pausesGame": true,
+              "panelWidth": 760,
+              "panelHeight": 560,
+              "buttons": []
+            },
+            {
+              "id": "panel.tower.broker",
+              "title": "第二栋：券商",
+              "kind": "tower",
+              "pausesGame": true,
+              "panelWidth": 760,
+              "panelHeight": 560,
+              "buttons": []
+            },
+            {
+              "id": "panel.tower.fund",
+              "title": "第三栋：基金公司",
+              "kind": "tower",
+              "pausesGame": true,
+              "panelWidth": 760,
+              "panelHeight": 560,
+              "buttons": []
+            },
+            {
+              "id": "panel.orderBook",
+              "title": "今天的挂单簿",
+              "kind": "orderBook",
+              "pausesGame": true,
+              "panelWidth": 840,
+              "panelHeight": 640,
+              "buttons": []
+            },
+            {
+              "id": "panel.matchGame",
+              "title": "机构职责板",
+              "kind": "matchGame",
+              "pausesGame": true,
+              "panelWidth": 940,
+              "panelHeight": 660,
+              "buttons": []
+            },
+            {
+              "id": "panel.flowWalk",
+              "title": "这笔钱走过的路",
+              "kind": "flowWalk",
+              "pausesGame": true,
+              "panelWidth": 900,
+              "panelHeight": 700,
+              "buttons": []
+            },
+            {
+              "id": "panel.ifNoRule",
+              "title": "如果没有那道规定",
+              "kind": "reflection",
+              "pausesGame": true,
+              "panelWidth": 740,
+              "panelHeight": 560,
+              "buttons": []
+            },
+            {
+              "id": "panel.badNews",
+              "title": "坏消息词条",
+              "kind": "conceptCards",
+              "pausesGame": true,
+              "panelWidth": 1000,
+              "panelHeight": 620,
+              "buttons": []
+            }
+          ]
+        }
+      },
+      {
+        "id": "broker",
+        "name": "BrokerShell",
+        "tags": ["broker"],
+        "script": "BrokerShell",
+        "config": {
+          "initialCash": 100000,
+          "startDate": "2026-01-05",
+          "historyBars": 30,
+          "defaultInstrumentId": "601398",
+          "instrumentsPath": "config/instruments.json",
+          "eventsPath": "config/events.json",
+          "chaptersPath": "config/chapters.json",
+          "conceptsPath": "config/concepts.json",
+          "saveKey": "market-101.save.v1",
+          "rejectMentorLines": {
+            "REJECT_1": "买不起不是你的问题 —— A 股按「手」买，1 手 = 100 股。像茅台这种高价股，1 手就要十几万，先用便宜一点的标的把流程走通。",
+            "REJECT_2": "委托价超出了交易所允许的涨跌停范围。主板每天最多涨跌 10%，创业板和科创板 20% —— 这条规则是用来给市场降温的。",
+            "REJECT_3": "周末和节假日不开市，这是市场的作息。点一下「下一日」，日历往前走一天就好了。",
+            "REJECT_4": "A 股实行 T+1：今天买的股票，要下一个交易日才能卖。这不是刁难，是让市场少一点当天追涨杀跌。",
+            "REJECT_6": "A 股按「手」下单，1 手 = 100 股。数量填 100、200、300 这样 100 的整数倍就可以。",
+            "REJECT_7": "价格要以「分」为单位，也就是 0.01 的整数倍。报 36.80 可以，报 36.805 不行。",
+            "REJECT_8": "你手上可卖的数量不够。持仓表里标着「锁定(T+1)」的部分，今天还不能动。",
+            "REJECT_10": "委托数量必须大于 0。想买多少股就填多少股，记得是 100 的整数倍。"
+          }
+        }
+      }
+    ]
   }
 }

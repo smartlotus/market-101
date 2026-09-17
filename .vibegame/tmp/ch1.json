@@ -1,0 +1,597 @@
+{
+  "id": 1,
+  "name": "第一笔钱",
+  "implemented": true,
+  "situation": "你攒下 ¥100,000 放在活期里，家里人说「别碰股票」",
+  "preview": "第一笔钱：把第一单做成，并且说得清自己在做什么。",
+  "rated": false,
+  "noScoreLabel": "本章不打分",
+  "clearResidualsOnEnter": true,
+  "unlocks": {
+    "instruments": [
+      "601398"
+    ]
+  },
+  "goalCard": {
+    "title": "本章要什么：把第一单做成，并且说得清自己在做什么",
+    "teach": [
+      "通胀侵蚀购买力",
+      "银行",
+      "券商",
+      "资金账户",
+      "本金",
+      "可用资金",
+      "K线",
+      "最新价",
+      "涨跌幅",
+      "自选",
+      "最小交易单位",
+      "委托",
+      "成交",
+      "手续费",
+      "成交价",
+      "T+1",
+      "交易日",
+      "休市",
+      "持仓成本",
+      "未实现盈亏",
+      "已实现盈亏",
+      "盈亏归因"
+    ],
+    "graded": false
+  },
+  "savePoints": [
+    "1.5",
+    "1.8"
+  ],
+  "directedEvents": [
+    "I04",
+    "C03"
+  ],
+  "pinnedEvents": [
+    {
+      "eventId": "I04",
+      "marketDay": 1,
+      "beatId": "1.3",
+      "note": "第一个开市日（1.3 入金后 beginFirstDay 由本节拍开启）"
+    },
+    {
+      "eventId": "C03",
+      "marketDay": 2,
+      "beatId": "1.6",
+      "note": "第二个开市日（1.6 点「进入下一交易日」时开启）"
+    }
+  ],
+  "directedQueue": [],
+  "choices": {
+    "1.9.confirm": {
+      "id": "1.9.confirm",
+      "question": "你昨天买的那 100 股，今天能不能卖？为什么？",
+      "conceptKey": "T+1",
+      "correctKey": "t1",
+      "options": [
+        {
+          "key": "t1",
+          "text": "能卖。A 股买入的股票，要到下一个交易日才能卖，今天已经是下一个交易日了。",
+          "feedback": "对。你昨天买的，今天才可卖——这条规则叫 T+1。它能卖不是因为今天涨了，是因为交易日换了。"
+        },
+        {
+          "key": "limit",
+          "text": "不能卖。它今天要是涨到涨停价，涨停的股票就不能卖。",
+          "feedback": "我们再摆一次：能不能卖，与今天涨没涨、有没有涨停无关。A 股买入的股票要等到下一个交易日才能卖，这条规则叫 T+1。"
+        }
+      ]
+    }
+  },
+  "panels": {
+    "panel.deposit": {
+      "id": "panel.deposit",
+      "kind": "sceneCloseup",
+      "title": "活期存单",
+      "blocks": [
+        {
+          "type": "bigNumber",
+          "id": "deposit.rate",
+          "label": "年利率",
+          "value": "1.5%"
+        },
+        {
+          "type": "text",
+          "id": "deposit.cpi",
+          "text": "同期物价上涨约 2%"
+        }
+      ],
+      "actions": [
+        {
+          "id": "1.1.closePanel",
+          "label": "收起来"
+        }
+      ]
+    },
+    "panel.conceptCards": {
+      "id": "panel.conceptCards",
+      "kind": "conceptCards",
+      "title": "这三张卡先收着",
+      "blocks": [
+        {
+          "type": "conceptCard",
+          "id": "委托 vs 成交",
+          "conceptKey": "委托 vs 成交"
+        },
+        {
+          "type": "conceptCard",
+          "id": "手续费",
+          "conceptKey": "手续费"
+        },
+        {
+          "type": "conceptCard",
+          "id": "成交价",
+          "conceptKey": "成交价"
+        }
+      ],
+      "actions": [
+        {
+          "id": "1.5.5.closePanel",
+          "label": "看过三张了"
+        }
+      ]
+    },
+    "panel.review": {
+      "id": "panel.review",
+      "kind": "tradeReview",
+      "title": "这一笔的完整拆解",
+      "blocks": [
+        {
+          "type": "kvRows",
+          "id": "review.rows",
+          "rows": [
+            {
+              "key": "buyPrice",
+              "label": "买价",
+              "source": "lastBuy.fillPrice"
+            },
+            {
+              "key": "sellPrice",
+              "label": "卖价",
+              "source": "lastSell.fillPrice"
+            },
+            {
+              "key": "fee",
+              "label": "费用",
+              "source": "trade.fee"
+            },
+            {
+              "key": "result",
+              "label": "结果",
+              "source": "trade.realizedPnL"
+            },
+            {
+              "key": "reason",
+              "label": "原因",
+              "source": "event.headline"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "1.8.closePanel",
+          "label": "看完了"
+        }
+      ]
+    },
+    "panel.confirm": {
+      "id": "panel.confirm",
+      "kind": "understandingCheck",
+      "title": "章末确认",
+      "blocks": [
+        {
+          "type": "choiceGroup",
+          "id": "1.9.confirm",
+          "choiceId": "1.9.confirm"
+        }
+      ],
+      "actions": [
+        {
+          "id": "1.9.finish",
+          "label": "完成理解确认"
+        }
+      ]
+    }
+  },
+  "chapterEnd": {
+    "settlementPanelId": null,
+    "confirmPanelId": "panel.confirm",
+    "understandingChoiceId": "1.9.confirm"
+  },
+  "beats": [
+    {
+      "id": "1.0",
+      "title": "开场",
+      "shell": "hidden",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [
+        {
+          "timing": "chapterOpen",
+          "speaker": null,
+          "conceptKey": null,
+          "line": "这是一个用真规则、假钱做的游戏。你的账户里有 ¥100,000。"
+        }
+      ],
+      "panels": [],
+      "panelAutoOpen": false,
+      "require": [
+        {
+          "kind": "interact",
+          "id": "1.0.start",
+          "label": "开始"
+        }
+      ],
+      "concepts": [],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.1",
+      "title": "钱躺着",
+      "shell": "hidden",
+      "scene": "bankHall",
+      "sceneImageKey": "scene_bank",
+      "mentor": [
+        {
+          "timing": "firstConcept",
+          "speaker": "offscreen",
+          "conceptKey": "银行",
+          "line": "你今年存了多少？"
+        }
+      ],
+      "panels": [
+        "panel.deposit"
+      ],
+      "panelAutoOpen": false,
+      "require": [
+        {
+          "kind": "interact",
+          "id": "1.1.openDeposit",
+          "label": "点开存单",
+          "opensPanel": "panel.deposit"
+        },
+        {
+          "kind": "read",
+          "id": "1.1.readDeposit",
+          "panelId": "panel.deposit",
+          "count": 2,
+          "mustClose": true,
+          "label": "读完存单上的两个数字"
+        }
+      ],
+      "concepts": [
+        "银行",
+        "通胀侵蚀购买力"
+      ],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.2",
+      "title": "开个户",
+      "shell": "openAccount",
+      "scene": "bankHall",
+      "sceneImageKey": "scene_bank",
+      "mentor": [
+        {
+          "timing": "firstConcept",
+          "speaker": "face",
+          "conceptKey": "券商",
+          "line": "钱躺着不动，其实是在慢慢变少。"
+        }
+      ],
+      "panels": [],
+      "panelAutoOpen": false,
+      "require": [
+        {
+          "kind": "interact",
+          "id": "1.2.openAccount",
+          "label": "同意并开户",
+          "simAction": [
+            "openAccount"
+          ]
+        }
+      ],
+      "concepts": [
+        "券商",
+        "资金账户"
+      ],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.3",
+      "title": "入金",
+      "shell": "openAccount",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [],
+      "panels": [],
+      "panelAutoOpen": false,
+      "require": [
+        {
+          "kind": "interact",
+          "id": "1.3.fundInitial",
+          "label": "入金 ¥100,000",
+          "simAction": [
+            "fundInitial",
+            "beginFirstDay"
+          ],
+          "opensFirstMarketDay": true
+        }
+      ],
+      "concepts": [
+        "本金",
+        "可用资金"
+      ],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": "I04"
+    },
+    {
+      "id": "1.4",
+      "title": "挑一只买得起的",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [
+        {
+          "timing": "firstConcept",
+          "speaker": "face",
+          "conceptKey": "最小交易单位",
+          "line": "挑一只你买得起一整手的。"
+        }
+      ],
+      "panels": [],
+      "panelAutoOpen": false,
+      "hints": {
+        "lotCostColumnLabel": "1 手约",
+        "unaffordableNote": "1 手约 ¥{amount} 超出可用资金",
+        "backToAffordableLabel": "回到买得起的那只",
+        "defaultHighlightRule": "cheapestAffordable"
+      },
+      "require": [
+        {
+          "kind": "select",
+          "id": "1.4.pick",
+          "rule": "affordable",
+          "label": "在自选列表里点选一只买得起一整手的"
+        }
+      ],
+      "concepts": [
+        "K线",
+        "最新价",
+        "涨跌幅",
+        "自选",
+        "最小交易单位"
+      ],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.5",
+      "title": "第一单",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [],
+      "panels": [],
+      "panelAutoOpen": false,
+      "prefill": {
+        "type": "limit",
+        "priceRef": "lastPrice",
+        "qtyLots": 1,
+        "showFeeBreakdown": true
+      },
+      "require": [
+        {
+          "kind": "submit",
+          "id": "1.5.buy",
+          "expect": {
+            "accepted": true,
+            "side": "buy",
+            "type": "limit"
+          },
+          "label": "点「买入」"
+        }
+      ],
+      "concepts": [
+        "委托",
+        "成交",
+        "手续费"
+      ],
+      "conceptCards": [],
+      "savePoint": true,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.5.5",
+      "title": "这一单成了",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [],
+      "panels": [
+        "panel.conceptCards"
+      ],
+      "panelAutoOpen": true,
+      "require": [
+        {
+          "kind": "read",
+          "id": "1.5.5.cards",
+          "panelId": "panel.conceptCards",
+          "count": 3,
+          "mustClose": true,
+          "label": "读完三张概念卡"
+        }
+      ],
+      "concepts": [
+        "委托 vs 成交",
+        "手续费",
+        "成交价"
+      ],
+      "conceptCards": [
+        "委托 vs 成交",
+        "手续费",
+        "成交价"
+      ],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.6",
+      "title": "明天再看",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [
+        {
+          "timing": "firstConcept",
+          "speaker": "face",
+          "conceptKey": "T+1",
+          "line": "今天就这样。明天再看。"
+        }
+      ],
+      "panels": [],
+      "panelAutoOpen": false,
+      "highlight": "advanceDayButton",
+      "require": [
+        {
+          "kind": "advanceDay",
+          "id": "1.6.advance",
+          "label": "进入下一交易日",
+          "simAction": [
+            "advanceDay"
+          ]
+        }
+      ],
+      "concepts": [
+        "T+1",
+        "交易日",
+        "休市"
+      ],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": true,
+      "forceEvent": "C03"
+    },
+    {
+      "id": "1.7",
+      "title": "卖掉它",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [
+        {
+          "timing": "firstConcept",
+          "speaker": "face",
+          "conceptKey": "已实现盈亏",
+          "line": "试试把它卖掉。"
+        }
+      ],
+      "panels": [],
+      "panelAutoOpen": false,
+      "require": [
+        {
+          "kind": "submit",
+          "id": "1.7.sell",
+          "expect": {
+            "accepted": true,
+            "side": "sell"
+          },
+          "label": "卖出"
+        }
+      ],
+      "concepts": [
+        "未实现盈亏",
+        "已实现盈亏",
+        "持仓成本",
+        "事件驱动行情"
+      ],
+      "conceptCards": [],
+      "savePoint": false,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.8",
+      "title": "第一次复盘",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [],
+      "panels": [
+        "panel.review"
+      ],
+      "panelAutoOpen": true,
+      "require": [
+        {
+          "kind": "read",
+          "id": "1.8.review",
+          "panelId": "panel.review",
+          "count": 5,
+          "mustClose": true,
+          "label": "读复盘（买价 / 卖价 / 费用 / 结果 / 原因）"
+        }
+      ],
+      "concepts": [
+        "盈亏归因"
+      ],
+      "conceptCards": [],
+      "savePoint": true,
+      "advanceDay": false,
+      "forceEvent": null
+    },
+    {
+      "id": "1.9",
+      "title": "章末确认",
+      "shell": "full",
+      "scene": null,
+      "sceneImageKey": null,
+      "mentor": [
+        {
+          "timing": "chapterEnd",
+          "speaker": "face",
+          "conceptKey": null,
+          "line": "你刚才做的事，和世界上几亿人每天做的事一模一样。区别只在于——你现在知道自己在做什么。"
+        }
+      ],
+      "panels": [
+        "panel.confirm"
+      ],
+      "panelAutoOpen": true,
+      "require": [
+        {
+          "kind": "choice",
+          "id": "1.9.confirm",
+          "choiceId": "1.9.confirm",
+          "label": "完成理解确认（一道 10 秒选择题）"
+        }
+      ],
+      "concepts": [],
+      "conceptCards": [],
+      "savePoint": true,
+      "advanceDay": false,
+      "endOfChapter": true,
+      "forceEvent": null
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "result": {
+    "trace": [
+      {
+        "tag": "enter 4.1",
+        "beatId": "4.1",
+        "req": [
+          "4.1.openExchange=false",
+          "4.1.openBroker=false",
+          "4.1.openFund=false"
+        ],
+        "panelId": null,
+        "openPanels": [],
+        "mentor": "\u8fd9\u4e00\u7ae0\u4e0d\u82b1\u4f60\u7684\u94b1\uff0c\u53ea\u82b1\u4f60\u7684\u65f6\u95f4\u3002",
+        "mentorSource": "beat",
+        "match": null,
+        "flow": null,
+        "event": "M03",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.1 done",
+        "beatId": "4.2",
+        "req": [
+          "4.2.advance=false",
+          "4.2.match=false"
+        ],
+        "panelId": "panel.orderBook",
+        "openPanels": [
+          "panel.orderBook"
+        ],
+        "mentor": "\u4f60\u770b\u8fd9\u672c\u6302\u5355\u7c3f\u3002\u60f3\u4e70\u7684\u4eba\u62a5\u4e00\u4e2a\u4ef7\uff0c\u60f3\u5356\u7684\u4eba\u62a5\u4e00\u4e2a\u4ef7\uff0c\u4ef7\u5bf9\u4e0a\u4e86\u5c31\u6210\u4e00\u7b14 \u2014\u2014 \u8fd9\u91cc\u7684\u4ef7\u6ca1\u6709\u4eba\u5b9a\uff0c\u662f\u4e24\u8fb9\u81ea\u5df1\u649e\u4e0a\u7684\u3002",
+        "mentorSource": "beat",
+        "match": null,
+        "flow": null,
+        "event": "M03",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.2 done",
+        "beatId": "4.3",
+        "req": [
+          "4.3.match.exchange=false",
+          "4.3.match.broker=false",
+          "4.3.match.bank=false",
+          "4.3.match.clearing=false",
+          "4.3.match.regulator=false",
+          "4.3.match.fundManager=false"
+        ],
+        "panelId": "panel.matchGame",
+        "openPanels": [
+          "panel.matchGame"
+        ],
+        "mentor": "\u521a\u624d\u90a3\u4e09\u680b\u697c\uff0c\u5404\u6709\u5404\u7684\u6d3b\u513f\u3002\u6211\u8fd9\u513f\u6709\u516d\u5f20\u5361\uff0c\u4f60\u628a\u5b83\u914d\u5230\u5404\u81ea\u505a\u7684\u4e8b\u4e0a \u2014\u2014 \u914d\u4e0d\u4e0a\u5c31\u6362\u4e00\u5f20\uff0c\u8fd9\u91cc\u4e0d\u8bb0\u6b21\u6570\u3002",
+        "mentorSource": "beat",
+        "match": 0,
+        "flow": null,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.3 done",
+        "beatId": "4.4",
+        "req": [
+          "4.4.flow.done=false"
+        ],
+        "panelId": "panel.flowWalk",
+        "openPanels": [
+          "panel.flowWalk"
+        ],
+        "mentor": "\u4f60\u70b9\u4e00\u4e0b\u300c\u4e70\u5165\u300d\uff0c\u770b\u4e0a\u53bb\u662f\u4e00\u77ac\u95f4\u7684\u4e8b\u3002\u94b1\u548c\u80a1\u7968\u5176\u5b9e\u8981\u8d70\u8fc7\u597d\u51e0\u7ad9 \u2014\u2014 \u4f60\u987a\u7740\u8d70\u4e00\u904d\uff0c\u5c31\u77e5\u9053\u6bcf\u4e00\u7ad9\u662f\u8c01\u5728\u770b\u8d26\u3002",
+        "mentorSource": "beat",
+        "match": 6,
+        "flow": 0,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.4 done",
+        "beatId": "4.5",
+        "req": [
+          "4.5.ifNoRule=false"
+        ],
+        "panelId": "panel.ifNoRule",
+        "openPanels": [
+          "panel.ifNoRule"
+        ],
+        "mentor": "\u6211\u5148\u95ee\u4f60\u4e00\u53e5\uff1a\u5982\u679c\u6ca1\u6709\u300c\u5ba2\u6237\u7684\u94b1\u4e0d\u80fd\u653e\u5728\u5238\u5546\u81ea\u5df1\u624b\u91cc\u300d\u90a3\u6761\u89c4\u77e9\uff0c\u4f1a\u600e\u6837\uff1f",
+        "mentorSource": "beat",
+        "match": 6,
+        "flow": 7,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.5 done",
+        "beatId": "4.6",
+        "req": [
+          "4.6.badNews=false"
+        ],
+        "panelId": "panel.badNews",
+        "openPanels": [
+          "panel.badNews"
+        ],
+        "mentor": "\u574f\u6d88\u606f\u4e5f\u662f\u5e02\u573a\u7684\u4e00\u90e8\u5206\u3002\u6709\u4e09\u4e2a\u8bcd\u4f60\u8fdf\u65e9\u4f1a\u78b0\u4e0a\uff0c\u5148\u770b\u4e00\u904d\uff0c\u78b0\u4e0a\u65f6\u4e0d\u81f3\u4e8e\u614c\u3002",
+        "mentorSource": "beat",
+        "match": 6,
+        "flow": 7,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.6 done",
+        "beatId": "4.7",
+        "req": [
+          "4.7.finish=false"
+        ],
+        "panelId": null,
+        "openPanels": [],
+        "mentor": "\u4f60\u6015\u7684\u4e0d\u662f\u5e02\u573a\uff0c\u662f\u4f60\u770b\u4e0d\u89c1\u7684\u90a3\u4e9b\u624b\u3002\u73b0\u5728\u4f60\u770b\u89c1\u5b83\u4eec\u4e86\u3002\u4e0b\u4e00\u7ae0\u6211\u5e26\u4f60\u53bb\u770b\u4e00\u79cd\u591a\u4e86\u4e24\u4e2a\u53d8\u91cf\u7684\u4e1c\u897f\u3002",
+        "mentorSource": "beat",
+        "match": 6,
+        "flow": 7,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.7 \u8d77\u70b9",
+        "beatId": "4.7",
+        "req": [
+          "4.7.finish=false"
+        ],
+        "panelId": null,
+        "openPanels": [],
+        "mentor": "\u4f60\u6015\u7684\u4e0d\u662f\u5e02\u573a\uff0c\u662f\u4f60\u770b\u4e0d\u89c1\u7684\u90a3\u4e9b\u624b\u3002\u73b0\u5728\u4f60\u770b\u89c1\u5b83\u4eec\u4e86\u3002\u4e0b\u4e00\u7ae0\u6211\u5e26\u4f60\u53bb\u770b\u4e00\u79cd\u591a\u4e86\u4e24\u4e2a\u53d8\u91cf\u7684\u4e1c\u897f\u3002",
+        "mentorSource": "beat",
+        "match": 6,
+        "flow": 7,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "chapter"
+      },
+      {
+        "tag": "4.7 \u5b8c\u6210",
+        "beatId": "4.7",
+        "req": [
+          "4.7.finish=true"
+        ],
+        "panelId": "panel.confirm",
+        "openPanels": [
+          "panel.confirm"
+        ],
+        "mentor": "\u4f60\u6015\u7684\u4e0d\u662f\u5e02\u573a\uff0c\u662f\u4f60\u770b\u4e0d\u89c1\u7684\u90a3\u4e9b\u624b\u3002\u73b0\u5728\u4f60\u770b\u89c1\u5b83\u4eec\u4e86\u3002\u4e0b\u4e00\u7ae0\u6211\u5e26\u4f60\u53bb\u770b\u4e00\u79cd\u591a\u4e86\u4e24\u4e2a\u53d8\u91cf\u7684\u4e1c\u897f\u3002",
+        "mentorSource": "beat",
+        "match": 6,
+        "flow": 7,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "confirm",
+        "mode": "chapter"
+      },
+      {
+        "tag": "\u786e\u8ba4\u540e",
+        "beatId": "4.7",
+        "req": [
+          "4.7.finish=true"
+        ],
+        "panelId": null,
+        "openPanels": [],
+        "mentor": null,
+        "mentorSource": null,
+        "match": 6,
+        "flow": 7,
+        "event": "P02",
+        "rating": null,
+        "extra": null,
+        "endPhase": "none",
+        "mode": "freeDay"
+      }
+    ],
+    "b41dom": {
+      "props": 3
+    },
+    "b42dom": {
+      "last": true
+    },
+    "b42wrong": {
+      "ok": true,
+      "correct": false,
+      "answeredKey": "exchange",
+      "advanced": false
+    },
+    "b42event": {
+      "id": "P02",
+      "headline": "\u56fd\u5bb6\u5927\u57fa\u91d1\u4e8c\u671f\u52a0\u7801\u534a\u5bfc\u4f53\u6276\u6301",
+      "targets": [
+        "688981"
+      ],
+      "sentiment": "GOOD",
+      "magnitude": 0.35
+    },
+    "b42owed": {
+      "required": [
+        "P02"
+      ],
+      "drawn": [
+        "P02"
+      ],
+      "owed": []
+    },
+    "b43wrong": {
+      "ok": false,
+      "reason": "no_such_pair"
+    },
+    "b43pairs": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "b44wrong": {
+      "ok": false,
+      "reason": "out_of_order",
+      "expected": "buy"
+    },
+    "b44steps": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "b45": {
+      "ok": true,
+      "correct": null,
+      "answeredKey": "same",
+      "advanced": true
+    },
+    "b46": {
+      "open": "panel.badNews"
+    },
+    "b47": {
+      "mentorLine": "\u4f60\u6015\u7684\u4e0d\u662f\u5e02\u573a\uff0c\u662f\u4f60\u770b\u4e0d\u89c1\u7684\u90a3\u4e9b\u624b\u3002\u73b0\u5728\u4f60\u770b\u89c1\u5b83\u4eec\u4e86\u3002\u4e0b\u4e00\u7ae0\u6211\u5e26\u4f60\u53bb\u770b\u4e00\u79cd\u591a\u4e86\u4e24\u4e2a\u53d8\u91cf\u7684\u4e1c\u897f\u3002",
+      "mentorSource": "beat",
+      "endOfChapter": true
+    },
+    "afterEnd": {
+      "tag": "4.7 \u5b8c\u6210",
+      "beatId": "4.7",
+      "req": [
+        "4.7.finish=true"
+      ],
+      "panelId": "panel.confirm",
+      "openPanels": [
+        "panel.confirm"
+      ],
+      "mentor": "\u4f60\u6015\u7684\u4e0d\u662f\u5e02\u573a\uff0c\u662f\u4f60\u770b\u4e0d\u89c1\u7684\u90a3\u4e9b\u624b\u3002\u73b0\u5728\u4f60\u770b\u89c1\u5b83\u4eec\u4e86\u3002\u4e0b\u4e00\u7ae0\u6211\u5e26\u4f60\u53bb\u770b\u4e00\u79cd\u591a\u4e86\u4e24\u4e2a\u53d8\u91cf\u7684\u4e1c\u897f\u3002",
+      "mentorSource": "beat",
+      "match": 6,
+      "flow": 7,
+      "event": "P02",
+      "rating": null,
+      "extra": null,
+      "endPhase": "confirm",
+      "mode": "chapter"
+    },
+    "endPanel": {
+      "panels": [
+        "panel.confirm"
+      ],
+      "text": "\u7ae0\u672b understandingCheck \u8fd9\u4e00\u7ae0\u6211\u4eec\u770b\u8fc7\u7684 \u4e09\u680b\u697c\u4f60\u90fd\u8fdb\u53bb\u4e86\u3002\u8fd9\u4e00\u7ae0\u6ca1\u8ba9\u4f60\u82b1\u4e00\u5206\u94b1\uff0c\u4f46\u4f60\u73b0\u5728\u77e5\u9053\u4e86\uff1a\u4f60\u70b9\u4e00\u4e0b\u300c\u4e70\u5165\u300d\uff0c\u94b1\u548c\u80a1\u7968\u8981\u8d70\u8fc7\u597d\u51e0\u53ea\u624b\uff0c\u6bcf\u4e00\u53ea\u624b\u90fd\u6709\u5b83\u7684\u9053\u7406\u3002 \u4f60\u7684\u94b1\u7ecf\u8fc7\u7684\u624b 1 \u4ea4\u6613\u6240\uff1a\u642d\u53f0\u5b50\u3001\u7ed9\u89c4\u5219 2 \u5238\u5546\uff1a\u66ff\u4f60\u8f6c\u8fbe\u3001\u66ff\u4f60\u8bb0\u8d26 3 \u94f6\u884c\uff1a\u66ff\u4f60\u5b58\u7740\u4e70\u5356\u7528\u7684\u94b1 4 \u6e05\u7b97\u673a\u6784\uff1a\u7b97\u6e05\u8c01\u6b20\u8c01\u591a\u5c11 5 \u76d1\u7ba1\u673a\u6784\uff1a\u5b9a\u89c4\u5219\u3001\u770b\u8d26 6 \u57fa\u91d1\u7ba1\u7406\u4eba\uff1a\u6309\u8bf4\u597d\u7684\u65b9\u6cd5\u66ff\u4f60\u7ba1\u90a3\u7bee\u5b50 \u7ee7\u7eed"
+    },
+    "mentorHistoryCh4": [
+      "4.1 | beat | \u8fd9\u4e00\u7ae0\u4e0d\u82b1\u4f60\u7684\u94b1\uff0c\u53ea\u82b1\u4f60\u7684\u65f6\u95f4\u3002",
+      "4.2 | beat | \u4f60\u770b\u8fd9\u672c\u6302\u5355\u7c3f\u3002\u60f3\u4e70\u7684\u4eba\u62a5\u4e00\u4e2a\u4ef7\uff0c\u60f3\u5356\u7684\u4eba\u62a5\u4e00\u4e2a\u4ef7\uff0c\u4ef7\u5bf9\u4e0a\u4e86\u5c31\u6210\u4e00\u7b14 \u2014\u2014 \u8fd9\u91cc\u7684\u4ef7\u6ca1\u6709\u4eba\u5b9a\uff0c\u662f\u4e24\u8fb9\u81ea\u5df1\u649e\u4e0a\u7684\u3002",
+      "4.2 | choiceFeedback | \u6211\u4eec\u518d\u6446\u4e00\u6b21\uff1a\u4ea4\u6613\u6240\u53ea\u63d0\u4f9b\u573a\u5730\u548c\u89c4\u5219\uff0c\u5b83\u81ea\u5df1\u65e2\u4e0d\u4e70\u3001\u4e5f\u4e0d\u5356\u3001\u66f4\u4e0d\u62a5\u4ef7\u3002\u4f60\u628a\u4e24\u5217\u6302\u5355\u6700\u4e0b\u9762\u7684\u4e24\u4e2a\u4ef7\u6446\u4e00\u8d77\u770b \u2014\u2014 \u6210\u4ea4\u4ef7\u662f\u4ece\u5b83\u4eec\u4e2d\u95f4\u51fa\u6765\u7684\u3002",
+      "4.2 | choiceFeedback | \u5bf9\u3002\u6210\u4ea4\u4ef7\u4e0d\u662f\u8c01\u5199\u4e0a\u53bb\u7684\uff0c\u662f\u4e24\u8fb9\u7684\u4ef7\u7b2c\u4e00\u6b21\u5bf9\u4e0a\u3002\u4e24\u5217\u6302\u5355\u6700\u4e0b\u9762\u7684\u90a3\u4e24\u4e2a\u4ef7\uff0c\u5c31\u662f\u4e0b\u4e00\u6b21\u6700\u53ef\u80fd\u6210\u4ea4\u7684\u5730\u65b9\u3002",
+      "4.3 | beat | \u521a\u624d\u90a3\u4e09\u680b\u697c\uff0c\u5404\u6709\u5404\u7684\u6d3b\u513f\u3002\u6211\u8fd9\u513f\u6709\u516d\u5f20\u5361\uff0c\u4f60\u628a\u5b83\u914d\u5230\u5404\u81ea\u505a\u7684\u4e8b\u4e0a \u2014\u2014 \u914d\u4e0d\u4e0a\u5c31\u6362\u4e00\u5f20\uff0c\u8fd9\u91cc\u4e0d\u8bb0\u6b21\u6570\u3002",
+      "4.4 | beat | \u4f60\u70b9\u4e00\u4e0b\u300c\u4e70\u5165\u300d\uff0c\u770b\u4e0a\u53bb\u662f\u4e00\u77ac\u95f4\u7684\u4e8b\u3002\u94b1\u548c\u80a1\u7968\u5176\u5b9e\u8981\u8d70\u8fc7\u597d\u51e0\u7ad9 \u2014\u2014 \u4f60\u987a\u7740\u8d70\u4e00\u904d\uff0c\u5c31\u77e5\u9053\u6bcf\u4e00\u7ad9\u662f\u8c01\u5728\u770b\u8d26\u3002",
+      "4.5 | beat | \u6211\u5148\u95ee\u4f60\u4e00\u53e5\uff1a\u5982\u679c\u6ca1\u6709\u300c\u5ba2\u6237\u7684\u94b1\u4e0d\u80fd\u653e\u5728\u5238\u5546\u81ea\u5df1\u624b\u91cc\u300d\u90a3\u6761\u89c4\u77e9\uff0c\u4f1a\u600e\u6837\uff1f",
+      "4.5 | choiceFeedback | \u8fd9\u8bdd\u4e5f\u6210\u7acb \u2014\u2014 \u592a\u5e73\u7684\u65f6\u5019\uff0c\u6709\u6ca1\u6709\u90a3\u9053\u89c4\u5b9a\uff0c\u4f53\u611f\u662f\u4e00\u6837\u7684\u3002\u89c4\u5b9a\u672c\u6765\u5c31\u4e0d\u662f\u4e3a\u592a\u5e73\u7684\u90a3\u5929\u5199\u7684\u3002",
+      "4.6 | beat | \u574f\u6d88\u606f\u4e5f\u662f\u5e02\u573a\u7684\u4e00\u90e8\u5206\u3002\u6709\u4e09\u4e2a\u8bcd\u4f60\u8fdf\u65e9\u4f1a\u78b0\u4e0a\uff0c\u5148\u770b\u4e00\u904d\uff0c\u78b0\u4e0a\u65f6\u4e0d\u81f3\u4e8e\u614c\u3002",
+      "4.7 | beat | \u4f60\u6015\u7684\u4e0d\u662f\u5e02\u573a\uff0c\u662f\u4f60\u770b\u4e0d\u89c1\u7684\u90a3\u4e9b\u624b\u3002\u73b0\u5728\u4f60\u770b\u89c1\u5b83\u4eec\u4e86\u3002\u4e0b\u4e00\u7ae0\u6211\u5e26\u4f60\u53bb\u770b\u4e00\u79cd\u591a\u4e86\u4e24\u4e2a\u53d8\u91cf\u7684\u4e1c\u897f\u3002"
+    ],
+    "confirm": {
+      "ok": true,
+      "chapterId": 4,
+      "mode": "freeDay",
+      "entered": null,
+      "nextChapter": null
+    },
+    "finalRow": {
+      "tag": "\u786e\u8ba4\u540e",
+      "beatId": "4.7",
+      "req": [
+        "4.7.finish=true"
+      ],
+      "panelId": null,
+      "openPanels": [],
+      "mentor": null,
+      "mentorSource": null,
+      "match": 6,
+      "flow": 7,
+      "event": "P02",
+      "rating": null,
+      "extra": null,
+      "endPhase": "none",
+      "mode": "freeDay"
+    },
+    "finalSummary": {
+      "mode": "freeDay",
+      "unlockedChapters": [
+        4
+      ],
+      "grades": {},
+      "rating": null,
+      "extraSegment": null,
+      "remedialUsedThisChapter": false,
+      "redLineActive": false,
+      "injectionsTotal": 0,
+      "completedBeats": [
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5",
+        "4.6",
+        "4.7"
+      ],
+      "beatCount": 7
+    }
+  }
+}
