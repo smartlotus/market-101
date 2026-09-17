@@ -101,10 +101,20 @@ expected_gain = (rv["fillPrice"] - rv["costPrice"]) * rv["sellQty"] - rv["sellFe
 ok("realizedPnL == (卖价−成本)×量 − 费用（盈利侧）",
    abs(rv["realizedPnL"] - round(expected_gain, 2)) < 0.02, f"{rv['realizedPnL']} vs {expected_gain}")
 sc = R["signCheck"]
-ok("亏本卖出 → realizedPnL 由正转负", sc["realizedBefore"] > 0 and sc["realizedAfter"] < 0,
-   f"{sc['realizedBefore']} -> {sc['realizedAfter']}")
+# 亏损侧的断言只校「符号处理 + 累计公式」，不校盈亏的绝对幅度 ——
+# 行情每次会话都重新随机种子，`realizedBefore` 的大小不可预测；
+# 用「这次卖出确实亏了(delta<0) 且把累计值往下推了」来验证符号处理，
+# 既覆盖同一段产品逻辑，又不依赖随机幅度。
+ok("亏本卖出 → realizedPnL 被亏损拉低", sc["delta"] < 0 and sc["realizedAfter"] < sc["realizedBefore"],
+   f"{sc['realizedBefore']} -> {sc['realizedAfter']} (delta {sc['delta']})")
 ok("亏损侧 delta == (卖价−成本)×量 − 费用（公式一致）",
    abs(sc["delta"] - sc["expectedDelta"]) < 0.02, sc)
+ok("亏损侧成交成立且成交价 == 委托价（限价卖取优）",
+   sc["reasonCode"] == "OK" and abs(float(sc["fillPrice"]) - float(sc["sellPrice"])) < 0.005,
+   {k: sc[k] for k in ("reasonCode", "status", "fillPrice", "sellPrice", "lastPrice", "limitDown")})
+ok("亏损侧卖出的持仓确实已扣除",
+   "601398:" not in " ".join(sc["positionsAfterLossSell"]),
+   sc["positionsAfterLossSell"])
 
 # ── Edge Case 1.4 偏选茅台 ────────────────────────────────────────────────
 print("[Edge Case 1.4 偏选茅台：非阻断提示 + 不改数量 + 可自行提交得 REJECT_1]")
@@ -114,7 +124,11 @@ ok("面板出现非阻断超资金提示", "超出可用资金" in (mt["overNote
 ok("提示同时给出「回到买得起的那只」", "回到买得起的那只" in (mt["overNoteText"] or ""), mt["overNoteText"])
 ok("数量未被自动改动（仍为 100）", mt["qtyAfterPick"] == "100", mt["qtyAfterPick"])
 ok("玩家自行提交 → REJECT_1", mt["rejectResult"]["reasonCode"] == "REJECT_1" and mt["rejectResult"]["accepted"] is False, mt["rejectResult"])
-ok("拒单后未产生持仓（安全失败）", mt["positionsAfter"] == [], mt["positionsAfter"])
+# 安全失败只看「被拒的那只标的没有留下持仓」。
+# 不能断言 positions 全局为空 —— 本测试在这之前合法持有过 601398，那不是脏数据。
+ok("拒单后未产生 600519 持仓（安全失败）",
+   not any(p.startswith("600519:") for p in mt["positionsAfter"]),
+   mt["positionsAfter"])
 
 print(f"\n{checks - len(fails)}/{checks} 断言通过")
 if fails:

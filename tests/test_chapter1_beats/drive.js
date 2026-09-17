@@ -200,20 +200,32 @@ snap('at19');
   b.advanceDay();                                   // 解锁窗口
   b.submitOrder({ side: 'buy', type: 'limit', instrumentId: '601398', price: px('601398'), qty: 100 });
   b.advanceDay();                                   // 次日 → 持仓解锁
-  const avg = (S().positions[0] || {}).avgCost;
+  const pos = S().positions.find((p) => p.instrumentId === '601398') || {};
+  const avg = Number(pos.avgCost) || 0;
+  const last = px('601398');
   const limitDown = Number(S().quotes['601398'].limitDown);
-  const lossPx = Number(Math.max(limitDown + 0.01, avg * 0.97).toFixed(2));
+  // 限价卖**只有「最新价 ≥ 限价」时才成交**（涨跌停撮合规则）。原实现取 `avg × 0.97`，
+  // 一旦两天的随机行情把价格砸下去超过 3%，这张单就挂在那儿不成交 —— 于是 realizedPnL
+  // 不动、持仓也卖不掉（本测试曾因此在连续会话中随机失败）。
+  // 取 min(均价−0.01, 最新价)：前者保证低于成本（必是亏损），后者保证不高于市价（必成交）；
+  // 再用跌停价托底，避免触发拒单 #2。
+  const lossPx = Number(Math.max(limitDown + 0.01, Math.min(avg - 0.01, last)).toFixed(2));
   const r = b.submitOrder({ side: 'sell', type: 'limit', instrumentId: '601398', price: lossPx, qty: 100 });
   R.signCheck = {
     realizedBefore: before,
     buyAvgCost: avg,
+    lastPrice: last,
+    limitDown,
     sellPrice: lossPx,
     reasonCode: r.reasonCode,
+    status: r.status,
     fillPrice: r.fillPrice,
     fee: r.fee,
+    qty: r.qty,
     realizedAfter: S().realizedPnL,
     delta: Number((S().realizedPnL - before).toFixed(2)),
     expectedDelta: Number(((r.fillPrice - avg) * 100 - r.fee).toFixed(2)),
+    positionsAfterLossSell: S().positions.map((p) => p.instrumentId + ':' + p.qty),
   };
 }
 // ── 1.9 章末确认 → 第二章 ──────────────────────────────────────────────────
