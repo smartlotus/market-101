@@ -347,7 +347,16 @@ export default class BrokerShell extends Node {
 
   runtimeState() {
     if (!this.sim) return { ready: false }
-    return { ...this.sim.snapshot(), chapter: this.chapter ? this.chapter.snapshot() : null }
+    const chapter = this.chapter ? this.chapter.snapshot() : null
+    // 品种解锁跟着**当前所在章**（而不是「已通关的章」）—— 第三章就是要买 ETF，
+    // 若等通关才解锁，那一章根本没东西可买。累加式，沙盒由 devSkipToSandbox 全开。
+    if (chapter) {
+      const done = Array.isArray(chapter.unlockedChapters) ? chapter.unlockedChapters : []
+      const cur = Number(chapter.chapterId) || 1
+      const max = done.reduce((m, v) => Math.max(m, Number(v) || 0), cur)
+      this.sim.unlockForChapter(max)
+    }
+    return { ...this.sim.snapshot(), chapter }
   }
 
   // === Stage 0 六个测试钩子（语义不变）===

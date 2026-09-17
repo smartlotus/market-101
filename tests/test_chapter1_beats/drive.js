@@ -93,7 +93,9 @@ snap('at14');
     quotes: quotes,
     selectedInstrumentId: S().selectedInstrumentId,
     expectedCheapestAffordable: (() => {
-      const ids = Object.keys(quotes);
+      // 只看**已解锁**的市场（自选列表也只列已解锁的，两者口径必须一致）
+      const unlocked = S().unlockedMarkets || [];
+      const ids = Object.keys(quotes).filter((id) => unlocked.includes(quotes[id].market));
       const afford = ids.filter((id) => Number(quotes[id].lastPrice) * 100 + 5 <= S().cash);
       afford.sort((a, c) => Number(quotes[a].lastPrice) - Number(quotes[c].lastPrice));
       return afford[0];

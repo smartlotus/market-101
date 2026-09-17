@@ -123,7 +123,8 @@ export default class OrderPanelView {
     this.submitBtn.addEventListener('click', () => this._submit())
 
     this.noteEl = el('div', 'hint', root)
-    el('span', '', this.noteEl, `A 股按「手」委托，1 手 = ${LOT_SIZE} 股 · 成交价不差于你的委托价`)
+    this._lotNoteEl = el('span', '', this.noteEl, '')
+    this._renderLotNote()
   }
 
   _kv(parent, label, extra = '') {
@@ -227,7 +228,7 @@ export default class OrderPanelView {
       this.priceInput.disabled = prefill.type === 'market'
     }
     const lots = Number(prefill.qtyLots)
-    if (Number.isFinite(lots) && lots > 0) this.qtyInput.value = String(lots * LOT_SIZE)
+    if (Number.isFinite(lots) && lots > 0) this.qtyInput.value = String(lots * this._lot())
     if (prefill.priceRef === 'lastPrice' && q) this.priceInput.value = Number(q.lastPrice).toFixed(2)
     this.root.dataset.prefillBeat = beat.id
     return true
@@ -244,6 +245,7 @@ export default class OrderPanelView {
     this._q = q
 
     this._applyPrefill(state, q)
+    this._renderLotNote()
 
     // 切换标的时把价格输入重置为新标的最新价；不覆盖玩家正在输入的内容
     if (this._priceInstrumentId !== inst.id) {
@@ -252,6 +254,44 @@ export default class OrderPanelView {
     }
 
     this._renderEstimate()
+  }
+
+  /** 交易单位说明：按市场说清自己的规则（不再一律写「A 股 1 手 = 100 股」）。 */
+  _renderLotNote() {
+    if (!this._lotNoteEl) return
+    const market = this._market()
+    const lot = this._lot()
+    let text
+    if (market === 'US') text = '美股 1 股起，支持碎股（最小 0.001 股）· 成交价不差于你的委托价'
+    else if (market === 'HK') text = `港股每手股数不固定，这只 1 手 = ${lot} 股 · 成交价不差于你的委托价`
+    else if (market === 'FUND') text = '场外基金按金额申购，100 元起 · 按当日收市后净值成交（未知价交易）'
+    else if (market === 'CRYPTO') text = '加密货币按金额下单，100 元起 · 7×24 交易、无涨跌停'
+    else if (market === 'ETF') text = `ETF 按「手」委托，1 手 = ${lot} 份 · 成交价不差于你的委托价`
+    else text = `A 股按「手」委托，1 手 = ${lot} 股 · 成交价不差于你的委托价`
+    setText(this._lotNoteEl, text)
+  }
+
+  /** 当前标的的市场（不再对所有标的套用 A 股）。 */
+  _market() {
+    return (this._q && this._q.market) || (this._inst && this._inst.market) || 'A_SHARE'
+  }
+
+  /** 当前标的的计价货币。 */
+  _currency() {
+    return (this._q && this._q.currency) || (this._inst && this._inst.currency) || 'CNY'
+  }
+
+  /** 当前标的的每手股数；按金额下单的市场（基金 / 加密）用 1 作参考单位。 */
+  _lot() {
+    // 构造期还没标的：退回 A 股的 1 手（Stage 0/1 既有缺省），首次 update 后即按标的纠正
+    if (!this._inst) return LOT_SIZE
+    const l = this._inst.lotSize
+    return l === null || l === undefined ? 1 : Number(l) || 1
+  }
+
+  /** 该市场的货币符号（成交明细与提示里的金额用）。 */
+  _sign() {
+    return { CNY: '¥', HKD: 'HK$', USD: '$', USDT: 'USDT ' }[this._currency()] || ''
   }
 
   _renderEstimate() {
@@ -270,10 +310,10 @@ export default class OrderPanelView {
     // 可买 / 可卖提示
     const position = (state.positions || []).find((p) => p.instrumentId === inst.id)
     const sellable = position ? position.qty - position.lockedQty : 0
-    const perLot = basis ? roundMoney(basis * LOT_SIZE) : 0
-    const perLotCost = perLot ? roundMoney(perLot + computeFee('A_SHARE', 'buy', perLot)) : 0
+    const perLot = basis ? roundMoney(basis * this._lot()) : 0
+    const perLotCost = perLot ? roundMoney(perLot + computeFee(this._market(), 'buy', perLot)) : 0
     const maxLots = perLotCost > 0 ? Math.floor(state.cash / perLotCost) : 0
-    setText(this.buyHint, `可买约 ${maxLots} 手`)
+    setText(this.buyHint, `可买约 ${maxLots} ${this._market() === 'US' ? '股' : '手'}`)
     setText(this.sellHint, `可卖 ${sellable} 股`)
 
     // 逐项明细
@@ -286,7 +326,7 @@ export default class OrderPanelView {
       setText(this.rowTotal, '—')
     } else {
       const notional = roundMoney(basis * qty)
-      const bd = feeBreakdown('A_SHARE', side, notional)
+      const bd = feeBreakdown(this._market(), side, notional)
       setText(this.rowNotional.value, fmtMoney(notional))
       setText(this.rowCommission.value, fmtMoney(bd.commission))
       setText(this.rowStamp.value, side === 'sell' ? fmtMoney(bd.stampDuty) : '卖出时收')
@@ -327,8 +367,8 @@ export default class OrderPanelView {
    */
   _renderOverHint(state, q, side) {
     const note = this.hints.unaffordableNote || ''
-    const perLot = roundMoney(Number(q.lastPrice) * LOT_SIZE)
-    const cost = roundMoney(perLot + computeFee('A_SHARE', 'buy', perLot))
+    const perLot = roundMoney(Number(q.lastPrice) * this._lot())
+    const cost = roundMoney(perLot + computeFee(this._market(), 'buy', perLot))
     const over = side === 'buy' && Boolean(note) && cost > Number(state.cash)
     this.overEl.classList.toggle('ch-hidden', !over)
     // 提示出现时收紧面板行距：本拍可能同时显示「超资金提示 + 拒单回执」，不收紧会撑出 506px 面板
