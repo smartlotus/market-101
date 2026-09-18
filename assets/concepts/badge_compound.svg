@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="复利">
-  <rect x="6" y="6" width="116" height="116" rx="26" fill="#FBF5E9" stroke="#8A7350" stroke-width="3"/>
-  <line x1="24" y1="72" x2="106" y2="98" stroke="#C4B393" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="38" cy="68" r="7" fill="#C2402F"/>
-  <circle cx="62" cy="72" r="11" fill="#C2402F"/>
-  <circle cx="88" cy="75" r="16" fill="#C2402F"/>
-  <path d="M96 62 A16 16 0 0 1 100 78" fill="none" stroke="#FBF5E9" stroke-width="3" stroke-linecap="round"/>
-</svg>
