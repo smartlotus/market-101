@@ -189,6 +189,26 @@ ${PALETTE}
   transform: translate(-50%, -30%);
   background: radial-gradient(closest-side, rgba(240, 217, 168, 0.18), transparent 100%);
 }
+/* 一杯热饮（咖啡馆 / 深夜 / 结业都用得上）。
+   GDD：咖啡馆桌上要**两杯** —— 他给你也点了一杯（v2.1：日常温暖，不承载伏笔）。 */
+#chapter-root .ch-draw .cup {
+  position: absolute;
+  width: 26px;
+  height: 22px;
+  border-radius: 3px 3px 7px 7px;
+  background: #FBF5E9;
+  box-shadow: inset 0 -5px 0 rgba(138, 115, 80, 0.28), 0 2px 0 rgba(51, 41, 31, 0.18);
+}
+#chapter-root .ch-draw .cup::after {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #FBF5E9;
+  border-radius: 50%;
+}
 #chapter-root .ch-draw .counter {
   position: absolute;
   left: 12%;

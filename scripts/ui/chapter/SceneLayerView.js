@@ -63,6 +63,46 @@ const BACKDROPS = {
     { cls: 'kerb' },
     { cls: 'floor' },
   ],
+  /**
+   * 咖啡馆（v2 新增，GDD：第三章开场、第八章开场、尾声）。
+   * 老周从办公室走到咖啡馆 = 他从「老师」变成「朋友」的视觉信号。
+   * **两杯热饮**：他给你也点了一杯（v2.1：日常温暖，不含任何伏笔语义）。
+   */
+  cafe: [
+    { cls: 'wall' },
+    { cls: 'lightpool', css: 'left:52%;width:44%;height:56%' },
+    { cls: 'col', css: 'left:14%;width:11%;height:52%' },
+    { cls: 'col', css: 'left:31%;width:11%;height:52%' },
+    { cls: 'counter', css: 'left:8%;width:84%;bottom:16%' },
+    { cls: 'cup', css: 'left:44%;bottom:34%' },
+    { cls: 'cup', css: 'left:56%;bottom:34%' },
+    { cls: 'floor' },
+  ],
+  /**
+   * 深夜书桌 / 客厅（v2 新增，GDD：第六、七章）。
+   * 承载「钱不睡觉，但我得睡」与加密章的孤独 —— 只亮一盏灯、窗外是夜色。
+   * **不出现人脸**（GDD 明确要求），只用光。
+   */
+  lateNight: [
+    { cls: 'wall', css: 'background:#2E2A26' },
+    { cls: 'farblock', css: 'left:58%;width:30%;height:38%;background:#1E2733' },
+    { cls: 'glow', css: 'left:24%;width:34%;height:40%' },
+    { cls: 'counter', css: 'left:12%;width:76%;bottom:14%' },
+    { cls: 'cup', css: 'left:30%;bottom:32%' },
+    { cls: 'floor', css: 'background:#3A342D' },
+  ],
+  /**
+   * 结业证书场景（GDD：尾声 E.1）。
+   * 一张小桌、一张**空白**的证书纸（纸面不承载任何文字，文字全由代码绘制）。
+   * v2.1：这一场承载的是「你走过的每一章」与期末净值的对照。
+   */
+  graduation: [
+    { cls: 'wall' },
+    { cls: 'lightpool', css: 'left:38%;width:34%;height:52%' },
+    { cls: 'counter', css: 'left:20%;width:60%;bottom:18%' },
+    { cls: 'cup', css: 'left:70%;bottom:36%' },
+    { cls: 'floor' },
+  ],
   generic: [{ cls: 'wall' }, { cls: 'lightpool' }, { cls: 'floor' }],
 }
 

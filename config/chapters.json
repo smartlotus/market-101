@@ -4416,7 +4416,7 @@
           "id": "6.1",
           "title": "时差",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -4466,7 +4466,7 @@
           "id": "6.2",
           "title": "半股也是股",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -4509,7 +4509,7 @@
           "id": "6.3",
           "title": "零佣金？",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -4553,7 +4553,7 @@
           "id": "6.4",
           "title": "没有涨停板，但有熔断",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -4599,7 +4599,7 @@
           "id": "6.5",
           "title": "你睡着的这一夜",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -4643,7 +4643,7 @@
           "id": "6.6",
           "title": "钱不睡觉",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -5246,7 +5246,7 @@
           "id": "7.1",
           "title": "全天不休",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
@@ -5297,7 +5297,7 @@
           "id": "7.2",
           "title": "先写下你的底线",
           "shell": "full",
-          "scene": null,
+          "scene": "lateNight",
           "sceneImageKey": null,
           "mentor": [
             {
