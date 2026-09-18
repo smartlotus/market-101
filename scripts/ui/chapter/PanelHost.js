@@ -253,7 +253,10 @@ export default class PanelHost {
       type === 'tower' ||
       type === 'orderBook' ||
       type === 'matchGame' ||
-      type === 'flowWalk'
+      type === 'flowWalk' ||
+      // 第三章的产品对比与招募说明书：**都是可读条目**，逐行 / 逐字段点开才计数
+      type === 'compare' ||
+      type === 'docCard'
     )
   }
 
@@ -333,6 +336,10 @@ export default class PanelHost {
         return this._blockMatchGame(block, ctx)
       case 'flowWalk':
         return this._blockFlowWalk(block, ctx)
+      case 'compare':
+        return this._blockCompare(block, ctx)
+      case 'docCard':
+        return this._blockDocCard(block, ctx)
       default:
         // 未知块型：渲染可读的原始标签而不是占位矩形（数据驱动，视图不吞掉信息）
         console.warn(`PanelHost: unknown block type "${block.type}"`)
@@ -419,6 +426,55 @@ export default class PanelHost {
       }
       this._readable(rowEl, block, ctx, unitKey)
       box.appendChild(rowEl)
+    }
+    return this._raw(block, ctx, box)
+  }
+
+  // ---- compare（产品并排对照，第三章 3.2）----
+  //
+  // 全游戏唯一一次「把两个产品放在同一张桌上看」。左列 / 右列逐项对齐，
+  // 每一行是一个**可读条目**（点开才算读过），与 `kvRows` 同一套 read 计数口径。
+  // 行内 `note` 是老周的补充话，不占读数。
+
+  _blockCompare(block, ctx) {
+    const box = el('div', 'ch-cmp')
+    box.dataset.leftLabel = String(block.leftLabel || '')
+    box.dataset.rightLabel = String(block.rightLabel || '')
+    const head = el('div', 'ch-cmp-h', box)
+    el('div', 'k', head, '')
+    el('div', 'lt', head, block.leftLabel || '左')
+    el('div', 'rt', head, block.rightLabel || '右')
+    for (const row of block.rows || []) {
+      const unitKey = this._unitKey(block, row)
+      const rowEl = el('div', 'ch-cmp-r', box)
+      rowEl.dataset.rowKey = String(row.key || '')
+      el('div', 'k', rowEl, row.label || row.key || '')
+      el('div', 'lt', rowEl, row.left || '')
+      el('div', 'rt', rowEl, row.right || '')
+      if (row.note) el('div', 'nt', rowEl, row.note)
+      this._readable(rowEl, block, ctx, unitKey)
+    }
+    return this._raw(block, ctx, box)
+  }
+
+  // ---- docCard（码排版的文档，第三章的基金招募说明书）----
+  //
+  // **由代码排版，不是图片**：字段逐条列出，每条可点开（计入 read）。
+  // `fields[] = { key, label, value, note? }`。
+
+  _blockDocCard(block, ctx) {
+    const box = el('div', 'ch-doc')
+    if (block.title) el('div', 'ch-doc-t', box, block.title)
+    if (block.subtitle) el('div', 'ch-doc-s', box, block.subtitle)
+    const body = el('div', 'ch-doc-b', box)
+    for (const f of block.fields || []) {
+      const unitKey = this._unitKey(block, f)
+      const rowEl = el('div', 'ch-kvr ch-doc-f', body)
+      rowEl.dataset.rowKey = String(f.key || '')
+      el('div', 'k', rowEl, f.label || f.key || '')
+      el('div', 'v', rowEl, f.value || '')
+      if (f.note) el('div', 'nt', rowEl, f.note)
+      this._readable(rowEl, block, ctx, unitKey)
     }
     return this._raw(block, ctx, box)
   }

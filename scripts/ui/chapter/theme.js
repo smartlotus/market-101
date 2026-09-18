@@ -1551,6 +1551,102 @@ ${PALETTE}
 }
 .ch-panel .ch-fw .fw-card:hover { background: #DDD4C4; }
 .ch-panel .ch-fw .fw-card.done { border-color: var(--ok-line); background: #E1DACC; color: var(--ok); }
+
+/* ==========================================================================
+   第三章「一篮子里的一颗蛋」—— 产品并排对照 / 码排文档（全部由代码绘制）
+   ========================================================================== */
+
+/* —— 产品对比（compare 块）—— 左列 ETF、右列场外基金，逐行对齐 —— */
+.ch-panel .ch-cmp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0 12px;
+}
+.ch-panel .ch-cmp-h,
+.ch-panel .ch-cmp-r {
+  display: grid;
+  grid-template-columns: 96px 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.ch-panel .ch-cmp-h {
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--border);
+}
+.ch-panel .ch-cmp-h .lt,
+.ch-panel .ch-cmp-h .rt {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.ch-panel .ch-cmp-h .lt { color: var(--accent); }
+.ch-panel .ch-cmp-h .rt { color: var(--gold); }
+.ch-panel .ch-cmp-r {
+  padding: 9px 10px;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  background: var(--panel-2);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.ch-panel .ch-cmp-r:hover { background: #F7F0E1; border-color: var(--border); }
+.ch-panel .ch-cmp-r.read { border-color: var(--ok-line); background: #EEF3F3; }
+.ch-panel .ch-cmp-r .k { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.ch-panel .ch-cmp-r .lt,
+.ch-panel .ch-cmp-r .rt { font-size: 12.5px; color: var(--text-2); line-height: 1.6; }
+.ch-panel .ch-cmp-r .lt { border-left: 3px solid var(--accent); padding-left: 8px; }
+.ch-panel .ch-cmp-r .rt { border-left: 3px solid var(--gold); padding-left: 8px; }
+.ch-panel .ch-cmp-r .nt {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* —— 码排文档（docCard 块）—— 基金招募说明书的关键字段 —— */
+.ch-panel .ch-doc {
+  margin: 8px 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: #FDFAF1;
+  box-shadow: 0 2px 0 rgba(90, 74, 48, 0.10);
+}
+.ch-panel .ch-doc-t {
+  padding: 11px 16px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 1px dashed var(--hair);
+}
+.ch-panel .ch-doc-s {
+  padding: 7px 16px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.ch-panel .ch-doc-b { padding: 8px 16px 12px; }
+.ch-panel .ch-doc-f {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 10px;
+  padding: 7px 8px;
+  border-bottom: 1px dotted var(--hair);
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 2px;
+}
+.ch-panel .ch-doc-f:last-child { border-bottom: none; }
+.ch-panel .ch-doc-f:hover { background: #F5EEE0; }
+.ch-panel .ch-doc-f.read { background: #EEF3F3; }
+.ch-panel .ch-doc-f .k { font-size: 12.5px; color: var(--muted); }
+.ch-panel .ch-doc-f .v { font-size: 13px; color: var(--text); line-height: 1.6; }
+.ch-panel .ch-doc-f .nt {
+  grid-column: 2;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
 `
 
 export default CHAPTER_THEME_CSS

@@ -653,6 +653,9 @@ export class ChapterRuntime {
       if (expect.status && result.status !== expect.status) return false
       if (expect.side && result.side !== expect.side) return false
       if (expect.type && result.type && result.type !== expect.type) return false
+      // 要求「就是这一只」：第三章的「申购那只场外基金 / 买一篮子」需要精确到标的，
+      // 否则玩家随便买一只股票也能满足条件。
+      if (expect.instrumentId && result.instrumentId !== expect.instrumentId) return false
       // 「修正后的限价单」：本章出现过拒单（即玩家学过怎么把价改回合法区间）
       if (expect.corrected && this._chapterRejectSeen !== true) return false
       return true

@@ -87,7 +87,9 @@
       "noScoreLabel": "本章不打分",
       "clearResidualsOnEnter": true,
       "unlocks": {
-        "instruments": ["601398"]
+        "instruments": [
+          "601398"
+        ]
       },
       "goalCard": {
         "title": "本章要什么：把第一单做成，并且说得清自己在做什么",
@@ -166,11 +168,23 @@
           "kind": "sceneCloseup",
           "title": "活期存单",
           "blocks": [
-            { "type": "bigNumber", "id": "deposit.rate", "label": "年利率", "value": "1.5%" },
-            { "type": "text", "id": "deposit.cpi", "text": "同期物价上涨约 2%" }
+            {
+              "type": "bigNumber",
+              "id": "deposit.rate",
+              "label": "年利率",
+              "value": "1.5%"
+            },
+            {
+              "type": "text",
+              "id": "deposit.cpi",
+              "text": "同期物价上涨约 2%"
+            }
           ],
           "actions": [
-            { "id": "1.1.closePanel", "label": "收起来" }
+            {
+              "id": "1.1.closePanel",
+              "label": "收起来"
+            }
           ]
         },
         "panel.conceptCards": {
@@ -178,12 +192,27 @@
           "kind": "conceptCards",
           "title": "这三张卡先收着",
           "blocks": [
-            { "type": "conceptCard", "id": "委托 vs 成交", "conceptKey": "委托 vs 成交" },
-            { "type": "conceptCard", "id": "手续费", "conceptKey": "手续费" },
-            { "type": "conceptCard", "id": "成交价", "conceptKey": "成交价" }
+            {
+              "type": "conceptCard",
+              "id": "委托 vs 成交",
+              "conceptKey": "委托 vs 成交"
+            },
+            {
+              "type": "conceptCard",
+              "id": "手续费",
+              "conceptKey": "手续费"
+            },
+            {
+              "type": "conceptCard",
+              "id": "成交价",
+              "conceptKey": "成交价"
+            }
           ],
           "actions": [
-            { "id": "1.5.5.closePanel", "label": "看过三张了" }
+            {
+              "id": "1.5.5.closePanel",
+              "label": "看过三张了"
+            }
           ]
         },
         "panel.review": {
@@ -195,16 +224,39 @@
               "type": "kvRows",
               "id": "review.rows",
               "rows": [
-                { "key": "buyPrice", "label": "买价", "source": "lastBuy.fillPrice" },
-                { "key": "sellPrice", "label": "卖价", "source": "lastSell.fillPrice" },
-                { "key": "fee", "label": "费用", "source": "trade.fee" },
-                { "key": "result", "label": "结果", "source": "trade.realizedPnL" },
-                { "key": "reason", "label": "原因", "source": "event.headline" }
+                {
+                  "key": "buyPrice",
+                  "label": "买价",
+                  "source": "lastBuy.fillPrice"
+                },
+                {
+                  "key": "sellPrice",
+                  "label": "卖价",
+                  "source": "lastSell.fillPrice"
+                },
+                {
+                  "key": "fee",
+                  "label": "费用",
+                  "source": "trade.fee"
+                },
+                {
+                  "key": "result",
+                  "label": "结果",
+                  "source": "trade.realizedPnL"
+                },
+                {
+                  "key": "reason",
+                  "label": "原因",
+                  "source": "event.headline"
+                }
               ]
             }
           ],
           "actions": [
-            { "id": "1.8.closePanel", "label": "看完了" }
+            {
+              "id": "1.8.closePanel",
+              "label": "看完了"
+            }
           ]
         },
         "panel.confirm": {
@@ -212,10 +264,17 @@
           "kind": "understandingCheck",
           "title": "章末确认",
           "blocks": [
-            { "type": "choiceGroup", "id": "1.9.confirm", "choiceId": "1.9.confirm" }
+            {
+              "type": "choiceGroup",
+              "id": "1.9.confirm",
+              "choiceId": "1.9.confirm"
+            }
           ],
           "actions": [
-            { "id": "1.9.finish", "label": "完成理解确认" }
+            {
+              "id": "1.9.finish",
+              "label": "完成理解确认"
+            }
           ]
         }
       },
@@ -242,7 +301,11 @@
           "panels": [],
           "panelAutoOpen": false,
           "require": [
-            { "kind": "interact", "id": "1.0.start", "label": "开始" }
+            {
+              "kind": "interact",
+              "id": "1.0.start",
+              "label": "开始"
+            }
           ],
           "concepts": [],
           "conceptCards": [],
@@ -269,8 +332,20 @@
           ],
           "panelAutoOpen": false,
           "require": [
-            { "kind": "interact", "id": "1.1.openDeposit", "label": "点开存单", "opensPanel": "panel.deposit" },
-            { "kind": "read", "id": "1.1.readDeposit", "panelId": "panel.deposit", "count": 2, "mustClose": true, "label": "读完存单上的两个数字" }
+            {
+              "kind": "interact",
+              "id": "1.1.openDeposit",
+              "label": "点开存单",
+              "opensPanel": "panel.deposit"
+            },
+            {
+              "kind": "read",
+              "id": "1.1.readDeposit",
+              "panelId": "panel.deposit",
+              "count": 2,
+              "mustClose": true,
+              "label": "读完存单上的两个数字"
+            }
           ],
           "concepts": [
             "银行",
@@ -298,7 +373,14 @@
           "panels": [],
           "panelAutoOpen": false,
           "require": [
-            { "kind": "interact", "id": "1.2.openAccount", "label": "同意并开户", "simAction": ["openAccount"] }
+            {
+              "kind": "interact",
+              "id": "1.2.openAccount",
+              "label": "同意并开户",
+              "simAction": [
+                "openAccount"
+              ]
+            }
           ],
           "concepts": [
             "券商",
@@ -323,7 +405,10 @@
               "kind": "interact",
               "id": "1.3.fundInitial",
               "label": "入金 ¥100,000",
-              "simAction": ["fundInitial", "beginFirstDay"],
+              "simAction": [
+                "fundInitial",
+                "beginFirstDay"
+              ],
               "opensFirstMarketDay": true
             }
           ],
@@ -359,7 +444,12 @@
             "defaultHighlightRule": "cheapestAffordable"
           },
           "require": [
-            { "kind": "select", "id": "1.4.pick", "rule": "affordable", "label": "在自选列表里点选一只买得起一整手的" }
+            {
+              "kind": "select",
+              "id": "1.4.pick",
+              "rule": "affordable",
+              "label": "在自选列表里点选一只买得起一整手的"
+            }
           ],
           "concepts": [
             "K线",
@@ -392,7 +482,11 @@
             {
               "kind": "submit",
               "id": "1.5.buy",
-              "expect": { "accepted": true, "side": "buy", "type": "limit" },
+              "expect": {
+                "accepted": true,
+                "side": "buy",
+                "type": "limit"
+              },
               "label": "点「买入」"
             }
           ],
@@ -418,7 +512,14 @@
           ],
           "panelAutoOpen": true,
           "require": [
-            { "kind": "read", "id": "1.5.5.cards", "panelId": "panel.conceptCards", "count": 3, "mustClose": true, "label": "读完三张概念卡" }
+            {
+              "kind": "read",
+              "id": "1.5.5.cards",
+              "panelId": "panel.conceptCards",
+              "count": 3,
+              "mustClose": true,
+              "label": "读完三张概念卡"
+            }
           ],
           "concepts": [
             "委托 vs 成交",
@@ -452,7 +553,14 @@
           "panelAutoOpen": false,
           "highlight": "advanceDayButton",
           "require": [
-            { "kind": "advanceDay", "id": "1.6.advance", "label": "进入下一交易日", "simAction": ["advanceDay"] }
+            {
+              "kind": "advanceDay",
+              "id": "1.6.advance",
+              "label": "进入下一交易日",
+              "simAction": [
+                "advanceDay"
+              ]
+            }
           ],
           "concepts": [
             "T+1",
@@ -481,7 +589,15 @@
           "panels": [],
           "panelAutoOpen": false,
           "require": [
-            { "kind": "submit", "id": "1.7.sell", "expect": { "accepted": true, "side": "sell" }, "label": "卖出" }
+            {
+              "kind": "submit",
+              "id": "1.7.sell",
+              "expect": {
+                "accepted": true,
+                "side": "sell"
+              },
+              "label": "卖出"
+            }
           ],
           "concepts": [
             "未实现盈亏",
@@ -542,7 +658,12 @@
           ],
           "panelAutoOpen": true,
           "require": [
-            { "kind": "choice", "id": "1.9.confirm", "choiceId": "1.9.confirm", "label": "完成理解确认（一道 10 秒选择题）" }
+            {
+              "kind": "choice",
+              "id": "1.9.confirm",
+              "choiceId": "1.9.confirm",
+              "label": "完成理解确认（一道 10 秒选择题）"
+            }
           ],
           "concepts": [],
           "conceptCards": [],
@@ -563,7 +684,10 @@
       "noScoreLabel": null,
       "clearResidualsOnEnter": true,
       "unlocks": {
-        "instruments": ["600519", "000858"]
+        "instruments": [
+          "600519",
+          "000858"
+        ]
       },
       "goalCard": {
         "title": "本章要什么：把四条规则亲手撞一遍，然后说清它们为什么在",
@@ -683,10 +807,16 @@
               "conceptKey": "T+1",
               "text": "今天买入的股票要到下一个交易日才能卖出。当天卖出会被拒。"
             },
-            { "type": "choiceGroup", "choiceId": "2.5.fourRules" }
+            {
+              "type": "choiceGroup",
+              "choiceId": "2.5.fourRules"
+            }
           ],
           "actions": [
-            { "id": "2.5.closePanel", "label": "四张都看过了" }
+            {
+              "id": "2.5.closePanel",
+              "label": "四张都看过了"
+            }
           ]
         },
         "panel.eventCard": {
@@ -694,10 +824,17 @@
           "kind": "eventCard",
           "title": "今天的新闻",
           "blocks": [
-            { "type": "eventCard", "id": "event.card", "source": "currentEvent" }
+            {
+              "type": "eventCard",
+              "id": "event.card",
+              "source": "currentEvent"
+            }
           ],
           "actions": [
-            { "id": "2.7.closePanel", "label": "我知道了" }
+            {
+              "id": "2.7.closePanel",
+              "label": "我知道了"
+            }
           ]
         },
         "panel.settlement": {
@@ -721,23 +858,51 @@
               "type": "kvRows",
               "id": "settlement.inputs",
               "rows": [
-                { "key": "rar", "label": "章内调整收益 rar", "source": "rating.rar" },
-                { "key": "maxDD", "label": "章内最大回撤 maxDD", "source": "rating.maxDD" },
-                { "key": "costRatio", "label": "章内成本比 costRatio", "source": "rating.costRatio" }
+                {
+                  "key": "rar",
+                  "label": "章内调整收益 rar",
+                  "source": "rating.rar"
+                },
+                {
+                  "key": "maxDD",
+                  "label": "章内最大回撤 maxDD",
+                  "source": "rating.maxDD"
+                },
+                {
+                  "key": "costRatio",
+                  "label": "章内成本比 costRatio",
+                  "source": "rating.costRatio"
+                }
               ]
             },
-            { "type": "bigNumber", "id": "settlement.score", "label": "本章分数 S", "source": "rating.S" },
-            { "type": "text", "id": "settlement.grade", "source": "gradeLine" },
+            {
+              "type": "bigNumber",
+              "id": "settlement.score",
+              "label": "本章分数 S",
+              "source": "rating.S"
+            },
+            {
+              "type": "text",
+              "id": "settlement.grade",
+              "source": "gradeLine"
+            },
             {
               "type": "text",
               "id": "settlement.marketMove",
               "label": "本章大盘同期涨跌（对照，不计分）",
               "source": "rating.marketMove"
             },
-            { "type": "text", "id": "settlement.beatenMarket", "source": "beatenMarketLine" }
+            {
+              "type": "text",
+              "id": "settlement.beatenMarket",
+              "source": "beatenMarketLine"
+            }
           ],
           "actions": [
-            { "id": "settlement.continue", "label": "继续" }
+            {
+              "id": "settlement.continue",
+              "label": "继续"
+            }
           ]
         },
         "panel.confirm": {
@@ -745,10 +910,17 @@
           "kind": "understandingCheck",
           "title": "章末确认",
           "blocks": [
-            { "type": "choiceGroup", "id": "2.end", "choiceId": "2.end" }
+            {
+              "type": "choiceGroup",
+              "id": "2.end",
+              "choiceId": "2.end"
+            }
           ],
           "actions": [
-            { "id": "2.end.finish", "label": "完成理解确认" }
+            {
+              "id": "2.end.finish",
+              "label": "完成理解确认"
+            }
           ]
         },
         "panel.extraSegment": {
@@ -756,11 +928,21 @@
           "kind": "extraSegment",
           "title": null,
           "blocks": [
-            { "type": "steps", "id": "extra.steps", "source": "extraSegment.steps" }
+            {
+              "type": "steps",
+              "id": "extra.steps",
+              "source": "extraSegment.steps"
+            }
           ],
           "actions": [
-            { "id": "extra.finish", "label": "继续" },
-            { "id": "extra.topUp", "label": "一键补足本金" }
+            {
+              "id": "extra.finish",
+              "label": "继续"
+            },
+            {
+              "id": "extra.topUp",
+              "label": "一键补足本金"
+            }
           ]
         }
       },
@@ -812,10 +994,22 @@
             "mentorLine": "这是训练场，不是成绩单。钱不够了就说一声。",
             "lowMarketLine": "这一章市场很差，你做对的地方是没被吓到",
             "steps": [
-              { "title": "先看标的", "text": "你买的是哪一只，这一章它自己动了多少——先把「它动的」和「你做的」分开。" },
-              { "title": "再看事件", "text": "这一章有哪条消息落在这只票上。它落在你买之前还是之后，差别很大。" },
-              { "title": "再看操作", "text": "你在什么价位进、什么价位出，中间隔了多久。这一层里，最贵的是频繁。" },
-              { "title": "最后看费用", "text": "一进一出收了多少，占成交金额多少。仓位越小、次数越多，这个比例越高——这是固定费用的性质，不是你的错。" }
+              {
+                "title": "先看标的",
+                "text": "你买的是哪一只，这一章它自己动了多少——先把「它动的」和「你做的」分开。"
+              },
+              {
+                "title": "再看事件",
+                "text": "这一章有哪条消息落在这只票上。它落在你买之前还是之后，差别很大。"
+              },
+              {
+                "title": "再看操作",
+                "text": "你在什么价位进、什么价位出，中间隔了多久。这一层里，最贵的是频繁。"
+              },
+              {
+                "title": "最后看费用",
+                "text": "一进一出收了多少，占成交金额多少。仓位越小、次数越多，这个比例越高——这是固定费用的性质，不是你的错。"
+              }
             ]
           }
         }
@@ -848,7 +1042,9 @@
             {
               "kind": "submit",
               "id": "2.1.rejectFunds",
-              "expect": { "reasonCode": "REJECT_1" },
+              "expect": {
+                "reasonCode": "REJECT_1"
+              },
               "label": "自己提交一次（买贵州茅台 1 手）"
             }
           ],
@@ -857,7 +1053,13 @@
             "label": "我暂时不想试",
             "demo": {
               "steps": [
-                { "side": "buy", "instrumentId": "600519", "type": "limit", "priceRef": "lastPrice", "qty": 100 }
+                {
+                  "side": "buy",
+                  "instrumentId": "600519",
+                  "type": "limit",
+                  "priceRef": "lastPrice",
+                  "qty": 100
+                }
               ]
             }
           },
@@ -891,7 +1093,9 @@
             {
               "kind": "submit",
               "id": "2.2.rejectLimit",
-              "expect": { "reasonCode": "REJECT_2" },
+              "expect": {
+                "reasonCode": "REJECT_2"
+              },
               "label": "自己提交一次（挂一个明显高于涨停的价）"
             }
           ],
@@ -900,7 +1104,13 @@
             "label": "我暂时不想试",
             "demo": {
               "steps": [
-                { "side": "buy", "instrumentId": "601398", "type": "limit", "priceRef": "limitUpPlusTick", "qty": 100 }
+                {
+                  "side": "buy",
+                  "instrumentId": "601398",
+                  "type": "limit",
+                  "priceRef": "limitUpPlusTick",
+                  "qty": 100
+                }
               ]
             }
           },
@@ -935,7 +1145,9 @@
             {
               "kind": "submit",
               "id": "2.3.rejectT1",
-              "expect": { "reasonCode": "REJECT_4" },
+              "expect": {
+                "reasonCode": "REJECT_4"
+              },
               "label": "自己提交一次（当天买入后当天卖出）"
             }
           ],
@@ -944,8 +1156,20 @@
             "label": "我暂时不想试",
             "demo": {
               "steps": [
-                { "side": "buy", "instrumentId": "601398", "type": "limit", "priceRef": "lastPrice", "qty": 100 },
-                { "side": "sell", "instrumentId": "601398", "type": "limit", "priceRef": "lastPrice", "qty": 100 }
+                {
+                  "side": "buy",
+                  "instrumentId": "601398",
+                  "type": "limit",
+                  "priceRef": "lastPrice",
+                  "qty": 100
+                },
+                {
+                  "side": "sell",
+                  "instrumentId": "601398",
+                  "type": "limit",
+                  "priceRef": "lastPrice",
+                  "qty": 100
+                }
               ]
             }
           },
@@ -979,7 +1203,9 @@
             {
               "kind": "submit",
               "id": "2.4.rejectClosed",
-              "expect": { "reasonCode": "REJECT_3" },
+              "expect": {
+                "reasonCode": "REJECT_3"
+              },
               "label": "自己提交一次（推进到周末后下单）"
             }
           ],
@@ -988,8 +1214,16 @@
             "label": "我暂时不想试",
             "demo": {
               "steps": [
-                { "action": "advanceToClosedDay" },
-                { "side": "buy", "instrumentId": "601398", "type": "limit", "priceRef": "lastPrice", "qty": 100 }
+                {
+                  "action": "advanceToClosedDay"
+                },
+                {
+                  "side": "buy",
+                  "instrumentId": "601398",
+                  "type": "limit",
+                  "priceRef": "lastPrice",
+                  "qty": 100
+                }
               ]
             }
           },
@@ -1029,7 +1263,12 @@
               "mustClose": true,
               "label": "读完四张规则卡"
             },
-            { "kind": "choice", "id": "2.5.choice", "choiceId": "2.5.fourRules", "label": "回答老周的问题" }
+            {
+              "kind": "choice",
+              "id": "2.5.choice",
+              "choiceId": "2.5.fourRules",
+              "label": "回答老周的问题"
+            }
           ],
           "concepts": [
             "撮合",
@@ -1061,25 +1300,41 @@
             {
               "kind": "submit",
               "id": "2.6.limitBuy",
-              "expect": { "accepted": true, "side": "buy", "type": "limit" },
+              "expect": {
+                "accepted": true,
+                "side": "buy",
+                "type": "limit"
+              },
               "label": "提交一笔合法的限价买"
             },
             {
               "kind": "submit",
               "id": "2.6.limitSell",
-              "expect": { "accepted": true, "side": "sell", "type": "limit" },
+              "expect": {
+                "accepted": true,
+                "side": "sell",
+                "type": "limit"
+              },
               "label": "提交一笔合法的限价卖"
             },
             {
               "kind": "submit",
               "id": "2.6.marketBuy",
-              "expect": { "accepted": true, "side": "buy", "type": "market" },
+              "expect": {
+                "accepted": true,
+                "side": "buy",
+                "type": "market"
+              },
               "label": "提交一笔合法的市价买"
             },
             {
               "kind": "submit",
               "id": "2.6.correctedLimit",
-              "expect": { "accepted": true, "type": "limit", "corrected": true },
+              "expect": {
+                "accepted": true,
+                "type": "limit",
+                "corrected": true
+              },
               "label": "提交一笔修正后的限价单"
             }
           ],
@@ -1107,7 +1362,14 @@
           ],
           "panelAutoOpen": true,
           "require": [
-            { "kind": "advanceDay", "id": "2.7.advance", "label": "进入下一交易日（等到那条新闻）", "simAction": ["advanceDay"] },
+            {
+              "kind": "advanceDay",
+              "id": "2.7.advance",
+              "label": "进入下一交易日（等到那条新闻）",
+              "simAction": [
+                "advanceDay"
+              ]
+            },
             {
               "kind": "read",
               "id": "2.7.eventCard",
@@ -1133,613 +1395,1481 @@
     {
       "id": 3,
       "name": "一篮子里的一颗蛋",
-      "implemented": false,
+      "implemented": true,
       "situation": "同事都在押一只股票，你觉得太吓人",
       "preview": "先别选公司。先选方法。",
       "rated": true,
       "noScoreLabel": null,
-      "goalCard": null,
-      "savePoints": [],
+      "clearResidualsOnEnter": true,
+      "unlocks": {
+        "instruments": [
+          "510300",
+          "510050",
+          "110020",
+          "000187"
+        ]
+      },
+      "goalCard": {
+        "title": "一篮子里的一颗蛋",
+        "teach": "这一章结束，你要能说清：买 ETF 和买一只股票，到底差在哪里；以及为什么「先选方法、再选公司」能让你不必猜对。",
+        "graded": true
+      },
+      "savePoints": [
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4",
+        "3.5",
+        "3.6",
+        "3.7"
+      ],
       "directedEvents": [
         "M02",
         "I02"
       ],
-      "pinnedEvents": [],
+      "pinnedEvents": [
+        "M02"
+      ],
       "directedQueue": [
         "M02",
         "I02"
       ],
-      "choices": {},
-      "panels": {},
-      "chapterEnd": null,
-      "beats": []
-    },
-  {
-    "id": 4,
-    "name": "隔壁的三栋楼",
-    "implemented": true,
-    "situation": "你换了工作，新公司在金融街旁边。午休出门，你抬头发现三栋楼：一栋写着「证券」，一栋写着「基金」，一栋写着「交易所」。你在第一章开过户、在第三章买过基金，但你突然发现——你根本不知道这三栋楼里的人在做什么，也不知道你的钱经过了几双手。晚上老周约你吃了顿饭。",
-    "preview": "隔壁的三栋楼：看清你的钱经过的每一双手。",
-    "rated": false,
-    "noScoreLabel": "本章不打分",
-    "noRemedial": true,
-    "clearResidualsOnEnter": true,
-    "unlocks": {
-      "instruments": []
-    },
-    "goalCard": {
-      "title": "本章要什么：看清你的钱经过的每一双手",
-      "teach": [
-        "交易所",
-        "券商",
-        "基金管理人",
-        "撮合",
-        "买卖价差",
-        "流动性",
-        "银行",
-        "清算交收",
-        "监管机构",
-        "存管",
-        "停牌",
-        "退市",
-        "黑天鹅"
-      ],
-      "graded": false
-    },
-    "savePoints": [
-      "4.2",
-      "4.4"
-    ],
-    "directedEvents": [
-      "P02"
-    ],
-    "pinnedEvents": [
-      {
-        "eventId": "P02",
-        "beatId": "4.2",
-        "marketDay": null,
-        "note": "节拍 4.2 消耗一个开市日，定向事件在开市日抽签时被消费（PRD §7 定向事件）"
-      }
-    ],
-    "directedQueue": [],
-    "choices": {
-      "4.2.match": {
-        "id": "4.2.match",
-        "question": "这一笔是谁和谁成交的？",
-        "conceptKey": "撮合",
-        "correctKey": "match",
-        "options": [
-          {
-            "key": "match",
-            "text": "有人愿意按 ¥10.43 买，正好有人按 ¥10.43 卖 —— 两边的价对上了，就成了这一笔。",
-            "feedback": "对。成交价不是谁写上去的，是两边的价第一次对上。两列挂单最下面的那两个价，就是下一次最可能成交的地方。"
-          },
-          {
-            "key": "exchange",
-            "text": "交易所定了一个 ¥10.43，大家照这个价成交。",
-            "feedback": "我们再摆一次：交易所只提供场地和规则，它自己既不买、也不卖、更不报价。你把两列挂单最下面的两个价摆一起看 —— 成交价是从它们中间出来的。"
-          }
-        ]
+      "choices": {
+        "3.2.pick": {
+          "id": "3.2.pick",
+          "question": "这两样摆在一起，你更在意哪一件事？",
+          "conceptKey": "场内 vs 场外",
+          "correctKey": null,
+          "options": [
+            {
+              "key": "priceKnown",
+              "text": "我更在意「价格是我自己知道的」——盘中报价、想买就买，成交价我心里有数。",
+              "feedback": "那就走场内。代价是你得自己盯价、自己决定什么时候出手；换来的是一切都在明面上。"
+            },
+            {
+              "key": "feeHidden",
+              "text": "我更在意「别让我天天动手」——按净值申购、不用盯盘，费用藏在净值里也认。",
+              "feedback": "那就走场外。代价是你今天不知道成交价，而且短期赎回要被收一笔惩罚费——它专门治「拿不住」。"
+            }
+          ]
+        },
+        "3.6.whyNotHold": {
+          "id": "3.6.whyNotHold",
+          "question": "如果你在这几拍里来回买卖了几次，你现在怎么想？",
+          "conceptKey": "交易成本",
+          "correctKey": null,
+          "options": [
+            {
+              "key": "costly",
+              "text": "我才发现，进出的每一次都要交钱——来回几趟，手续费比赚的还多。",
+              "feedback": "这就是**交易成本**。它不显眼，但它每次都在；交易越频繁，它咬得越狠。"
+            },
+            {
+              "key": "timing",
+              "text": "我其实是在猜什么时候买、什么时候卖——这就是「择时」，我猜得并不准。",
+              "feedback": "「长期持有 vs 择时」的第一课，不是择时一定错，而是**择时要有依据**；没有依据的择时，成本却一定在收。"
+            },
+            {
+              "key": "none",
+              "text": "我没有来回买卖，我就是拿着。",
+              "feedback": "那很好。你没有做任何动作，也就没有付出任何成本——这也是一种决定。"
+            }
+          ]
+        },
+        "3.end": {
+          "id": "3.end",
+          "question": "如果一年后你只能记住这一章的一句话，你希望是哪一句？",
+          "conceptKey": "分散投资",
+          "correctKey": null,
+          "options": [
+            {
+              "key": "pickedRight",
+              "text": "「我押对了哪只。」",
+              "feedback": "这句听起来很爽。但你得接受它另一半的意思：押错的时候，你也要承担全部后果——而这一章想说的恰恰是不必这样。"
+            },
+            {
+              "key": "knowWhy",
+              "text": "「我知道我为什么买。」",
+              "feedback": "这句更慢，但它能重复。知道为什么买的人，跌的时候也知道自己该做什么——这才是这一章真正想留给你的东西。"
+            }
+          ]
+        }
       },
-      "4.5.ifNoRule": {
-        "id": "4.5.ifNoRule",
-        "question": "如果没有那道规定，会怎样？",
-        "conceptKey": "存管",
-        "correctKey": null,
-        "options": [
-          {
-            "key": "used",
-            "text": "那我的钱就可能被券商拿去用 —— 账面上还是那些数，但我真要取的时候，它未必拿得出来。",
-            "feedback": "你想到的这一层，就是那道规定要挡住的事。钱在你名下、和钱在它手里，太平的时候看着一样，不平的那天不一样。"
-          },
-          {
-            "key": "same",
-            "text": "短时间里大概看不出区别：我照常买卖，对账单上还是那些数。",
-            "feedback": "这话也成立 —— 太平的时候，有没有那道规定，体感是一样的。规定本来就不是为太平的那天写的。"
-          }
-        ]
-      }
-    },
-    "panels": {
-      "panel.tower.exchange": {
-        "id": "panel.tower.exchange",
-        "kind": "tower",
-        "title": "第一栋：交易所",
-        "blocks": [
-          {
-            "type": "tower",
-            "id": "4.1.tower.exchange",
-            "name": "交易所",
-            "tagline": "开市的地方",
-            "lines": [
-              "全国想买、想卖的人，报的价都摆在这里的同一本簿子上。",
-              "它自己不做买卖，也不替你挑股票 —— 它只保证一件事：谁来都按同一条规则，谁先对上谁先成交。",
-              "你在第一章看到的那个「最新价」，就是从这里最后一笔成交里出来的。"
+      "panels": {
+        "panel.compare": {
+          "id": "panel.compare",
+          "kind": "compare",
+          "title": "两样东西摆在一张桌上",
+          "blocks": [
+            {
+              "type": "compare",
+              "id": "3.2.compare",
+              "leftLabel": "场内 ETF（510300）",
+              "rightLabel": "场外基金（110020）",
+              "rows": [
+                {
+                  "key": "where",
+                  "label": "在哪里买",
+                  "left": "券商 App 里，和买股票同一个入口。",
+                  "right": "基金公司或代销平台，是另一个入口（不在你的券商自选里）。"
+                },
+                {
+                  "key": "price",
+                  "label": "价格可知吗",
+                  "left": "盘中实时报价，你出多少价自己知道。",
+                  "right": "不知道。你提交时只有昨天和前天的净值，成交价按**今天收市后**的净值算。",
+                  "note": "这就是「未知价交易」——它不是为了坑你，是因为基金持有的一篮子东西，要等收市才能算清楚值多少钱。"
+                },
+                {
+                  "key": "settle",
+                  "label": "什么时候到账",
+                  "left": "卖出后资金当日可用（T+1 可卖，卖出款当日就能再买）。",
+                  "right": "申购 T+1 确认份额；赎回款 T+3 才回到你的账上。",
+                  "note": "所以场外基金不适合「明天要用钱」的场景——它天生鼓励你慢一点。"
+                },
+                {
+                  "key": "fee",
+                  "label": "费用结构",
+                  "left": "佣金（有最低 5 元），免印花税、免过户费。",
+                  "right": "申购费按金额收；赎回费按**你持有了多久**收——持有越短，费率越高。",
+                  "note": "免掉的印花税让 ETF 的短线成本更低；而场外基金用赎回费惩罚「拿不住」。这两个设计方向是相反的。"
+                },
+                {
+                  "key": "tracking",
+                  "label": "跟踪误差",
+                  "left": "你看着报价买，误差几乎全落在你自己的成交价上。",
+                  "right": "基金自己也会有很小的跟踪偏离（咱们这个模拟里是 ±0.1%）——它跟着指数走，但不会分毫不差。",
+                  "note": "跟踪误差不是缺陷，是「复制一个指数」这件事本身的代价。"
+                },
+                {
+                  "key": "manage",
+                  "label": "管理费",
+                  "left": "同样有管理费，但它已经体现在你看到的报价里。",
+                  "right": "年化管理费**从净值里直接扣**，你不会收到任何账单。",
+                  "note": "看不见的费用最容易让人忽略它——这也是它在教学上必须被点名的原因。"
+                }
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "id": "3.2.closeCompare",
+              "label": "两边都看过了"
+            }
+          ]
+        },
+        "panel.prospectus": {
+          "id": "panel.prospectus",
+          "kind": "docCard",
+          "title": "基金招募说明书（节选）",
+          "blocks": [
+            {
+              "type": "docCard",
+              "id": "3.2.doc",
+              "title": "沪深300指数基金 · 招募说明书节选",
+              "subtitle": "关键字段（由代码排版呈现，不是图片）",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "基金名称",
+                  "value": "沪深300指数基金"
+                },
+                {
+                  "key": "type",
+                  "label": "基金类型",
+                  "value": "股票型指数基金（场外）"
+                },
+                {
+                  "key": "target",
+                  "label": "跟踪标的",
+                  "value": "沪深300ETF（510300）"
+                },
+                {
+                  "key": "min",
+                  "label": "起购金额",
+                  "value": "100 元",
+                  "note": "场外基金按金额买，不按「手」——这和 ETF、股票都不一样。"
+                },
+                {
+                  "key": "sub",
+                  "label": "申购费",
+                  "value": "申购金额 × 0.15%"
+                },
+                {
+                  "key": "redeem",
+                  "label": "赎回费",
+                  "value": "持有 < 7 天 1.5% / 7–365 天 0.5% / > 365 天 0",
+                  "note": "持仓时间越短罚得越重，这笔钱是「别急着走」的意思。"
+                },
+                {
+                  "key": "manage",
+                  "label": "管理费",
+                  "value": "年化 1.2%，按日从基金净值中扣除",
+                  "note": "你永远不会收到这张账单——它每天悄悄从净值里走。"
+                },
+                {
+                  "key": "confirm",
+                  "label": "确认与到账",
+                  "value": "申购 T+1 确认份额；赎回款 T+3 到账"
+                },
+                {
+                  "key": "risk",
+                  "label": "风险提示",
+                  "value": "本基金不保本；净值随所跟踪指数波动而涨跌。"
+                }
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "id": "3.2.closeDoc",
+              "label": "合上说明书"
+            }
+          ]
+        },
+        "panel.unknownPrice": {
+          "id": "panel.unknownPrice",
+          "kind": "text",
+          "title": "你今天不知道成交价",
+          "blocks": [
+            {
+              "type": "text",
+              "id": "3.3.head",
+              "label": "",
+              "text": "你的申购单被接受了——但没有立刻成交。"
+            },
+            {
+              "type": "text",
+              "id": "3.3.body",
+              "label": "",
+              "text": "场外基金是**未知价交易**：你今天提交，按**今天收市后算出来的净值**成交。所以你此刻看到的那个净值，只是昨天的。"
+            },
+            {
+              "type": "text",
+              "id": "3.3.body2",
+              "label": "",
+              "text": "这不是延迟，也不是系统慢——基金手里握着一篮子资产，要等收市以后才能算清它到底值多少钱。"
+            }
+          ],
+          "actions": [
+            {
+              "id": "3.3.closePanel",
+              "label": "知道了"
+            }
+          ]
+        },
+        "panel.holdingPeriod": {
+          "id": "panel.holdingPeriod",
+          "kind": "kvRows",
+          "title": "钱不是立刻回来的",
+          "blocks": [
+            {
+              "type": "kvRows",
+              "id": "3.4.rows",
+              "rows": [
+                {
+                  "key": "c1",
+                  "label": "申购当天（T 日）",
+                  "value": "提交申购，成交价未知"
+                },
+                {
+                  "key": "c2",
+                  "label": "T+1",
+                  "value": "份额确认，你才真正持有它"
+                },
+                {
+                  "key": "c3",
+                  "label": "赎回当天",
+                  "value": "提交赎回，同样按当日收市净值算"
+                },
+                {
+                  "key": "c4",
+                  "label": "T+3",
+                  "value": "赎回款回到你的账上"
+                },
+                {
+                  "key": "c5",
+                  "label": "持有不足 7 天就赎回",
+                  "value": "赎回费 1.5% —— 几乎吃掉一次短线的全部利润"
+                }
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "id": "3.4.closePanel",
+              "label": "都看明白了"
+            }
+          ]
+        },
+        "panel.whyNotHold": {
+          "id": "panel.whyNotHold",
+          "kind": "text",
+          "title": "为什么拿不住",
+          "blocks": [
+            {
+              "type": "text",
+              "id": "3.6.body",
+              "label": "",
+              "text": "老周把你这两天的操作翻出来看了一眼，没评价对错，只问了一句：你进出的这些次数，每一次都在交钱——你算过一共交了多少吗？"
+            },
+            {
+              "type": "text",
+              "id": "3.6.body2",
+              "label": "",
+              "text": "这一问你想不想答都行。想看自己的费用，去持仓与账本那边翻一眼。"
+            },
+            {
+              "type": "choiceGroup",
+              "choiceId": "3.6.whyNotHold"
+            }
+          ],
+          "actions": [
+            {
+              "id": "3.6.closePanel",
+              "label": "我想完了"
+            }
+          ]
+        },
+        "panel.confirm": {
+          "id": "panel.confirm",
+          "kind": "understandingCheck",
+          "title": "章末确认",
+          "blocks": [
+            {
+              "type": "choiceGroup",
+              "id": "2.end",
+              "choiceId": "2.end"
+            }
+          ],
+          "actions": [
+            {
+              "id": "2.end.finish",
+              "label": "完成理解确认"
+            }
+          ]
+        },
+        "panel.settlement": {
+          "id": "panel.settlement",
+          "kind": "settlement",
+          "title": "章末结算",
+          "blocks": [
+            {
+              "type": "formula",
+              "id": "settlement.formula",
+              "label": "S 的计算",
+              "expression": "S = clamp( 50 + rar × 833 , 0 , 100 ) − 40 × clamp( (maxDD − 0.05) / 0.15 , 0 , 1 ) − 15 × clamp( (costRatio − 0.002) / 0.010 , 0 , 1 )",
+              "notes": [
+                "章内调整收益 rar = (NAV₁ − I − NAV₀) / NAV₀",
+                "章内最大回撤 maxDD = max_t ( (峰值调整NAV − 调整NAV_t) / 峰值调整NAV )",
+                "章内成本比 costRatio = 章内累计交易费用 / 章内累计成交金额",
+                "黄档（NAV < ¥50,000）时：成本罚分项 ×0.5"
+              ]
+            },
+            {
+              "type": "kvRows",
+              "id": "settlement.inputs",
+              "rows": [
+                {
+                  "key": "rar",
+                  "label": "章内调整收益 rar",
+                  "source": "rating.rar"
+                },
+                {
+                  "key": "maxDD",
+                  "label": "章内最大回撤 maxDD",
+                  "source": "rating.maxDD"
+                },
+                {
+                  "key": "costRatio",
+                  "label": "章内成本比 costRatio",
+                  "source": "rating.costRatio"
+                }
+              ]
+            },
+            {
+              "type": "bigNumber",
+              "id": "settlement.score",
+              "label": "本章分数 S",
+              "source": "rating.S"
+            },
+            {
+              "type": "text",
+              "id": "settlement.grade",
+              "source": "gradeLine"
+            },
+            {
+              "type": "text",
+              "id": "settlement.marketMove",
+              "label": "本章大盘同期涨跌（对照，不计分）",
+              "source": "rating.marketMove"
+            },
+            {
+              "type": "text",
+              "id": "settlement.beatenMarket",
+              "source": "beatenMarketLine"
+            }
+          ],
+          "actions": [
+            {
+              "id": "settlement.continue",
+              "label": "继续"
+            }
+          ]
+        },
+        "panel.extraSegment": {
+          "id": "panel.extraSegment",
+          "kind": "extraSegment",
+          "title": null,
+          "blocks": [
+            {
+              "type": "steps",
+              "id": "extra.steps",
+              "source": "extraSegment.steps"
+            }
+          ],
+          "actions": [
+            {
+              "id": "extra.finish",
+              "label": "继续"
+            },
+            {
+              "id": "extra.topUp",
+              "label": "一键补足本金"
+            }
+          ]
+        },
+        "panel.assemble": {
+          "id": "panel.assemble",
+          "kind": "flowWalk",
+          "title": "把你选它的理由拼出来",
+          "blocks": [
+            {
+              "type": "flowWalk",
+              "id": "3.7.walk",
+              "walkId": "reason"
+            }
+          ],
+          "actions": [
+            {
+              "id": "3.7.closePanel",
+              "label": "拼好了"
+            }
+          ]
+        }
+      },
+      "flowWalks": {
+        "reason": {
+          "id": "reason",
+          "prompt": "把你选它的理由，从下面这些片段里按顺序拼出来。",
+          "cards": [
+            {
+              "id": "p3",
+              "label": "所以我不需要先猜对哪一家会涨"
+            },
+            {
+              "id": "p1",
+              "label": "我买的是一篮子，不是一个赌注"
+            },
+            {
+              "id": "p4",
+              "label": "我赚的是市场的钱，不是我的运气"
+            },
+            {
+              "id": "p2",
+              "label": "与其把全部本金押在一只股票上"
+            }
+          ],
+          "order": [
+            "p2",
+            "p1",
+            "p3",
+            "p4"
+          ],
+          "finishRequireId": "3.7.assemble.done"
+        }
+      },
+      "chapterEnd": {
+        "settlementPanelId": "panel.settlement",
+        "confirmPanelId": "panel.confirm",
+        "extraPanelId": "panel.extraSegment",
+        "understandingChoiceId": "3.end"
+      },
+      "settlement": {
+        "gradeLines": {
+          "A": "这一章你走得很稳。",
+          "B": "这一章走得不错。",
+          "C": "这一章走完了。",
+          "D": "这一章我们再摆一次。"
+        },
+        "gradeLabels": {
+          "A": "进阶加演",
+          "B": "常规推进",
+          "C": "常规推进",
+          "D": "本章需要再摆一次"
+        },
+        "marketMoveRowLabel": "本章大盘同期涨跌（对照，不计分）",
+        "beatenMarketLine": "你这一章跑赢了市场。",
+        "extraSegments": {
+          "advanced": {
+            "kind": "advanced",
+            "label": "加演",
+            "unlockConcepts": [
+              "限价单",
+              "市价单"
             ],
-            "mentorLine": "这一栋的门谁都进得去，但进去只能报自己的价，改不了别人的价。"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.1.closeExchange",
-            "label": "收起来"
-          }
-        ]
-      },
-      "panel.tower.broker": {
-        "id": "panel.tower.broker",
-        "kind": "tower",
-        "title": "第二栋：券商",
-        "blocks": [
-          {
-            "type": "tower",
-            "id": "4.1.tower.broker",
-            "name": "券商",
-            "tagline": "你开户的那一家",
-            "lines": [
-              "你在第一章开户的那家就是券商。它替你把委托送进交易所，也替你记账。",
-              "它经你的手、也过你的账，但有一条规定让它不能把客户的钱当成自己的钱用。",
-              "它的收入来自手续费 —— 你买卖一次，它收一次。"
-            ],
-            "mentorLine": "券商是你和交易所之间那扇门。它只负责转达，价还是你自己报。"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.1.closeBroker",
-            "label": "收起来"
-          }
-        ]
-      },
-      "panel.tower.fund": {
-        "id": "panel.tower.fund",
-        "kind": "tower",
-        "title": "第三栋：基金公司",
-        "blocks": [
-          {
-            "type": "tower",
-            "id": "4.1.tower.fund",
-            "name": "基金管理人",
-            "tagline": "管那篮子的那家公司",
-            "lines": [
-              "你在第三章买的那只基金，钱交给的就是这一栋。",
-              "它把很多人的钱凑在一起，按事先说好的方法去买一篮子东西。",
-              "它不发股票，也不替你下单；它只做一件事 —— 按说好的方法管那笔钱。"
-            ],
-            "mentorLine": "它每做一笔都要留下记录给监管看。你交给它的钱不在它自己账上，是单独存着的。"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.1.closeFund",
-            "label": "收起来"
-          }
-        ]
-      },
-      "panel.orderBook": {
-        "id": "panel.orderBook",
-        "kind": "orderBook",
-        "title": "今天的挂单簿",
-        "blocks": [
-          {
-            "type": "orderBook",
-            "id": "4.2.book",
-            "label": "挂单簿：卖出挂单 / 买入挂单",
-            "bids": [
+            "steps": [
               {
-                "price": 10.42,
-                "qty": 2200
+                "title": "挂单为什么不成交",
+                "text": "限价单只有在价格够到你的价时才成交。你报的买价低于最新价，它就挂在单子上等着——不成交，也不消失。"
               },
               {
-                "price": 10.41,
-                "qty": 900
-              },
-              {
-                "price": 10.4,
-                "qty": 1500
+                "title": "跨日自动撤销",
+                "text": "挂单只当日有效，跨日自动撤销，冻住的钱会退回来。所以「没成交」不是没发生：它占过你的资金，也占过你的时间。"
               }
             ],
-            "asks": [
+            "body": [
+              "你这一章买的是 ETF，不是某一家公司。",
+              "所以你赚到的钱里，有很大一部分来自**市场整体**，而不是你猜对了谁——这正是「不用猜对一只股票，也能参与」的意思。",
+              "老周补了一句：真要比较，就拿你这一章的收益去比**同期沪深300**。跑赢它是本事，跑平它是常态，跑输了要问自己为什么。"
+            ]
+          },
+          "remedial": {
+            "kind": "remedial",
+            "label": "再摆一次",
+            "toTopUpLabel": "一键补足本金",
+            "mentorLine": "这是训练场，不是成绩单。钱不够了就说一声。",
+            "lowMarketLine": "这一章市场很差，你做对的地方是没被吓到",
+            "steps": [
               {
+                "title": "先看标的",
+                "text": "你买的是哪一只，这一章它自己动了多少——先把「它动的」和「你做的」分开。"
+              },
+              {
+                "title": "再看事件",
+                "text": "这一章有哪条消息落在这只票上。它落在你买之前还是之后，差别很大。"
+              },
+              {
+                "title": "再看操作",
+                "text": "你在什么价位进、什么价位出，中间隔了多久。这一层里，最贵的是频繁。"
+              },
+              {
+                "title": "最后看费用",
+                "text": "一进一出收了多少，占成交金额多少。仓位越小、次数越多，这个比例越高——这是固定费用的性质，不是你的错。"
+              }
+            ],
+            "body": [
+              "这一章的市场不算差，但你没能把「先选方法、再选公司」落成动作。",
+              "我们只做一件事：把 ETF 和场外基金并排再看一遍。",
+              "场内 ETF 是**盘中实时报价**，你出的价你自己知道；场外基金是**未知价交易**，你今天申购，按今天收市后的净值成交——你以为的价，其实要等到晚上才知道。",
+              "这两句话记住就够了：**前者你定价，后者它定价。** 没有哪个更好，只有你更需要哪一种。"
+            ]
+          }
+        }
+      },
+      "beats": [
+        {
+          "id": "3.1",
+          "title": "一篮子",
+          "shell": "full",
+          "scene": "cafe",
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "chapterOpen",
+              "speaker": "face",
+              "conceptKey": null,
+              "line": "第二章你学会的是「别被规则咬到」。这一章换个问题：既然你不需要猜对一只股票——那你要买的到底是什么？"
+            },
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "ETF",
+              "line": "你翻自选列表翻了一上午，每一只都能找出理由，也都能找出理由不买。先别选公司。先选方法。"
+            }
+          ],
+          "panels": [],
+          "panelAutoOpen": false,
+          "require": [
+            {
+              "kind": "select",
+              "id": "3.1.selectEtf",
+              "instrumentId": "510300",
+              "label": "在自选列表里找到并选中沪深300ETF"
+            }
+          ],
+          "concepts": [
+            "ETF",
+            "指数"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": false
+        },
+        {
+          "id": "3.2",
+          "title": "并排看",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "场内 vs 场外",
+              "line": "这两样东西，一个是场内的 ETF，一个是场外的基金。我把它们摆在一张桌上，你逐条看。"
+            }
+          ],
+          "panels": [
+            "panel.compare",
+            "panel.prospectus"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "read",
+              "id": "3.2.compare",
+              "panelId": "panel.compare",
+              "count": 6,
+              "mustClose": true,
+              "label": "把六个对照项逐条看过"
+            },
+            {
+              "kind": "read",
+              "id": "3.2.doc",
+              "panelId": "panel.prospectus",
+              "count": 9,
+              "mustClose": true,
+              "label": "读完招募说明书的关键字段"
+            },
+            {
+              "kind": "choice",
+              "id": "3.2.pick",
+              "choiceId": "3.2.pick",
+              "label": "回答：你更在意哪一件事"
+            }
+          ],
+          "concepts": [
+            "场内 vs 场外",
+            "IOPV",
+            "折溢价",
+            "跟踪误差",
+            "管理费"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": false
+        },
+        {
+          "id": "3.3",
+          "title": "你不知道今天什么价",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "未知价交易",
+              "line": "现在去申购那只场外基金。提醒你一句：你按下的那一刻，成交价还没生出来。"
+            }
+          ],
+          "panels": [
+            "panel.unknownPrice"
+          ],
+          "panelAutoOpen": false,
+          "require": [
+            {
+              "kind": "submit",
+              "id": "3.3.subscribe",
+              "expect": {
+                "accepted": true,
+                "side": "buy",
+                "instrumentId": "110020"
+              },
+              "label": "申购一笔场外基金"
+            }
+          ],
+          "concepts": [
+            "未知价交易",
+            "基金净值NAV"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": false
+        },
+        {
+          "id": "3.4",
+          "title": "钱不是立刻回来的",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "申购确认",
+              "line": "份额还没到你名下。往前推一天看看。"
+            }
+          ],
+          "panels": [
+            "panel.holdingPeriod"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "read",
+              "id": "3.4.read",
+              "panelId": "panel.holdingPeriod",
+              "count": 5,
+              "mustClose": true,
+              "label": "看清申赎的时间线"
+            },
+            {
+              "kind": "advanceDay",
+              "id": "3.4.advance1",
+              "label": "进入下一交易日（T+1 份额确认）",
+              "simAction": [
+                "advanceDay"
+              ]
+            },
+            {
+              "kind": "advanceDay",
+              "id": "3.4.advance2",
+              "label": "再推一天，看账户怎么变",
+              "simAction": [
+                "advanceDay"
+              ]
+            }
+          ],
+          "concepts": [
+            "申购确认",
+            "赎回到账",
+            "持有期惩罚"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": false
+        },
+        {
+          "id": "3.5",
+          "title": "买一篮子",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "分散投资",
+              "line": "现在把 ETF 买进来。买它，等于一次买下三百家公司——你不用挑出对的那一家。"
+            }
+          ],
+          "panels": [],
+          "panelAutoOpen": false,
+          "require": [
+            {
+              "kind": "select",
+              "id": "3.5.select",
+              "instrumentId": "510300",
+              "label": "选中沪深300ETF"
+            },
+            {
+              "kind": "submit",
+              "id": "3.5.buy",
+              "expect": {
+                "accepted": true,
+                "side": "buy",
+                "instrumentId": "510300"
+              },
+              "label": "买入 ETF"
+            }
+          ],
+          "concepts": [
+            "分散投资"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": false
+        },
+        {
+          "id": "3.6",
+          "title": "为什么拿不住",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "交易成本",
+              "line": "有个东西一直在悄悄收你的钱，它不显眼，但每一次都在。"
+            }
+          ],
+          "panels": [
+            "panel.whyNotHold"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "read",
+              "id": "3.6.read",
+              "panelId": "panel.whyNotHold",
+              "count": 2,
+              "mustClose": true,
+              "label": "读老周的点评（想不想回答都可以）"
+            }
+          ],
+          "concepts": [
+            "交易成本",
+            "长期持有 vs 择时",
+            "机会成本"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": false
+        },
+        {
+          "id": "3.7",
+          "title": "章末",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "chapterClose",
+              "speaker": "face",
+              "conceptKey": null,
+              "line": "你这一章赚到的钱，主要来自你**没有押一只股票**。收尾之前，把你选它的理由自己拼一遍。"
+            }
+          ],
+          "panels": [
+            "panel.assemble"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "interact",
+              "id": "3.7.assemble.done",
+              "gate": "flowWalk",
+              "label": "把「我为什么选它」按顺序拼出来"
+            },
+            {
+              "kind": "choice",
+              "id": "3.7.end",
+              "choiceId": "3.end",
+              "label": "回答老周的最后一问"
+            }
+          ],
+          "concepts": [
+            "投资理念"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null,
+          "endOfChapter": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "隔壁的三栋楼",
+      "implemented": true,
+      "situation": "你换了工作，新公司在金融街旁边。午休出门，你抬头发现三栋楼：一栋写着「证券」，一栋写着「基金」，一栋写着「交易所」。你在第一章开过户、在第三章买过基金，但你突然发现——你根本不知道这三栋楼里的人在做什么，也不知道你的钱经过了几双手。晚上老周约你吃了顿饭。",
+      "preview": "隔壁的三栋楼：看清你的钱经过的每一双手。",
+      "rated": false,
+      "noScoreLabel": "本章不打分",
+      "noRemedial": true,
+      "clearResidualsOnEnter": true,
+      "unlocks": {
+        "instruments": []
+      },
+      "goalCard": {
+        "title": "本章要什么：看清你的钱经过的每一双手",
+        "teach": [
+          "交易所",
+          "券商",
+          "基金管理人",
+          "撮合",
+          "买卖价差",
+          "流动性",
+          "银行",
+          "清算交收",
+          "监管机构",
+          "存管",
+          "停牌",
+          "退市",
+          "黑天鹅"
+        ],
+        "graded": false
+      },
+      "savePoints": [
+        "4.2",
+        "4.4"
+      ],
+      "directedEvents": [
+        "P02"
+      ],
+      "pinnedEvents": [
+        {
+          "eventId": "P02",
+          "beatId": "4.2",
+          "marketDay": null,
+          "note": "节拍 4.2 消耗一个开市日，定向事件在开市日抽签时被消费（PRD §7 定向事件）"
+        }
+      ],
+      "directedQueue": [],
+      "choices": {
+        "4.2.match": {
+          "id": "4.2.match",
+          "question": "这一笔是谁和谁成交的？",
+          "conceptKey": "撮合",
+          "correctKey": "match",
+          "options": [
+            {
+              "key": "match",
+              "text": "有人愿意按 ¥10.43 买，正好有人按 ¥10.43 卖 —— 两边的价对上了，就成了这一笔。",
+              "feedback": "对。成交价不是谁写上去的，是两边的价第一次对上。两列挂单最下面的那两个价，就是下一次最可能成交的地方。"
+            },
+            {
+              "key": "exchange",
+              "text": "交易所定了一个 ¥10.43，大家照这个价成交。",
+              "feedback": "我们再摆一次：交易所只提供场地和规则，它自己既不买、也不卖、更不报价。你把两列挂单最下面的两个价摆一起看 —— 成交价是从它们中间出来的。"
+            }
+          ]
+        },
+        "4.5.ifNoRule": {
+          "id": "4.5.ifNoRule",
+          "question": "如果没有那道规定，会怎样？",
+          "conceptKey": "存管",
+          "correctKey": null,
+          "options": [
+            {
+              "key": "used",
+              "text": "那我的钱就可能被券商拿去用 —— 账面上还是那些数，但我真要取的时候，它未必拿得出来。",
+              "feedback": "你想到的这一层，就是那道规定要挡住的事。钱在你名下、和钱在它手里，太平的时候看着一样，不平的那天不一样。"
+            },
+            {
+              "key": "same",
+              "text": "短时间里大概看不出区别：我照常买卖，对账单上还是那些数。",
+              "feedback": "这话也成立 —— 太平的时候，有没有那道规定，体感是一样的。规定本来就不是为太平的那天写的。"
+            }
+          ]
+        }
+      },
+      "panels": {
+        "panel.tower.exchange": {
+          "id": "panel.tower.exchange",
+          "kind": "tower",
+          "title": "第一栋：交易所",
+          "blocks": [
+            {
+              "type": "tower",
+              "id": "4.1.tower.exchange",
+              "name": "交易所",
+              "tagline": "开市的地方",
+              "lines": [
+                "全国想买、想卖的人，报的价都摆在这里的同一本簿子上。",
+                "它自己不做买卖，也不替你挑股票 —— 它只保证一件事：谁来都按同一条规则，谁先对上谁先成交。",
+                "你在第一章看到的那个「最新价」，就是从这里最后一笔成交里出来的。"
+              ],
+              "mentorLine": "这一栋的门谁都进得去，但进去只能报自己的价，改不了别人的价。"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.1.closeExchange",
+              "label": "收起来"
+            }
+          ]
+        },
+        "panel.tower.broker": {
+          "id": "panel.tower.broker",
+          "kind": "tower",
+          "title": "第二栋：券商",
+          "blocks": [
+            {
+              "type": "tower",
+              "id": "4.1.tower.broker",
+              "name": "券商",
+              "tagline": "你开户的那一家",
+              "lines": [
+                "你在第一章开户的那家就是券商。它替你把委托送进交易所，也替你记账。",
+                "它经你的手、也过你的账，但有一条规定让它不能把客户的钱当成自己的钱用。",
+                "它的收入来自手续费 —— 你买卖一次，它收一次。"
+              ],
+              "mentorLine": "券商是你和交易所之间那扇门。它只负责转达，价还是你自己报。"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.1.closeBroker",
+              "label": "收起来"
+            }
+          ]
+        },
+        "panel.tower.fund": {
+          "id": "panel.tower.fund",
+          "kind": "tower",
+          "title": "第三栋：基金公司",
+          "blocks": [
+            {
+              "type": "tower",
+              "id": "4.1.tower.fund",
+              "name": "基金管理人",
+              "tagline": "管那篮子的那家公司",
+              "lines": [
+                "你在第三章买的那只基金，钱交给的就是这一栋。",
+                "它把很多人的钱凑在一起，按事先说好的方法去买一篮子东西。",
+                "它不发股票，也不替你下单；它只做一件事 —— 按说好的方法管那笔钱。"
+              ],
+              "mentorLine": "它每做一笔都要留下记录给监管看。你交给它的钱不在它自己账上，是单独存着的。"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.1.closeFund",
+              "label": "收起来"
+            }
+          ]
+        },
+        "panel.orderBook": {
+          "id": "panel.orderBook",
+          "kind": "orderBook",
+          "title": "今天的挂单簿",
+          "blocks": [
+            {
+              "type": "orderBook",
+              "id": "4.2.book",
+              "label": "挂单簿：卖出挂单 / 买入挂单",
+              "bids": [
+                {
+                  "price": 10.42,
+                  "qty": 2200
+                },
+                {
+                  "price": 10.41,
+                  "qty": 900
+                },
+                {
+                  "price": 10.4,
+                  "qty": 1500
+                }
+              ],
+              "asks": [
+                {
+                  "price": 10.43,
+                  "qty": 500
+                },
+                {
+                  "price": 10.44,
+                  "qty": 1200
+                },
+                {
+                  "price": 10.45,
+                  "qty": 3000
+                }
+              ],
+              "last": {
                 "price": 10.43,
                 "qty": 500
               },
-              {
-                "price": 10.44,
-                "qty": 1200
-              },
-              {
-                "price": 10.45,
-                "qty": 3000
-              }
-            ],
-            "last": {
-              "price": 10.43,
-              "qty": 500
+              "spread": 0.01,
+              "notes": [
+                "上面那一列是想卖的人在报价，下面那一列是想买的人在报价。",
+                "两列最下面那一行，是离成交最近的两个价 —— 它们只差 ¥0.01，这个差就是买卖价差。",
+                "差越小，想买想卖的人越容易立刻找到对手，我们就说它流动性好。"
+              ]
             },
-            "spread": 0.01,
-            "notes": [
-              "上面那一列是想卖的人在报价，下面那一列是想买的人在报价。",
-              "两列最下面那一行，是离成交最近的两个价 —— 它们只差 ¥0.01，这个差就是买卖价差。",
-              "差越小，想买想卖的人越容易立刻找到对手，我们就说它流动性好。"
-            ]
-          },
-          {
-            "type": "choiceGroup",
-            "id": "4.2.choice",
-            "choiceId": "4.2.match"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.2.closePanel",
-            "label": "合上挂单簿"
-          }
-        ]
+            {
+              "type": "choiceGroup",
+              "id": "4.2.choice",
+              "choiceId": "4.2.match"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.2.closePanel",
+              "label": "合上挂单簿"
+            }
+          ]
+        },
+        "panel.matchGame": {
+          "id": "panel.matchGame",
+          "kind": "matchGame",
+          "title": "机构职责板",
+          "blocks": [
+            {
+              "type": "matchGame",
+              "id": "4.3.game",
+              "gameId": "institutions"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.3.closePanel",
+              "label": "都配好了"
+            }
+          ]
+        },
+        "panel.flowWalk": {
+          "id": "panel.flowWalk",
+          "kind": "flowWalk",
+          "title": "这笔钱走过的路",
+          "blocks": [
+            {
+              "type": "flowWalk",
+              "id": "4.4.walk",
+              "walkId": "orderFlow"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.4.closePanel",
+              "label": "走完了"
+            }
+          ]
+        },
+        "panel.ifNoRule": {
+          "id": "panel.ifNoRule",
+          "kind": "reflection",
+          "title": "如果没有那道规定",
+          "blocks": [
+            {
+              "type": "text",
+              "id": "4.5.prompt",
+              "label": "老周的提问",
+              "text": "你的钱进了券商，但券商不能拿它去做自己的事 —— 这条规定是谁在盯着？如果没有它，会怎样？"
+            },
+            {
+              "type": "choiceGroup",
+              "id": "4.5.choice",
+              "choiceId": "4.5.ifNoRule"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.5.closePanel",
+              "label": "我想完了"
+            }
+          ]
+        },
+        "panel.badNews": {
+          "id": "panel.badNews",
+          "kind": "conceptCards",
+          "title": "坏消息词条",
+          "blocks": [
+            {
+              "type": "conceptCard",
+              "id": "4.6.停牌",
+              "conceptKey": "停牌"
+            },
+            {
+              "type": "conceptCard",
+              "id": "4.6.退市",
+              "conceptKey": "退市"
+            },
+            {
+              "type": "conceptCard",
+              "id": "4.6.黑天鹅",
+              "conceptKey": "黑天鹅"
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.6.closePanel",
+              "label": "看过了"
+            }
+          ]
+        },
+        "panel.confirm": {
+          "id": "panel.confirm",
+          "kind": "understandingCheck",
+          "title": "章末",
+          "blocks": [
+            {
+              "type": "text",
+              "id": "4.end.recap",
+              "label": "这一章我们看过的",
+              "text": "三栋楼你都进去了。这一章没让你花一分钱，但你现在知道了：你点一下「买入」，钱和股票要走过好几只手，每一只手都有它的道理。"
+            },
+            {
+              "type": "list",
+              "id": "4.end.hands",
+              "label": "你的钱经过的手",
+              "items": [
+                "交易所：搭台子、给规则",
+                "券商：替你转达、替你记账",
+                "银行：替你存着买卖用的钱",
+                "清算机构：算清谁欠谁多少",
+                "监管机构：定规则、看账",
+                "基金管理人：按说好的方法替你管那篮子"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "id": "4.end.finish",
+              "label": "继续"
+            }
+          ]
+        }
       },
-      "panel.matchGame": {
-        "id": "panel.matchGame",
-        "kind": "matchGame",
-        "title": "机构职责板",
-        "blocks": [
-          {
-            "type": "matchGame",
-            "id": "4.3.game",
-            "gameId": "institutions"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.3.closePanel",
-            "label": "都配好了"
-          }
-        ]
+      "matchGames": {
+        "institutions": {
+          "id": "institutions",
+          "prompt": "把这六张机构卡，配到它们各自做的那件事上。配不上就换一张再试 —— 这里不记次数。",
+          "cards": [
+            {
+              "id": "exchange",
+              "name": "交易所",
+              "sub": "全国报价摆在同一本簿子的地方"
+            },
+            {
+              "id": "broker",
+              "name": "券商",
+              "sub": "你开户的那一家"
+            },
+            {
+              "id": "bank",
+              "name": "银行",
+              "sub": "替你保管钱的那家"
+            },
+            {
+              "id": "clearing",
+              "name": "清算机构",
+              "sub": "成交之后算账的那家"
+            },
+            {
+              "id": "regulator",
+              "name": "监管机构",
+              "sub": "不参与买卖、只看账的那家"
+            },
+            {
+              "id": "fundManager",
+              "name": "基金管理人",
+              "sub": "管你那只基金的那家公司"
+            }
+          ],
+          "targets": [
+            {
+              "key": "t.exchange",
+              "label": "交易所",
+              "text": "搭一个公开的场子，让买卖两边报的价摆在同一本簿子上，谁先对上谁先成交"
+            },
+            {
+              "key": "t.broker",
+              "label": "券商",
+              "text": "替你把委托送进场、把持仓记在你账上，但不能自己动你的钱"
+            },
+            {
+              "key": "t.bank",
+              "label": "银行",
+              "text": "替你存着买卖用的钱，按算好的结果划出划进"
+            },
+            {
+              "key": "t.clearing",
+              "label": "清算机构",
+              "text": "成交之后算清谁该给谁多少钱、多少股"
+            },
+            {
+              "key": "t.regulator",
+              "label": "监管机构",
+              "text": "不参与买卖，但规则由它定、每一层的账它都看得到"
+            },
+            {
+              "key": "t.fundManager",
+              "label": "基金管理人",
+              "text": "把很多人的钱凑成一篮子，按事先说好的方法去管"
+            }
+          ],
+          "pairs": [
+            {
+              "cardId": "exchange",
+              "targetKey": "t.exchange",
+              "requireId": "4.3.match.exchange"
+            },
+            {
+              "cardId": "broker",
+              "targetKey": "t.broker",
+              "requireId": "4.3.match.broker"
+            },
+            {
+              "cardId": "bank",
+              "targetKey": "t.bank",
+              "requireId": "4.3.match.bank"
+            },
+            {
+              "cardId": "clearing",
+              "targetKey": "t.clearing",
+              "requireId": "4.3.match.clearing"
+            },
+            {
+              "cardId": "regulator",
+              "targetKey": "t.regulator",
+              "requireId": "4.3.match.regulator"
+            },
+            {
+              "cardId": "fundManager",
+              "targetKey": "t.fundManager",
+              "requireId": "4.3.match.fundManager"
+            }
+          ]
+        }
       },
-      "panel.flowWalk": {
-        "id": "panel.flowWalk",
-        "kind": "flowWalk",
-        "title": "这笔钱走过的路",
-        "blocks": [
-          {
-            "type": "flowWalk",
-            "id": "4.4.walk",
-            "walkId": "orderFlow"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.4.closePanel",
-            "label": "走完了"
-          }
-        ]
+      "flowWalks": {
+        "orderFlow": {
+          "id": "orderFlow",
+          "prompt": "你买入的那只 ETF，从你点下按钮到份额真正归你，经过了哪几个环节？按顺序点出来。",
+          "cards": [
+            {
+              "id": "register",
+              "label": "T+2 交收：股票登记到你名下"
+            },
+            {
+              "id": "broker",
+              "label": "券商把委托送到交易所"
+            },
+            {
+              "id": "regulate",
+              "label": "监管机构看这一路的账"
+            },
+            {
+              "id": "buy",
+              "label": "你点下「买入」"
+            },
+            {
+              "id": "custody",
+              "label": "存管账户把钱划给对手方"
+            },
+            {
+              "id": "match",
+              "label": "交易所撮合成交"
+            },
+            {
+              "id": "clearing",
+              "label": "清算机构算清谁欠谁多少"
+            }
+          ],
+          "order": [
+            "buy",
+            "broker",
+            "match",
+            "clearing",
+            "custody",
+            "register",
+            "regulate"
+          ],
+          "finishRequireId": "4.4.flow.done"
+        }
       },
-      "panel.ifNoRule": {
-        "id": "panel.ifNoRule",
-        "kind": "reflection",
-        "title": "如果没有那道规定",
-        "blocks": [
-          {
-            "type": "text",
-            "id": "4.5.prompt",
-            "label": "老周的提问",
-            "text": "你的钱进了券商，但券商不能拿它去做自己的事 —— 这条规定是谁在盯着？如果没有它，会怎样？"
-          },
-          {
-            "type": "choiceGroup",
-            "id": "4.5.choice",
-            "choiceId": "4.5.ifNoRule"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.5.closePanel",
-            "label": "我想完了"
-          }
-        ]
+      "chapterEnd": {
+        "settlementPanelId": null,
+        "confirmPanelId": "panel.confirm",
+        "understandingChoiceId": null
       },
-      "panel.badNews": {
-        "id": "panel.badNews",
-        "kind": "conceptCards",
-        "title": "坏消息词条",
-        "blocks": [
-          {
-            "type": "conceptCard",
-            "id": "4.6.停牌",
-            "conceptKey": "停牌"
-          },
-          {
-            "type": "conceptCard",
-            "id": "4.6.退市",
-            "conceptKey": "退市"
-          },
-          {
-            "type": "conceptCard",
-            "id": "4.6.黑天鹅",
-            "conceptKey": "黑天鹅"
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.6.closePanel",
-            "label": "看过了"
-          }
-        ]
-      },
-      "panel.confirm": {
-        "id": "panel.confirm",
-        "kind": "understandingCheck",
-        "title": "章末",
-        "blocks": [
-          {
-            "type": "text",
-            "id": "4.end.recap",
-            "label": "这一章我们看过的",
-            "text": "三栋楼你都进去了。这一章没让你花一分钱，但你现在知道了：你点一下「买入」，钱和股票要走过好几只手，每一只手都有它的道理。"
-          },
-          {
-            "type": "list",
-            "id": "4.end.hands",
-            "label": "你的钱经过的手",
-            "items": [
-              "交易所：搭台子、给规则",
-              "券商：替你转达、替你记账",
-              "银行：替你存着买卖用的钱",
-              "清算机构：算清谁欠谁多少",
-              "监管机构：定规则、看账",
-              "基金管理人：按说好的方法替你管那篮子"
-            ]
-          }
-        ],
-        "actions": [
-          {
-            "id": "4.end.finish",
-            "label": "继续"
-          }
-        ]
-      }
-    },
-    "matchGames": {
-      "institutions": {
-        "id": "institutions",
-        "prompt": "把这六张机构卡，配到它们各自做的那件事上。配不上就换一张再试 —— 这里不记次数。",
-        "cards": [
-          {
-            "id": "exchange",
-            "name": "交易所",
-            "sub": "全国报价摆在同一本簿子的地方"
-          },
-          {
-            "id": "broker",
-            "name": "券商",
-            "sub": "你开户的那一家"
-          },
-          {
-            "id": "bank",
-            "name": "银行",
-            "sub": "替你保管钱的那家"
-          },
-          {
-            "id": "clearing",
-            "name": "清算机构",
-            "sub": "成交之后算账的那家"
-          },
-          {
-            "id": "regulator",
-            "name": "监管机构",
-            "sub": "不参与买卖、只看账的那家"
-          },
-          {
-            "id": "fundManager",
-            "name": "基金管理人",
-            "sub": "管你那只基金的那家公司"
-          }
-        ],
-        "targets": [
-          {
-            "key": "t.exchange",
-            "label": "交易所",
-            "text": "搭一个公开的场子，让买卖两边报的价摆在同一本簿子上，谁先对上谁先成交"
-          },
-          {
-            "key": "t.broker",
-            "label": "券商",
-            "text": "替你把委托送进场、把持仓记在你账上，但不能自己动你的钱"
-          },
-          {
-            "key": "t.bank",
-            "label": "银行",
-            "text": "替你存着买卖用的钱，按算好的结果划出划进"
-          },
-          {
-            "key": "t.clearing",
-            "label": "清算机构",
-            "text": "成交之后算清谁该给谁多少钱、多少股"
-          },
-          {
-            "key": "t.regulator",
-            "label": "监管机构",
-            "text": "不参与买卖，但规则由它定、每一层的账它都看得到"
-          },
-          {
-            "key": "t.fundManager",
-            "label": "基金管理人",
-            "text": "把很多人的钱凑成一篮子，按事先说好的方法去管"
-          }
-        ],
-        "pairs": [
-          {
-            "cardId": "exchange",
-            "targetKey": "t.exchange",
-            "requireId": "4.3.match.exchange"
-          },
-          {
-            "cardId": "broker",
-            "targetKey": "t.broker",
-            "requireId": "4.3.match.broker"
-          },
-          {
-            "cardId": "bank",
-            "targetKey": "t.bank",
-            "requireId": "4.3.match.bank"
-          },
-          {
-            "cardId": "clearing",
-            "targetKey": "t.clearing",
-            "requireId": "4.3.match.clearing"
-          },
-          {
-            "cardId": "regulator",
-            "targetKey": "t.regulator",
-            "requireId": "4.3.match.regulator"
-          },
-          {
-            "cardId": "fundManager",
-            "targetKey": "t.fundManager",
-            "requireId": "4.3.match.fundManager"
-          }
-        ]
-      }
-    },
-    "flowWalks": {
-      "orderFlow": {
-        "id": "orderFlow",
-        "prompt": "你买入的那只 ETF，从你点下按钮到份额真正归你，经过了哪几个环节？按顺序点出来。",
-        "cards": [
-          {
-            "id": "register",
-            "label": "T+2 交收：股票登记到你名下"
-          },
-          {
-            "id": "broker",
-            "label": "券商把委托送到交易所"
-          },
-          {
-            "id": "regulate",
-            "label": "监管机构看这一路的账"
-          },
-          {
-            "id": "buy",
-            "label": "你点下「买入」"
-          },
-          {
-            "id": "custody",
-            "label": "存管账户把钱划给对手方"
-          },
-          {
-            "id": "match",
-            "label": "交易所撮合成交"
-          },
-          {
-            "id": "clearing",
-            "label": "清算机构算清谁欠谁多少"
-          }
-        ],
-        "order": [
-          "buy",
-          "broker",
-          "match",
-          "clearing",
-          "custody",
-          "register",
-          "regulate"
-        ],
-        "finishRequireId": "4.4.flow.done"
-      }
-    },
-    "chapterEnd": {
-      "settlementPanelId": null,
-      "confirmPanelId": "panel.confirm",
-      "understandingChoiceId": null
-    },
-    "beats": [
-      {
-        "id": "4.1",
-        "title": "三栋楼",
-        "shell": "hidden",
-        "scene": "cityStreet",
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "chapterOpen",
-            "speaker": "face",
-            "conceptKey": null,
-            "line": "这一章不花你的钱，只花你的时间。"
-          }
-        ],
-        "panels": [
-          "panel.tower.exchange",
-          "panel.tower.broker",
-          "panel.tower.fund"
-        ],
-        "panelAutoOpen": false,
-        "require": [
-          {
-            "kind": "interact",
-            "id": "4.1.openExchange",
-            "label": "交易所",
-            "opensPanel": "panel.tower.exchange",
-            "propStyle": "tower"
-          },
-          {
-            "kind": "interact",
-            "id": "4.1.openBroker",
-            "label": "证券",
-            "opensPanel": "panel.tower.broker",
-            "propStyle": "tower"
-          },
-          {
-            "kind": "interact",
-            "id": "4.1.openFund",
-            "label": "基金",
-            "opensPanel": "panel.tower.fund",
-            "propStyle": "tower"
-          }
-        ],
-        "concepts": [
-          "交易所",
-          "券商",
-          "基金管理人"
-        ],
-        "conceptCards": [],
-        "savePoint": false,
-        "advanceDay": false,
-        "forceEvent": null
-      },
-      {
-        "id": "4.2",
-        "title": "谁在定价",
-        "shell": "full",
-        "scene": null,
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "firstConcept",
-            "speaker": "face",
-            "conceptKey": "撮合",
-            "line": "你看这本挂单簿。想买的人报一个价，想卖的人报一个价，价对上了就成一笔 —— 这里的价没有人定，是两边自己撞上的。"
-          }
-        ],
-        "panels": [
-          "panel.orderBook"
-        ],
-        "panelAutoOpen": true,
-        "highlight": "advanceDayButton",
-        "require": [
-          {
-            "kind": "advanceDay",
-            "id": "4.2.advance",
-            "label": "进入下一交易日",
-            "simAction": [
-              "advanceDay"
-            ]
-          },
-          {
-            "kind": "choice",
-            "id": "4.2.match",
-            "choiceId": "4.2.match",
-            "label": "点选「这一笔是谁和谁成交的」"
-          }
-        ],
+      "beats": [
+        {
+          "id": "4.1",
+          "title": "三栋楼",
+          "shell": "hidden",
+          "scene": "cityStreet",
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "chapterOpen",
+              "speaker": "face",
+              "conceptKey": null,
+              "line": "这一章不花你的钱，只花你的时间。"
+            }
+          ],
+          "panels": [
+            "panel.tower.exchange",
+            "panel.tower.broker",
+            "panel.tower.fund"
+          ],
+          "panelAutoOpen": false,
+          "require": [
+            {
+              "kind": "interact",
+              "id": "4.1.openExchange",
+              "label": "交易所",
+              "opensPanel": "panel.tower.exchange",
+              "propStyle": "tower"
+            },
+            {
+              "kind": "interact",
+              "id": "4.1.openBroker",
+              "label": "证券",
+              "opensPanel": "panel.tower.broker",
+              "propStyle": "tower"
+            },
+            {
+              "kind": "interact",
+              "id": "4.1.openFund",
+              "label": "基金",
+              "opensPanel": "panel.tower.fund",
+              "propStyle": "tower"
+            }
+          ],
+          "concepts": [
+            "交易所",
+            "券商",
+            "基金管理人"
+          ],
+          "conceptCards": [],
+          "savePoint": false,
+          "advanceDay": false,
+          "forceEvent": null
+        },
+        {
+          "id": "4.2",
+          "title": "谁在定价",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "撮合",
+              "line": "你看这本挂单簿。想买的人报一个价，想卖的人报一个价，价对上了就成一笔 —— 这里的价没有人定，是两边自己撞上的。"
+            }
+          ],
+          "panels": [
+            "panel.orderBook"
+          ],
+          "panelAutoOpen": true,
+          "highlight": "advanceDayButton",
+          "require": [
+            {
+              "kind": "advanceDay",
+              "id": "4.2.advance",
+              "label": "进入下一交易日",
+              "simAction": [
+                "advanceDay"
+              ]
+            },
+            {
+              "kind": "choice",
+              "id": "4.2.match",
+              "choiceId": "4.2.match",
+              "label": "点选「这一笔是谁和谁成交的」"
+            }
+          ],
           "concepts": [
             "撮合",
             "买卖价差",
@@ -1749,216 +2879,216 @@
           "savePoint": true,
           "advanceDay": true,
           "forceEvent": null
-      },
-      {
-        "id": "4.3",
-        "title": "配对游戏",
-        "shell": "full",
-        "scene": null,
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "firstConcept",
-            "speaker": "face",
-            "conceptKey": "交易所",
-            "line": "刚才那三栋楼，各有各的活儿。我这儿有六张卡，你把它配到各自做的事上 —— 配不上就换一张，这里不记次数。"
-          }
-        ],
-        "panels": [
-          "panel.matchGame"
-        ],
-        "panelAutoOpen": true,
-        "require": [
-          {
-            "kind": "interact",
-            "id": "4.3.match.exchange",
-            "gate": "matchGame",
-            "label": "把「交易所」配到它做的事上"
-          },
-          {
-            "kind": "interact",
-            "id": "4.3.match.broker",
-            "gate": "matchGame",
-            "label": "把「券商」配到它做的事上"
-          },
-          {
-            "kind": "interact",
-            "id": "4.3.match.bank",
-            "gate": "matchGame",
-            "label": "把「银行」配到它做的事上"
-          },
-          {
-            "kind": "interact",
-            "id": "4.3.match.clearing",
-            "gate": "matchGame",
-            "label": "把「清算机构」配到它做的事上"
-          },
-          {
-            "kind": "interact",
-            "id": "4.3.match.regulator",
-            "gate": "matchGame",
-            "label": "把「监管机构」配到它做的事上"
-          },
-          {
-            "kind": "interact",
-            "id": "4.3.match.fundManager",
-            "gate": "matchGame",
-            "label": "把「基金管理人」配到它做的事上"
-          }
-        ],
-        "concepts": [
-          "交易所",
-          "券商",
-          "银行",
-          "清算交收",
-          "监管机构",
-          "基金管理人"
-        ],
-        "conceptCards": [],
-        "savePoint": false,
-        "advanceDay": false,
-        "forceEvent": null
-      },
-      {
-        "id": "4.4",
-        "title": "你的钱在哪",
-        "shell": "full",
-        "scene": null,
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "firstConcept",
-            "speaker": "face",
-            "conceptKey": "清算交收",
-            "line": "你点一下「买入」，看上去是一瞬间的事。钱和股票其实要走过好几站 —— 你顺着走一遍，就知道每一站是谁在看账。"
-          }
-        ],
-        "panels": [
-          "panel.flowWalk"
-        ],
-        "panelAutoOpen": true,
-        "require": [
-          {
-            "kind": "interact",
-            "id": "4.4.flow.done",
-            "gate": "flowWalk",
-            "label": "按正确顺序点出这笔钱走过的环节"
-          }
-        ],
-        "concepts": [
-          "清算交收",
-          "存管",
-          "监管机构"
-        ],
-        "conceptCards": [],
-        "savePoint": true,
-        "advanceDay": false,
-        "forceEvent": null
-      },
-      {
-        "id": "4.5",
-        "title": "如果券商自己拿了你的钱",
-        "shell": "full",
-        "scene": null,
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "firstConcept",
-            "speaker": "face",
-            "conceptKey": "存管",
-            "line": "我先问你一句：如果没有「客户的钱不能放在券商自己手里」那条规矩，会怎样？"
-          }
-        ],
-        "panels": [
-          "panel.ifNoRule"
-        ],
-        "panelAutoOpen": true,
-        "require": [
-          {
-            "kind": "choice",
-            "id": "4.5.ifNoRule",
-            "choiceId": "4.5.ifNoRule",
-            "label": "回答老周的问题（不判对错）"
-          }
-        ],
-        "concepts": [
-          "监管机构",
-          "存管"
-        ],
-        "conceptCards": [],
-        "savePoint": false,
-        "advanceDay": false,
-        "forceEvent": null
-      },
-      {
-        "id": "4.6",
-        "title": "坏消息词条",
-        "shell": "full",
-        "scene": null,
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "firstConcept",
-            "speaker": "face",
-            "conceptKey": "停牌",
-            "line": "坏消息也是市场的一部分。有三个词你迟早会碰上，先看一遍，碰上时不至于慌。"
-          }
-        ],
-        "panels": [
-          "panel.badNews"
-        ],
-        "panelAutoOpen": true,
-        "require": [
-          {
-            "kind": "read",
-            "id": "4.6.badNews",
-            "panelId": "panel.badNews",
-            "count": 3,
-            "mustClose": true,
-            "label": "读完 停牌 / 退市 / 黑天鹅 三条词条"
-          }
-        ],
-        "concepts": [
-          "停牌",
-          "退市",
-          "黑天鹅"
-        ],
-        "conceptCards": [],
-        "savePoint": false,
-        "advanceDay": false,
-        "forceEvent": null
-      },
-      {
-        "id": "4.7",
-        "title": "章末",
-        "shell": "full",
-        "scene": null,
-        "sceneImageKey": null,
-        "mentor": [
-          {
-            "timing": "chapterEnd",
-            "speaker": "face",
-            "conceptKey": null,
-            "line": "你怕的不是市场，是你看不见的那些手。现在你看见它们了。下一章我带你去看一种多了两个变量的东西。"
-          }
-        ],
-        "panels": [],
-        "panelAutoOpen": false,
-        "require": [
-          {
-            "kind": "interact",
-            "id": "4.7.finish",
-            "label": "继续"
-          }
-        ],
-        "concepts": [],
-        "conceptCards": [],
-        "savePoint": true,
-        "advanceDay": false,
-        "endOfChapter": true,
-        "forceEvent": null
-      }
-    ]
-  }
+        },
+        {
+          "id": "4.3",
+          "title": "配对游戏",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "交易所",
+              "line": "刚才那三栋楼，各有各的活儿。我这儿有六张卡，你把它配到各自做的事上 —— 配不上就换一张，这里不记次数。"
+            }
+          ],
+          "panels": [
+            "panel.matchGame"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "interact",
+              "id": "4.3.match.exchange",
+              "gate": "matchGame",
+              "label": "把「交易所」配到它做的事上"
+            },
+            {
+              "kind": "interact",
+              "id": "4.3.match.broker",
+              "gate": "matchGame",
+              "label": "把「券商」配到它做的事上"
+            },
+            {
+              "kind": "interact",
+              "id": "4.3.match.bank",
+              "gate": "matchGame",
+              "label": "把「银行」配到它做的事上"
+            },
+            {
+              "kind": "interact",
+              "id": "4.3.match.clearing",
+              "gate": "matchGame",
+              "label": "把「清算机构」配到它做的事上"
+            },
+            {
+              "kind": "interact",
+              "id": "4.3.match.regulator",
+              "gate": "matchGame",
+              "label": "把「监管机构」配到它做的事上"
+            },
+            {
+              "kind": "interact",
+              "id": "4.3.match.fundManager",
+              "gate": "matchGame",
+              "label": "把「基金管理人」配到它做的事上"
+            }
+          ],
+          "concepts": [
+            "交易所",
+            "券商",
+            "银行",
+            "清算交收",
+            "监管机构",
+            "基金管理人"
+          ],
+          "conceptCards": [],
+          "savePoint": false,
+          "advanceDay": false,
+          "forceEvent": null
+        },
+        {
+          "id": "4.4",
+          "title": "你的钱在哪",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "清算交收",
+              "line": "你点一下「买入」，看上去是一瞬间的事。钱和股票其实要走过好几站 —— 你顺着走一遍，就知道每一站是谁在看账。"
+            }
+          ],
+          "panels": [
+            "panel.flowWalk"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "interact",
+              "id": "4.4.flow.done",
+              "gate": "flowWalk",
+              "label": "按正确顺序点出这笔钱走过的环节"
+            }
+          ],
+          "concepts": [
+            "清算交收",
+            "存管",
+            "监管机构"
+          ],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "forceEvent": null
+        },
+        {
+          "id": "4.5",
+          "title": "如果券商自己拿了你的钱",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "存管",
+              "line": "我先问你一句：如果没有「客户的钱不能放在券商自己手里」那条规矩，会怎样？"
+            }
+          ],
+          "panels": [
+            "panel.ifNoRule"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "choice",
+              "id": "4.5.ifNoRule",
+              "choiceId": "4.5.ifNoRule",
+              "label": "回答老周的问题（不判对错）"
+            }
+          ],
+          "concepts": [
+            "监管机构",
+            "存管"
+          ],
+          "conceptCards": [],
+          "savePoint": false,
+          "advanceDay": false,
+          "forceEvent": null
+        },
+        {
+          "id": "4.6",
+          "title": "坏消息词条",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "firstConcept",
+              "speaker": "face",
+              "conceptKey": "停牌",
+              "line": "坏消息也是市场的一部分。有三个词你迟早会碰上，先看一遍，碰上时不至于慌。"
+            }
+          ],
+          "panels": [
+            "panel.badNews"
+          ],
+          "panelAutoOpen": true,
+          "require": [
+            {
+              "kind": "read",
+              "id": "4.6.badNews",
+              "panelId": "panel.badNews",
+              "count": 3,
+              "mustClose": true,
+              "label": "读完 停牌 / 退市 / 黑天鹅 三条词条"
+            }
+          ],
+          "concepts": [
+            "停牌",
+            "退市",
+            "黑天鹅"
+          ],
+          "conceptCards": [],
+          "savePoint": false,
+          "advanceDay": false,
+          "forceEvent": null
+        },
+        {
+          "id": "4.7",
+          "title": "章末",
+          "shell": "full",
+          "scene": null,
+          "sceneImageKey": null,
+          "mentor": [
+            {
+              "timing": "chapterEnd",
+              "speaker": "face",
+              "conceptKey": null,
+              "line": "你怕的不是市场，是你看不见的那些手。现在你看见它们了。下一章我带你去看一种多了两个变量的东西。"
+            }
+          ],
+          "panels": [],
+          "panelAutoOpen": false,
+          "require": [
+            {
+              "kind": "interact",
+              "id": "4.7.finish",
+              "label": "继续"
+            }
+          ],
+          "concepts": [],
+          "conceptCards": [],
+          "savePoint": true,
+          "advanceDay": false,
+          "endOfChapter": true,
+          "forceEvent": null
+        }
+      ]
+    }
   ]
 }
