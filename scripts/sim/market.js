@@ -577,12 +577,21 @@ export class MarketSim {
    */
   buyOption({ contractId, lots = 1 } = {}) {
     const market = 'OPTION'
+    // 失败路径与成功路径**必须返回同一个形状**（`lastOrder`），否则章节层的
+    // `onOrderResult` 读不到 `accepted` / `reasonCode`，拒单信息会在章节层静默丢失。
+    const refuse = (reasonCode, rejectText) => {
+      this.lastOrder = {
+        accepted: false, status: 'rejected', reasonCode, rejectText,
+        side: 'buy', instrumentId: contractId || null, market, currency: 'CNY',
+        fillPrice: null, qty: Number(lots) || 0, fee: 0, notional: 0, option: null,
+      }
+      return this.lastOrder
+    }
     if (!this.isUnlocked(market)) {
-      return { ok: false, reason: 'locked', code: REJECT.LOCKED,
-        text: rejectTextFor('CLOSED', market, null) }
+      return refuse(REJECT.LOCKED, `${marketLabel(market)}还没到开放的时候——先把这一章走完，你会知道它怎么用。`)
     }
     if (!this.calendar.isOpenFor(market)) {
-      return { ok: false, reason: 'closed', code: REJECT.CLOSED, text: '今天不是期权市场的交易日，无法下单' }
+      return refuse(REJECT.CLOSED, '今天不是期权市场的交易日，无法下单')
     }
     const r = this.options.buy({
       contractId, lots, cash: this.account.cash,
@@ -601,19 +610,13 @@ export class MarketSim {
       }
       return this.lastOrder
     }
-    const text = {
+    return refuse('OPTION_' + String(r.reason || 'ERR').toUpperCase(), {
       funds: `可用资金不足：这张合约要 ¥${money2(r.need || 0)}，你只有 ¥${money2(r.have || 0)}`,
       lots: '张数必须大于 0',
       expired: '这张合约已经到期了',
       worthless: '这张合约当前没有价值',
       unknown_contract: '没有这张合约',
-    }[r.reason] || '无法买入这张合约'
-    this.lastOrder = {
-      accepted: false, status: 'rejected', reasonCode: r.reason, rejectText: text,
-      side: 'buy', instrumentId: contractId, market, currency: 'CNY',
-      fillPrice: null, qty: lots, fee: 0, notional: 0,
-    }
-    return this.lastOrder
+    }[r.reason] || '无法买入这张合约')
   }
 
   // === 白盒测试钩子（plan.md 决策 8）===

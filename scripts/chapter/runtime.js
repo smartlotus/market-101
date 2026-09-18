@@ -1841,6 +1841,10 @@ export class ChapterRuntime {
       // 派生量：视图**只读**这两个，不自己推导任何解锁、不自己算评定
       unlockedInstruments: this.unlockedInstruments,
       graduationStanding: this.graduationStanding,
+      // 本章声明的解锁项（`unlocks.instruments` / `unlocks.markets`）。
+      // BrokerShell 依赖它来解锁「没有独立标的条目」的市场（如第八章的 OPTION）——
+      // 之前这里没透出，导致那段解锁代码从未生效。
+      unlocks: (this.chapter && this.chapter.unlocks) || null,
       // 第七章 7.2：玩家亲手写下的「这笔钱我能接受亏多少」。
       // **不进评级公式**（写大写小都不该被机械奖惩），只作为自我承诺的可见化，
       // 由章末结算面板与当章真实最大回撤并排展示（GDD 第七章）。
