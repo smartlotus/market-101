@@ -1,0 +1,18 @@
+{
+  "mentor_portrait": {
+    "type": "image",
+    "path": "character/mentor_portrait.png",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  "scene_bank": {
+    "type": "image",
+    "path": "scene/bank-hall.png",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  }
+}

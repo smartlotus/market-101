@@ -1689,6 +1689,28 @@ ${PALETTE}
 .ch-panel .ch-opt-c .m.atm { background: rgba(216, 154, 44, 0.18); color: #8A5A12; }
 .ch-panel .ch-opt-c .m.otm { background: rgba(58, 107, 138, 0.12); color: var(--accent); }
 .ch-panel .ch-opt-c .lv { font-size: 11.5px; color: var(--gold); }
+
+/* —— 概念徽章（手写 SVG，DOM 引用）——
+   尺寸三档：xs 索引行 / sm 概念卡头 / md 词典详情。
+   徽章是装饰层：加载失败或该概念没有徽章时不占位，故这里不设最小尺寸。 */
+.ch-badge {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+  image-rendering: auto;
+}
+.ch-badge.xs { width: 16px; height: 16px; margin-right: 6px; }
+.ch-badge.sm { width: 24px; height: 24px; margin-right: 8px; }
+.ch-badge.md { width: 40px; height: 40px; margin-right: 10px; }
+
+/* 词典详情：徽章与标题并排（仅在该概念有徽章时才包这一层） */
+.ch-detail-head,
+.detail-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.detail-head h3 { margin: 0; }
 `
 
 export default CHAPTER_THEME_CSS

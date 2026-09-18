@@ -20,6 +20,7 @@
  */
 
 import { clear, el, fmtMoney, fmtNum, fmtPct } from '../kit.js'
+import { badgeEl } from './badges.js'
 
 function chapterOf(state) {
   return (state && state.chapter) || state || {}
@@ -230,6 +231,9 @@ export default class ConceptDictionaryView {
       // 折叠 ≠ 禁用：行仍可点、颜色不变，只是没有正文
       btn.classList.toggle('folded', folded)
       btn.classList.toggle('nex', !reached)
+      // 概念徽章（装饰层）：没有对应徽章时不占位
+      const badge = badgeEl(concept.key, 'xs')
+      if (badge) btn.appendChild(badge)
       el('span', '', btn, concept.name || concept.key)
       if (concept.advanced) el('span', 'tag', btn, ADVANCED_TAG)
       if (!reached) el('span', 'tag next', btn, NEXT_CHAPTER_HINT)
@@ -246,7 +250,15 @@ export default class ConceptDictionaryView {
     clear(this.detailEl)
     if (!concept) return
     // 词典条目正文（数据），没有的就是没有 —— 不编造解释
-    el('h3', '', this.detailEl, concept.name || concept.key)
+    // 徽章只在有对应图形时才包一层，避免无徽章的概念被改变既有排版
+    const dBadge = badgeEl(concept.key, 'md')
+    if (dBadge) {
+      const dh = el('div', 'detail-head', this.detailEl)
+      dh.appendChild(dBadge)
+      el('h3', '', dh, concept.name || concept.key)
+    } else {
+      el('h3', '', this.detailEl, concept.name || concept.key)
+    }
     if (this._isFolded(concept, unlocked)) {
       // 折叠中的进阶条目：有标签、无正文（搜索也不泄露）
       const folded = el('div', 'detail-folded', this.detailEl)

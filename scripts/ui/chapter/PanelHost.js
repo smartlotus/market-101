@@ -50,6 +50,7 @@
  */
 
 import { clear, dirClass, el, fmtMoney, fmtNum, fmtPct, fmtSignedMoney } from '../kit.js'
+import { badgeEl } from './badges.js'
 
 function chapterOf(state) {
   return (state && state.chapter) || state || {}
@@ -708,6 +709,9 @@ export default class PanelHost {
     card.dataset.conceptKey = String(block.conceptKey || '')
     if (!concept) card.dataset.chMissing = String(block.conceptKey || '')
     const hd = el('div', 'hd', card)
+    // 概念徽章（装饰层）：没有对应徽章时不占位 —— 徽章是锦上添花，正文才是内容。
+    const badge = badgeEl(block.conceptKey, 'sm')
+    if (badge) hd.appendChild(badge)
     el('div', 't', hd, concept ? concept.name : String(block.conceptKey || ''))
     if (concept && concept.advanced) el('div', 'tag', hd, String(concept.chapter || ''))
     if (concept && concept.def) el('div', 'def', card, concept.def)

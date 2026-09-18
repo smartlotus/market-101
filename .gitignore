@@ -4,7 +4,18 @@
 /.vibegame/tasks/
 /.vibegame/dashboard/
 /.vibegame/team/pids/
-/assets/
+# 资产默认不入库（vibegame 模板：大体积/可再生资源），
+# 但**下面这几类必须入库**，否则手写的源与已定稿的成品丢了就没了。
+# 注意 git 规则：父目录被排除时无法重新包含子文件，
+# 所以必须写成 /assets/*（排内容不排目录）再逐项放行。
+# 井号只有在行首才是注释，绝不能跟在模式后面。
+/assets/*
+!/assets/manifest.json
+!/assets/concepts/
+!/assets/scene/
+!/assets/character/
+# 仍然忽略：assets/artifacts/（生图原始件与放大复核裁剪件，可再生且体积大）
+#            assets/_review/（评审临时图）
 /skeletons/
 tests/**/evidence/
 **/node_modules/
