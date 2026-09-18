@@ -108,6 +108,8 @@ export default class BrokerShell extends Node {
         marketChanges: () => this._marketChanges(),
         // 节拍声明的 `forceEvent` 钉到下一次开市推进（第五章把 M03 钉在 5.5）
         pinNextEvent: (eventId) => this.sim.pinDirectedEvent(eventId),
+        // 尾声的「什么都不做的自己」推算需要游戏内经过的天数
+        dayIndex: () => this.sim.calendar.dayIndex,
       },
     })
     if (saved) {

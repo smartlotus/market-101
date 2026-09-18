@@ -1852,7 +1852,31 @@ export class ChapterRuntime {
         const n = Number(key)
         return Number.isFinite(n) && n > 0 ? n : null
       })(),
-      // 当章真实最大回撤（绝对值，CNY）：与 baselineAmount 对撞用
+      // 尾声：结业数据。三项对照 —— 真实的你 / 什么都不做的你 / 被通胀吃掉的你。
+      // `dormantValue` 与 `inflationValue` 都是**推算**，不是玩家的账（结算面板要如实标注）。
+      finale: (() => {
+        const capital = Number(this.config.initialCapital) || 0
+        const nav = Number.isFinite(this.lastNav) ? this.lastNav : this._nav()
+        const dayIndex = this.config.dayIndex ? Number(this.config.dayIndex()) : 1
+        const years = Math.max(1 / 365, (Number(dayIndex) || 1) / 365)
+        const rows = []
+        for (const ch of this.chapters) {
+          const g = this.chapterGrades && this.chapterGrades[ch.id]
+          if (!g) continue
+          rows.push({ chapterId: ch.id, name: ch.name, grade: g.grade ?? g, S: g.S ?? null })
+        }
+        return {
+          finalNav: nav,
+          initialCapital: capital,
+          years: Math.round(years * 1000) / 1000,
+          // 活期 1.5% 复利：如果这八章你什么也没做
+          dormantValue: Math.round(capital * Math.pow(1.015, years) * 100) / 100,
+          // 物价上涨约 2%：这笔钱的购买力被吃到多少
+          inflationValue: Math.round((capital / Math.pow(1.02, years)) * 100) / 100,
+          gradeRows: rows,
+          gradeCount: rows.length,
+        }
+      })(),
       chapterMaxDrawdown: (() => {
         const w = this.ratingWindow
         if (!w || !Array.isArray(w.navSeries) || w.navSeries.length < 2) return 0
