@@ -14,6 +14,7 @@ import { Calendar } from './calendar.js'
 import { EventDeck, toPublicEvent } from './eventDeck.js'
 import { QUOTE_PARAMS, QuoteEngine } from './quote.js'
 import { FxBook } from './fx.js'
+import { OptionChain } from './options.js'
 import {
   LOT_SIZE, PRICE_TICK, checkLot, computeFee, currencyOf, isTickAligned,
   isPriceTickAligned, roundMoney, roundToTick, tickOf,
@@ -115,6 +116,17 @@ export class MarketSim {
     this.account = new Account({ initialCash: this.config.initialCash, market: this.market, fx: this.fx })
     /** 已解锁的市场。A 股第 1 章即开，其余按章节解锁阶梯放出。 */
     this.unlockedMarkets = new Set(['A_SHARE'])
+    /**
+     * 期权链：唯一标的 50ETF（510050）。`spotOf` 直接读行情引擎，保证定价与盘面同源。
+     * 期权的现金交割只动现金账，不建股票持仓。
+     */
+    this.options = new OptionChain({
+      underlyingId: '510050',
+      spotOf: () => {
+        const st = this.quotes.stateOf('510050')
+        return st ? st.close : 0
+      },
+    })
     this.reset()
   }
 
@@ -131,6 +143,15 @@ export class MarketSim {
   /** 该市场是否可交易（未解锁的品种仍可看、可选，UI 不得置灰）。 */
   isUnlocked(market) {
     return this.unlockedMarkets.has(market || 'A_SHARE')
+  }
+
+  /**
+   * 直接解锁一个市场。期权没有独立的「标的」条目（它的标的 510050 是 ETF），
+   * 因此不能靠 `unlockChapter` 的映射带出来，改由章数据 `unlocks.markets` 显式声明。
+   */
+  unlockMarket(market) {
+    if (market) this.unlockedMarkets.add(String(market))
+    return [...this.unlockedMarkets]
   }
 
   /** 解锁全部（沙盒 / 测试用）。 */
@@ -165,6 +186,7 @@ export class MarketSim {
     this.directedDrawn = []
     this.fxMove = null
     this.fx.reset()
+    this.options.reset()
     if (this.config.autoEnterFirstDay) this._openSandboxSession()
     return this
   }
@@ -337,6 +359,15 @@ export class MarketSim {
     // 汇率先动（持仓折算依赖当日汇率），行情再动
     this.fxMove = this.fx.applyEvent(event)
     this.quotes.advanceDay(event, (m) => this.calendar.isOpenFor(m))
+    // 期权链：所有未到期合约 D−=1；走到 D=0 的序列立即结算并把现金交割结果入账。
+    // 标的价取自**推进后**的行情，与玩家看到的盘面一致。
+    const settled = this.fx && this.options
+      ? this.options.advanceDay({ event, dayIndex: this.calendar.dayIndex })
+      : []
+    this.lastOptionSettlements = settled
+    for (const s of settled) {
+      if (s.proceeds > 0) this.account.credit(roundMoney(s.proceeds))
+    }
   }
 
   /** 点击「进入下一交易日」：结算（§3.5）→ 进入下一自然日 → 回到 §3.1 步骤 1。 */
@@ -539,6 +570,52 @@ export class MarketSim {
     return this.lastOrder
   }
 
+  /**
+   * 买入期权（仅买方，卖方不开放 —— 见 GDD D-14）。
+   * 现金账扣权利金；**建的是期权持仓，不是股票持仓**，所以不进 `account.positions`。
+   * 失败原因与股票拒单分开：期权面板自己有文案，不占用 REJECT_* 编号。
+   */
+  buyOption({ contractId, lots = 1 } = {}) {
+    const market = 'OPTION'
+    if (!this.isUnlocked(market)) {
+      return { ok: false, reason: 'locked', code: REJECT.LOCKED,
+        text: rejectTextFor('CLOSED', market, null) }
+    }
+    if (!this.calendar.isOpenFor(market)) {
+      return { ok: false, reason: 'closed', code: REJECT.CLOSED, text: '今天不是期权市场的交易日，无法下单' }
+    }
+    const r = this.options.buy({
+      contractId, lots, cash: this.account.cash,
+      dayIndex: this.calendar.dayIndex, event: this.currentEvent,
+    })
+    if (r.ok) {
+      this.account.cash = roundMoney(this.account.cash - r.premiumPaid)
+      this.account.feesPaid = roundMoney(this.account.feesPaid + r.premiumPaid) // 权利金全额计入已付成本
+      this.lastOrder = {
+        accepted: true, status: 'filled', reasonCode: 'OK', rejectText: '',
+        side: 'buy', instrumentId: contractId, market, currency: 'CNY',
+        fillPrice: r.premiumPerShare, qty: lots, fee: 0, notional: r.premiumPaid,
+        option: { contractId, lots, strike: r.contract.strike, type: r.contract.type,
+          moneyStatus: r.moneyStatus, seriesName: r.contract.seriesName,
+          leverage: r.leverage, notionalValue: r.notional },
+      }
+      return this.lastOrder
+    }
+    const text = {
+      funds: `可用资金不足：这张合约要 ¥${money2(r.need || 0)}，你只有 ¥${money2(r.have || 0)}`,
+      lots: '张数必须大于 0',
+      expired: '这张合约已经到期了',
+      worthless: '这张合约当前没有价值',
+      unknown_contract: '没有这张合约',
+    }[r.reason] || '无法买入这张合约'
+    this.lastOrder = {
+      accepted: false, status: 'rejected', reasonCode: r.reason, rejectText: text,
+      side: 'buy', instrumentId: contractId, market, currency: 'CNY',
+      fillPrice: null, qty: lots, fee: 0, notional: 0,
+    }
+    return this.lastOrder
+  }
+
   // === 白盒测试钩子（plan.md 决策 8）===
 
   /** 固定下一日（或下一次抽签）的事件，用于确定性驱动价格公式断言。 */
@@ -631,7 +708,11 @@ export class MarketSim {
         HK: this.calendar.isOpenFor('HK'),
         US: this.calendar.isOpenFor('US'),
         CRYPTO: this.calendar.isOpenFor('CRYPTO'),
+        OPTION: this.calendar.isOpenFor('OPTION'),
       },
+      // —— 期权（唯一标的 50ETF）—
+      options: this.options.snapshot(this.currentEvent),
+      lastOptionSettlements: (this.lastOptionSettlements || []).map((s) => ({ ...s })),
     }
   }
 
@@ -652,6 +733,7 @@ export class MarketSim {
       directedDrawn: [...this.directedDrawn],
       account: this.account.toJSON(),
       fx: this.fx.toJSON(),
+      options: this.options.toJSON(),
       unlockedMarkets: [...this.unlockedMarkets],
       calendar: this.calendar.toJSON(),
       deck: this.deck.toJSON(),
@@ -664,6 +746,7 @@ export class MarketSim {
     this.fx.loadFrom(data.fx)
     this.account.setFx(this.fx)
     this.account.loadFrom(data.account)
+    this.options.loadFrom(data.options)
     if (Array.isArray(data.unlockedMarkets) && data.unlockedMarkets.length) {
       this.unlockedMarkets = new Set(data.unlockedMarkets)
     }

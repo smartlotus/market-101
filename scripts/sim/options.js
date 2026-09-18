@@ -200,7 +200,10 @@ export class OptionChain {
       status: 'open',
     }
     this.positions.push(lot)
-    return { ok: true, lot, premiumPaid, contract: c, premiumPerShare: p.premiumPerShare, leverage: p.leverage, notional: p.notional }
+    return {
+      ok: true, lot, premiumPaid, contract: c, premiumPerShare: p.premiumPerShare,
+      leverage: p.leverage, notional: p.notional, moneyStatus: p.moneyStatus,
+    }
   }
 
   /** 持仓（含实时浮盈浮亏与当前定价）。 */

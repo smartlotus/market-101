@@ -662,6 +662,14 @@ export class ChapterRuntime {
       // 要求「就是这一只」：第三章的「申购那只场外基金 / 买一篮子」需要精确到标的，
       // 否则玩家随便买一只股票也能满足条件。
       if (expect.instrumentId && result.instrumentId !== expect.instrumentId) return false
+      // 期权：合约 id 是运行时生成的，条件写成「买一张虚值 CALL」这种语义匹配。
+      // `expect.optionType` ∈ {CALL, PUT}；`expect.optionMoney` ∈ {实值, 虚值, 平值}。
+      if (expect.optionType || expect.optionMoney) {
+        const o = result.option
+        if (!o) return false
+        if (expect.optionType && o.type !== expect.optionType) return false
+        if (expect.optionMoney && o.moneyStatus !== expect.optionMoney) return false
+      }
       // 「修正后的限价单」：本章出现过拒单（即玩家学过怎么把价改回合法区间）
       if (expect.corrected && this._chapterRejectSeen !== true) return false
       return true

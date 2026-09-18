@@ -147,7 +147,7 @@ export default class BrokerShell extends Node {
     const shell = this
     const MUTATORS = new Set([
       'chapterAck', 'chapterAnswer', 'chapterRead', 'chapterSelect', 'closePanel', 'openPanel',
-      'chapterMatch', 'chapterFlowStep',
+      'chapterMatch', 'chapterFlowStep', 'chapterBuyOption',
       'giveUp', 'setMode', 'setMuted', 'setProactiveEnabled', 'callMentor', 'advanceEndPhase',
       'advanceExtraStep', 'completeExtraSegment', 'confirmChapter', 'resetChapterProgress',
       'devTopUpCapital', 'devGotoBeat', 'devGotoChapter', 'devSatisfy', 'devInjectRatingInputs', 'devAdvanceDay',
@@ -357,6 +357,10 @@ export default class BrokerShell extends Node {
       const cur = Number(chapter.chapterId) || 1
       const max = done.reduce((m, v) => Math.max(m, Number(v) || 0), cur)
       this.sim.unlockForChapter(max)
+      // 期权没有独立标的条目，靠章数据 `unlocks.markets` 显式声明（第八章）
+      for (const mk of (chapter.unlocks && chapter.unlocks.markets) || []) {
+        this.sim.unlockMarket(mk)
+      }
     }
     return { ...this.sim.snapshot(), chapter }
   }
@@ -469,6 +473,18 @@ export default class BrokerShell extends Node {
 
   chapterFlowStep(walkId, stepId) {
     const result = this.chapter.chapterFlowStep(walkId, stepId)
+    this.refresh()
+    return result
+  }
+
+  /**
+   * 买入期权（第八章）。走与股票下单同一条路径：市场层出结果 → 章节层标记完成条件。
+   * 期权不建股票持仓，因此不经过 `submitOrder`，但结果照样交给 `onOrderResult`，
+   * 使 `submit` 类完成条件的判定口径保持唯一。
+   */
+  chapterBuyOption(contractId, lots = 1) {
+    const result = this.sim.buyOption({ contractId, lots })
+    this.chapter?.onOrderResult?.(result, { side: 'buy', type: 'option' })
     this.refresh()
     return result
   }

@@ -1641,12 +1641,54 @@ ${PALETTE}
 .ch-panel .ch-doc-f.read { background: #EEF3F3; }
 .ch-panel .ch-doc-f .k { font-size: 12.5px; color: var(--muted); }
 .ch-panel .ch-doc-f .v { font-size: 13px; color: var(--text); line-height: 1.6; }
+/* —— 期权链（optionChain 块）—— 第八章：3 序列 × 5 档 × CALL/PUT —— */
 .ch-panel .ch-doc-f .nt {
   grid-column: 2;
   font-size: 12px;
   color: var(--muted);
   line-height: 1.6;
 }
+.ch-panel .ch-opt { margin: 8px 0 12px; }
+.ch-panel .ch-opt-head {
+  font-size: 12.5px; color: var(--muted); padding: 0 2px 8px; line-height: 1.6;
+}
+.ch-panel .ch-opt-empty { font-size: 13px; color: var(--muted); padding: 12px 2px; }
+.ch-panel .ch-opt-s {
+  border: 1px solid var(--border); border-radius: 3px; background: #FDFAF1;
+  margin-bottom: 10px; overflow: hidden;
+}
+.ch-panel .ch-opt-sh {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 12px; background: var(--panel-2); border-bottom: 1px solid var(--hair);
+}
+.ch-panel .ch-opt-sh .nm { font-size: 13px; font-weight: 700; color: var(--text); }
+.ch-panel .ch-opt-sh .d { font-size: 12px; color: var(--muted); }
+.ch-panel .ch-opt-g {
+  display: grid; grid-template-columns: 74px 1fr 1fr; gap: 1px;
+  background: var(--hair);
+}
+.ch-panel .ch-opt-th {
+  background: #F6F0E3; font-size: 11.5px; color: var(--muted);
+  padding: 5px 8px; text-align: center;
+}
+.ch-panel .ch-opt-th.k { text-align: left; }
+.ch-panel .ch-opt-k {
+  background: #F9F4E9; font-size: 12.5px; color: var(--text-2);
+  padding: 8px; display: flex; align-items: center;
+}
+.ch-panel .ch-opt-c {
+  background: #FFFCF4; padding: 7px 9px; cursor: pointer; pointer-events: auto;
+  display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline;
+}
+.ch-panel .ch-opt-c:hover { background: #F7F0E1; }
+.ch-panel .ch-opt-c.read { background: #EEF3F3; box-shadow: inset 0 0 0 1px var(--ok-line); }
+.ch-panel .ch-opt-c .v { font-size: 13px; color: var(--text); font-weight: 600; }
+.ch-panel .ch-opt-c .t { font-size: 11.5px; color: var(--muted); }
+.ch-panel .ch-opt-c .m { font-size: 11px; padding: 0 4px; border-radius: 2px; }
+.ch-panel .ch-opt-c .m.itm { background: rgba(194, 64, 47, 0.14); color: var(--up); }
+.ch-panel .ch-opt-c .m.atm { background: rgba(216, 154, 44, 0.18); color: #8A5A12; }
+.ch-panel .ch-opt-c .m.otm { background: rgba(58, 107, 138, 0.12); color: var(--accent); }
+.ch-panel .ch-opt-c .lv { font-size: 11.5px; color: var(--gold); }
 `
 
 export default CHAPTER_THEME_CSS

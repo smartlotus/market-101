@@ -256,7 +256,9 @@ export default class PanelHost {
       type === 'flowWalk' ||
       // 第三章的产品对比与招募说明书：**都是可读条目**，逐行 / 逐字段点开才计数
       type === 'compare' ||
-      type === 'docCard'
+      type === 'docCard' ||
+      // 期权链：每一档合约是一个可读条目（点开才计入 read）
+      type === 'optionChain'
     )
   }
 
@@ -340,6 +342,8 @@ export default class PanelHost {
         return this._blockCompare(block, ctx)
       case 'docCard':
         return this._blockDocCard(block, ctx)
+      case 'optionChain':
+        return this._blockOptionChain(block, ctx)
       default:
         // 未知块型：渲染可读的原始标签而不是占位矩形（数据驱动，视图不吞掉信息）
         console.warn(`PanelHost: unknown block type "${block.type}"`)
@@ -475,6 +479,56 @@ export default class PanelHost {
       el('div', 'v', rowEl, f.value || '')
       if (f.note) el('div', 'nt', rowEl, f.note)
       this._readable(rowEl, block, ctx, unitKey)
+    }
+    return this._raw(block, ctx, box)
+  }
+
+  // ---- optionChain（第八章：期权链）----
+  //
+  // 数据来自快照的 `options`（唯一来源，视图不自算定价）。
+  // 每个**到期序列**是一张卡：卡头写「近月 · 剩余 D 天」，卡内按行权价列出
+  // CALL / PUT 两张合约的权利金、价内价外与杠杆。每张合约是一个可读条目。
+  // 画面内不出现「卖出」任何入口 —— 本作只教买方（GDD D-14）。
+
+  _blockOptionChain(block, ctx) {
+    const box = el('div', 'ch-opt')
+    const scope = this._scope(ctx)
+    const opt = scope.options || null
+    if (!opt || !Array.isArray(opt.series)) {
+      el('div', 'ch-opt-empty', box, '期权链尚未生成')
+      return this._raw(block, ctx, box)
+    }
+    el('div', 'ch-opt-head', box,
+      `标的 50ETF（510050）现价 ¥${Number(opt.underlyingSpot || 0).toFixed(3)}`
+      + ` · 1 张 = ${opt.multiplier} 份 · 波动情景 ×${opt.volFactor}`)
+    for (const s of opt.series) {
+      const card = el('div', 'ch-opt-s', box)
+      const head = el('div', 'ch-opt-sh', card)
+      el('span', 'nm', head, s.name)
+      el('span', 'd num', head, `剩余 ${s.daysLeft} / ${s.d0} 天`)
+      const grid = el('div', 'ch-opt-g', card)
+      el('div', 'ch-opt-th k', grid, '行权价 K')
+      el('div', 'ch-opt-th', grid, 'CALL 看涨')
+      el('div', 'ch-opt-th', grid, 'PUT 看跌')
+      // 按行权价成对渲染：一行一个 K，左右分别是 CALL / PUT
+      const strikes = [...new Set(s.contracts.map((c) => c.strike))].sort((a, b) => a - b)
+      for (const K of strikes) {
+        const call = s.contracts.find((c) => c.strike === K && c.type === 'CALL')
+        const put = s.contracts.find((c) => c.strike === K && c.type === 'PUT')
+        el('div', 'ch-opt-k num', grid, `¥${K.toFixed(2)}`)
+        for (const c of [call, put]) {
+          const cell = el('div', 'ch-opt-c', grid)
+          if (!c) { el('span', 'v', cell, '—'); continue }
+          cell.dataset.contractId = c.id
+          cell.dataset.moneyStatus = c.moneyStatus
+          cell.dataset.optionType = c.type
+          el('span', 'v num', cell, `¥${Number(c.premiumPerShare).toFixed(4)}`)
+          el('span', 't num', cell, `1 张 ¥${Number(c.premiumTotal).toFixed(0)}`)
+          el('span', `m ${c.moneyStatus === '实值' ? 'itm' : c.moneyStatus === '平值' ? 'atm' : 'otm'}`, cell, c.moneyStatus)
+          el('span', 'lv num', cell, `杠杆 ${Number(c.leverage).toFixed(1)}×`)
+          this._readable(cell, block, ctx, c.id)
+        }
+      }
     }
     return this._raw(block, ctx, box)
   }
