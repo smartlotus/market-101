@@ -1833,6 +1833,32 @@ export class ChapterRuntime {
       // 派生量：视图**只读**这两个，不自己推导任何解锁、不自己算评定
       unlockedInstruments: this.unlockedInstruments,
       graduationStanding: this.graduationStanding,
+      // 第七章 7.2：玩家亲手写下的「这笔钱我能接受亏多少」。
+      // **不进评级公式**（写大写小都不该被机械奖惩），只作为自我承诺的可见化，
+      // 由章末结算面板与当章真实最大回撤并排展示（GDD 第七章）。
+      // 数据驱动：章数据声明 `baselineChoiceId`，取该选择题被选中的那个键当金额。
+      baselineAmount: (() => {
+        const id = this.chapter && this.chapter.baselineChoiceId
+        if (!id) return null
+        const key = this.answeredChoices[id]
+        const n = Number(key)
+        return Number.isFinite(n) && n > 0 ? n : null
+      })(),
+      // 当章真实最大回撤（绝对值，CNY）：与 baselineAmount 对撞用
+      chapterMaxDrawdown: (() => {
+        const w = this.ratingWindow
+        if (!w || !Array.isArray(w.navSeries) || w.navSeries.length < 2) return 0
+        let peak = w.navSeries[0]
+        let maxDd = 0
+        for (const v of w.navSeries) {
+          if (v > peak) peak = v
+          const dd = peak > 0 ? (peak - v) / peak : 0
+          if (dd > maxDd) maxDd = dd
+        }
+        const nav = w.navSeries[0]
+        // runtime.js 不 import 金额工具（它与 sim 层解耦），这里就地取到分。
+        return Math.round(nav * maxDd * 100) / 100
+      })(),
       advancedUnlocked: [...this.advancedUnlocked],
       injectionsTotal: round6(this.injectionsTotal),
       mentorHistory: this.mentorHistory.map((e) => ({ ...e })),
