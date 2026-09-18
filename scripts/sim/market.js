@@ -582,6 +582,23 @@ export class MarketSim {
       cash: roundMoney(this.account.cash),
       frozenCash: roundMoney(this.account.frozenCash),
       positions: this.account.positions(quotes),
+      // 浮动盈亏拆成「股价贡献 / 汇率贡献」两行（GDD 第五章：结算面板与 5.5 复盘共用同一次拆分）。
+      // 恒有 priceContribution + fxContribution === total（见 account.positions）。
+      fxSplit: (() => {
+        let price = 0
+        let fx = 0
+        let total = 0
+        for (const p of this.account.positions(quotes)) {
+          price += p.priceContribution || 0
+          fx += p.fxContribution || 0
+          total += p.unrealizedPnL || 0
+        }
+        return {
+          priceContribution: roundMoney(price),
+          fxContribution: roundMoney(fx),
+          total: roundMoney(total),
+        }
+      })(),
       realizedPnL: roundMoney(this.account.realizedPnL),
       unrealizedPnL: this.account.unrealizedPnL(quotes),
       marketValue: this.account.totalMarketValue(quotes),

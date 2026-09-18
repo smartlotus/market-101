@@ -106,6 +106,8 @@ export default class BrokerShell extends Node {
         initialCapital: Number(cfg.initialCash ?? 100000),
         canAfford: (instrumentId) => this._canAffordOneLot(instrumentId),
         marketChanges: () => this._marketChanges(),
+        // 节拍声明的 `forceEvent` 钉到下一次开市推进（第五章把 M03 钉在 5.5）
+        pinNextEvent: (eventId) => this.sim.pinDirectedEvent(eventId),
       },
     })
     if (saved) {

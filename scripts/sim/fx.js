@@ -111,6 +111,16 @@ export class FxBook {
       noise: Math.round(noise * 1e6) / 1e6,
       eventId: event.id || null,
       headline: event.headline || null,
+      linked: [],
+    }
+    // 港币与美元是**联系汇率**：美元对人民币怎么动，港币对人民币就同比例动。
+    // 不补这一条，`fxTarget: USD` 的事件就完全碰不到港股持仓，
+    // 第五章「股价没跌，我的钱却少了」这个核心教学点就演示不出来。
+    if (currency === 'USD' && this.initialRates.HKD !== undefined) {
+      const hkBefore = this.rateOf('HKD')
+      const hkAfter = round4(hkBefore * (after / before))
+      this.rates.HKD = hkAfter
+      this.lastMove.linked.push({ currency: 'HKD', before: hkBefore, after: hkAfter, reason: 'peg' })
     }
     return this.lastMove
   }

@@ -340,6 +340,12 @@ export class ChapterRuntime {
     }
     if (!restoring) {
       this._claimBeatPins()
+      // `forceEvent`：本拍声明的定向事件，钉在下一次开市推进上。
+      // 第五章靠它把 `M03`（唯一带 fxTarget 的事件）精准钉在「汇率咬了你一口」那一拍，
+      // 否则它会被章级 `directedQueue` 在更早的开市日先消耗掉，教学点就落空了。
+      if (beat.forceEvent && typeof this.config.pinNextEvent === 'function') {
+        this.config.pinNextEvent(beat.forceEvent)
+      }
       // 开口时机：拍首台词（`rejected` 类台词在被拒单时开口，见 _onReject）
       const opening = (beat.mentor || []).find((m) => m.timing !== 'rejected')
       if (opening) this._speak(opening)
