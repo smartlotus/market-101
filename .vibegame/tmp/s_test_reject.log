@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+#1 可用资金不足（买 1 手茅台）
+  PASS  #1 reasonCode == REJECT_1
+  PASS  #1 accepted == false
+  PASS  #1 status == 'rejected'
+  PASS  #1 fillPrice == null
+  PASS  #1 rejectText 含 '可用资金不足'
+  PASS  #1 rejectText 含 '含手续费'
+  PASS  #1 rejectText 含 '还差 ¥'
+  PASS  #1 文案含真实差额（1 手 ≈ ¥152564.00 > 可用 ¥100000.00）
+  PASS  #1 拒单后可用资金未变
+  PASS  #1 拒单后无持仓
+#2 委托价超涨跌停
+  PASS  #2a 买入限价 > 涨停 reasonCode == REJECT_2
+  PASS  #2a 买入限价 > 涨停 accepted == false
+  PASS  #2a 买入限价 > 涨停 status == 'rejected'
+  PASS  #2a 买入限价 > 涨停 fillPrice == null
+  PASS  #2a 买入限价 > 涨停 rejectText 含 '委托价超出今日涨跌停区间'
+  PASS  #2a 买入限价 > 涨停 rejectText 含 '–'
+  PASS  #2a 文案含跌停价 ¥5.58 与涨停价 ¥6.82（先跌停后涨停）
+  PASS  #2b 卖出限价 < 跌停 reasonCode == REJECT_2
+  PASS  #2b 卖出限价 < 跌停 accepted == false
+  PASS  #2b 卖出限价 < 跌停 status == 'rejected'
+  PASS  #2b 卖出限价 < 跌停 fillPrice == null
+  PASS  #2b 卖出限价 < 跌停 rejectText 含 '委托价超出今日涨跌停区间'
+  PASS  #2b 卖出限价 < 跌停 rejectText 含 '–'
+#4 T+1 未解禁（当日买入后当日卖出）
+  PASS  #4 reasonCode == REJECT_4
+  PASS  #4 accepted == false
+  PASS  #4 status == 'rejected'
+  PASS  #4 fillPrice == null
+  PASS  #4 rejectText 含 'A 股实行 T+1'
+  PASS  #4 rejectText 含 '今日买入需下个交易日才能卖出'
+  PASS  #4 拒单前持仓 lockedQty > 0（当日买入锁定）
+  PASS  #4 拒单后持仓与锁定未变
+#6 数量非整手
+  PASS  #6 reasonCode == REJECT_6
+  PASS  #6 accepted == false
+  PASS  #6 status == 'rejected'
+  PASS  #6 fillPrice == null
+  PASS  #6 rejectText 逐字 == 'A 股最小交易单位为 100 股（1 手）'
+#7 价格精度不符
+  PASS  #7 reasonCode == REJECT_7
+  PASS  #7 accepted == false
+  PASS  #7 status == 'rejected'
+  PASS  #7 fillPrice == null
+  PASS  #7 rejectText 逐字 == '价格需为 ¥0.01 的整数倍'
+#8 可卖持仓不足
+  PASS  #8 reasonCode == REJECT_8
+  PASS  #8 accepted == false
+  PASS  #8 status == 'rejected'
+  PASS  #8 fillPrice == null
+  PASS  #8 rejectText 逐字 == '可用持仓不足，无法卖出'
+  PASS  #8 前置：持仓 100 股、无 T+1 锁定，卖出 200 股 → 可用不足
+#3 休市
+  PASS  #3 reasonCode == REJECT_3
+  PASS  #3 accepted == false
+  PASS  #3 status == 'rejected'
+  PASS  #3 fillPrice == null
+  PASS  #3 rejectText 逐字 == '今天该市场休市，无法下单'
+  PASS  #3 前置：推进到周六（2026-01-10，dayIndex=6）
+  PASS  #3 canSubmitOrder == false（下单面板不可提交）
+Edge Case 数量 ≤ 0（独立原因码 REJECT_10）
+  PASS  数量 0 reasonCode == REJECT_10
+  PASS  数量 0 accepted == false
+  PASS  数量 0 status == 'rejected'
+  PASS  数量 0 fillPrice == null
+  PASS  数量 0 rejectText 逐字 == '委托数量必须大于 0'
+  PASS  数量 0 的 reasonCode ≠ REJECT_6（区别于非整手）
+  PASS  数量 −100 reasonCode == REJECT_10
+  PASS  数量 −100 accepted == false
+  PASS  数量 −100 status == 'rejected'
+  PASS  数量 −100 fillPrice == null
+  PASS  数量 −100 rejectText 逐字 == '委托数量必须大于 0'
+  PASS  数量 −100 的 reasonCode ≠ REJECT_6（区别于非整手）
+收尾：驱动脚本最后已 reset 回初始可玩状态
+  PASS  finalState.dayIndex == 1
+  PASS  finalState.cash == 100000
+  PASS  finalState.positions == []
+
+69 项断言，0 项失败

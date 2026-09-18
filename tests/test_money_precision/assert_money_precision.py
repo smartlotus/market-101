@@ -32,7 +32,13 @@ def check(label, cond, detail=""):
 
 
 def aligned(value):
-    """是否为 ¥0.01 的整数倍（与 scripts/sim/fees.js:isPriceTickAligned 同口径）。"""
+    """是否为 ¥0.01 的整数倍（与 scripts/sim/fees.js:isPriceTickAligned 同口径）。
+
+    `None` = 该字段对本标的不适用：港股/美股/加密**没有涨跌停**，`limitUp/limitDown`
+    合法为 null。这不是精度问题，跳过即可（否则 float(None) 会直接崩）。
+    """
+    if value is None:
+        return True
     n = float(value)
     return abs(n * 100.0 - round(n * 100.0)) < 1e-9
 
@@ -95,7 +101,10 @@ def main():
                 scan("states[%d].positions[%s].%s" % (si, p["instrumentId"], key), p[key], bad)
         for iid, q in st["quotes"].items():
             for key in QUOTE_FIELDS:
-                scan("states[%d].quotes[%s].%s" % (si, iid, key), q[key], bad)
+                # 只有 A 股 / ETF 用 ¥0.01 价位。基金按净值报价（4 位小数，如 1.5003）、
+                # 港股/美股/加密各有各的最小变动价位 —— 它们套 A 股口径必然「非整数倍」。
+                if (q.get("market") or "A_SHARE") in ("A_SHARE", "ETF"):
+                    scan("states[%d].quotes[%s].%s" % (si, iid, key), q[key], bad)
 
     for oi, o in enumerate(orders):
         for key in ORDER_FIELDS:

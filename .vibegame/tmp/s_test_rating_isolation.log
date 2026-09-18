@@ -1,0 +1,47 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+[§3.3 L2 评级不侵入市场层：注入 A/D/C 后 sim.snapshot() 与对照逐字节相同]
+  PASS 已进入第二章（评级窗口所在章）
+  PASS 注入 A 得 A 档
+  PASS 注入 D 得 D 档
+  PASS 注入 C 得 C 档
+  PASS sim.snapshot() 逐字节相同
+  PASS 逐字段 diff 为空（含 quotes/currentEvent/eventDeck/limitUp·limitDown）
+  PASS 涨跌停限价表（limitsFor）往返相同
+  PASS canSubmitOrder 不变
+  PASS selectedInstrumentId 不变
+  PASS isMarketOpen 不变
+[L2b 注入极端评级后同一笔委托结果逐字段一致（费率与撮合未被污染）]
+  PASS 对照单（未注入）已成交
+  PASS 注入 A 后同一笔委托逐字段一致
+  PASS 注入 D 后同一笔委托逐字段一致
+  PASS 手续费常量往返一致
+  PASS 成交价往返一致
+[§3.3 L3 A 级不发资源：只改 extraSegment 与进阶条目，钱与持仓一动不动]
+  PASS 注入后确实落在 A 档
+  PASS A 级 → extraSegment.kind == 'advanced'
+  PASS A 级 → 解锁进阶条目（unlockConcepts 非空）
+  PASS A 级后 sim.snapshot() 逐字节相同
+  PASS A 级后 cash/NAV/frozenCash/tradedNotional/feesPaid/持仓/navHistory 全同
+  PASS 对照（B 档）不产生加演段
+  PASS 注入前本章声明的进阶条目是折叠态
+  PASS A 级后本章声明的进阶条目全部展开（不再折叠）
+  PASS B 档对照下进阶条目折叠态一字不变（非 A 级不解锁）
+[L3b 章末 A 级路径同样不发资源]
+  PASS 章末评级为 A
+  PASS 章末 A 级 → extraSegment.kind == 'advanced' + 解锁 2 条进阶条目
+  PASS 章末 A 级前后 cash 不变
+  PASS 章末 A 级前后 NAV 不变
+  PASS 章末 A 级前后 frozenCash 不变
+  PASS 章末 A 级前后 tradedNotional 不变
+  PASS 章末 A 级前后 feesPaid 不变
+
+31/31 断言通过

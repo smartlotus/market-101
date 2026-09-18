@@ -48,18 +48,24 @@ export const REJECT_TEXT = {
 /** 按市场生成拒单文案（A 股返回逐字原文，其余市场说清自己的规则）。 */
 function rejectTextFor(kind, market, instrument) {
   const label = marketLabel(market)
+  // A 股的拒单文案是 PRD §3.4 的**逐字原文**，任何情况下都不得改写（回归测试逐字断言）。
+  // 其余市场才生成各自的版本 —— 那里没有「逐字」约束，说清自己的规则更有用。
+  const isAShare = !market || market === 'A_SHARE'
   switch (kind) {
-    case 'CLOSED': return `今天是${label}的休市日，无法下单`
-    case 'T1': return `${label}实行 T+1，今日买入需下个交易日才能卖出`
+    case 'CLOSED':
+      return isAShare ? REJECT_TEXT.CLOSED : `今天是${label}的休市日，无法下单`
+    case 'T1':
+      return isAShare ? REJECT_TEXT.T1 : `${label}实行 T+1，今日买入需下个交易日才能卖出`
     case 'LOT': {
       const lot = instrument && instrument.lotSize ? Number(instrument.lotSize) : null
       if (market === 'US') return '美股最小交易单位为 1 股（支持碎股，最小 0.001 股）'
       if (market === 'HK' && lot) return `这只港股的 1 手是 ${lot} 股（港股每手股数不固定）`
-      return `A 股最小交易单位为 ${LOT_SIZE} 股（1 手）`
+      return REJECT_TEXT.LOT
     }
-    case 'TICK': return `价格需为 ${tickLabel(market)} 的整数倍`
-    case 'SHARES': return '可用持仓不足，无法卖出'
-    case 'QTY': return '委托数量必须大于 0'
+    case 'TICK':
+      return isAShare ? REJECT_TEXT.TICK : `价格需为 ${tickLabel(market)} 的整数倍`
+    case 'SHARES': return REJECT_TEXT.SHARES
+    case 'QTY': return REJECT_TEXT.QTY
     default: return REJECT_TEXT[kind] || '无法下单'
   }
 }

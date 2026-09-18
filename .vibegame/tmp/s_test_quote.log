@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+§3.1 当前事件可观察（价格公式可对照）
+  PASS  第 1 日 currentEvent 非空
+  PASS  currentEvent 含字段 id
+  PASS  currentEvent 含字段 type
+  PASS  currentEvent 含字段 targets
+  PASS  currentEvent 含字段 sentiment
+  PASS  currentEvent 含字段 magnitude
+  PASS  currentEvent 含字段 fxTarget
+  PASS  currentEvent 含字段 headline
+  PASS  currentEvent 含字段 mentorLine
+  PASS  currentEvent.targets 为非空数组
+  PASS  currentEvent.sentiment ∈ {GOOD,BAD,NEUTRAL}
+  PASS  currentEvent.headline 非空
+  PASS  currentEvent.mentorLine 非空（新闻卡导师点评）
+§3.2 行情公式（eventMove = +0.0403，prevClose = 6.31）
+  PASS  第 2 日仍开市
+  PASS  after.currentEvent.id == 固定事件 id（事件被 devSetEvent 钉住）
+  PASS  quotes[].prevClose == 前一交易日收盘价
+  PASS  open == round(prevClose×(1+0.5×eventMove), 0.01) = 6.44
+  PASS  close/prevClose − 1 落在 eventMove ± noise(0.003) + 取整余量(+0.00155) 内（实测 +0.04120）
+  PASS  noise 是可见杂波：close 不等于无噪声的理论值（|实测噪声| 有意义）
+  PASS  GOOD 定向事件下 close > prevClose（方向正确）
+  PASS  lastPrice == close（最新价取当日收盘）
+  PASS  limitUp == round(prevClose×(1+10%), 0.01) = 6.94
+  PASS  limitDown == round(prevClose×(1−10%), 0.01) = 5.68
+  PASS  OHLC 自洽：high >= max(open,close) 且 low <= min(open,close)
+  PASS  新增一根 K（31 → 32）
+§3.2 未受事件影响的标的不串扰
+  PASS  600519 只随 drift + noise 波动（实测 -0.00250，带 0.0003±0.003）
+
+26 项断言，0 项失败

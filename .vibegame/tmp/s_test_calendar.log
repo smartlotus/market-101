@@ -1,0 +1,50 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+§2.3 普通交易日推进（进入下一交易日）
+  PASS  第 1 日 dayIndex == 1
+  PASS  第 1 日 inGameDate == 2026-01-05
+  PASS  第 1 日开市
+  PASS  推进后 dayIndex == 2（+1）
+  PASS  推进后 inGameDate == 2026-01-06（+1 自然日）
+  PASS  推进后仍开市
+  PASS  推进后 calendarClosedReason == null
+§2.3 周五（连续休市起点）
+  PASS  周五 dayIndex == 5
+  PASS  周五 inGameDate == 2026-01-09
+  PASS  周五开市
+§2.3 周六：周末 isMarketOpen=false、行情/NAV 不变
+  PASS  周六 dayIndex == 6
+  PASS  周六 inGameDate == 2026-01-10
+  PASS  周六 isMarketOpen == false
+  PASS  周六 calendarClosedReason == 'weekend'
+  PASS  周五 → 周六：非加密标的最新价（行情）不变
+  PASS  周五 → 周六：NAV 不变
+Edge Case 休市日持仓不重估
+  PASS  周五有持仓（前置条件）
+  PASS  marketValue 不变（6630 → 6630）
+  PASS  unrealizedPnL 不变（210 → 210）
+§3.1 顶栏当日涨跌幅休市日保持 0
+  PASS  周六 dayReturnPct == 0
+  PASS  周六 dayReturn == 0
+Edge Case 连续休市（周六 + 周日，需点两次）
+  PASS  周日 dayIndex == 7（连 +2）
+  PASS  周日 inGameDate == 2026-01-11
+  PASS  周日 isMarketOpen == false
+  PASS  周日 calendarClosedReason == 'weekend'
+  PASS  周六 → 周日：非加密标的行情仍未变（不自动跳过周末）
+  PASS  周六 → 周日：加密标的行情**照常波动**（7×24）
+  PASS  周日 NAV 不变
+  PASS  周日 dayReturnPct == 0
+  PASS  第三次推进才到周一 dayIndex == 8
+  PASS  周一 inGameDate == 2026-01-12
+  PASS  周一 isMarketOpen == true
+
+32 项断言，0 项失败

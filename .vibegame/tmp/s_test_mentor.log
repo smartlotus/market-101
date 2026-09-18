@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+[0 确定性基线]
+  PASS baseline.mode == 'chapter'
+  PASS baseline.beatId == '1.0'
+  PASS baseline 概念计数为空（确定性起点）
+  PASS baseline.muted is False
+  PASS baseline.proactiveEnabled is True
+[①(a) 章开场：一次，且只说数据里那一句]
+  PASS 章开场有台词
+  PASS 台词逐字等于数据里的 chapterOpen 台词
+  PASS 章开场没有 conceptKey（不占概念配额）
+  PASS speaker 与数据声明一致
+  PASS 仅刷新视图不再产生新台词
+  PASS 章开场不累加任何概念计数
+[①(b) 首遇概念：开口一次并累加该概念计数]
+  PASS 1.0 → 1.1 推进成功
+  PASS 1.1 有台词且逐字等于数据
+  PASS 1.1 台词挂 conceptKey == '银行'
+  PASS 银行 计数 == 1
+  PASS 1.4 首遇「最小交易单位」开口并计数 1
+  PASS 1.4 台词逐字等于数据
+  PASS 1.6 首遇「T+1」开口并计数 1
+[① 负例：非五个时机的路径不得开口]
+  PASS [负例] 开面板不换台词
+  PASS [负例] 读面板不换台词
+  PASS [负例] 进入未声明 mentor 的 1.3 → 无台词
+  PASS [负例] 1.3 数据里确实没有任何 mentor 条目
+  PASS [负例] 选标的推进到未声明 mentor 的 1.5 → 无台词
+  PASS [负例] 1.5 数据里确实没有任何 mentor 条目
+  PASS [负例] 跳拍本身（restoring）不开口
+  PASS [负例] 打开概念卡面板不开口
+  PASS [负例] 读满概念卡不开口
+[①(c) 被拒单 / 触风险警示线：开口，且comfort 优先、无纠正措辞]
+  PASS 触风险警示线（NAV ¥9000）开口一句提示
+  PASS 风险提示指向补足本金（数据里的 yellowLine）
+  PASS 风险提示金额代入当前 NAV（¥9000）
+  PASS 风险提示每章最多一次（清台词后再触线不再重复）
+  PASS 风险提示不消耗任何概念配额
+  PASS 被拒单（REJECT_2，非本拍期望）确实发生
+  PASS 被拒单后仍停在 2.1（未完成本拍）
+  PASS 被拒单开口且逐字等于数据里的 rejected 台词
+  PASS 被拒单台词挂 conceptKey == '可用资金不足'
+  PASS 被拒单开口不改动概念计数（reactive 不占配额）
+  PASS 被拒单台词 comfort 优先、无「你不该……」
+  PASS 全部章节台词 / 反馈都不含「你不该……」
+[② 每概念主动讲解上限 2 次：第 3 次抑制，呼叫仍可用]
+  PASS reset -> 1.0：章开场照常开口（不受概念上限限制）
+  PASS 银行 第 2 次主动仍开口（比喻 → 机制）
+  PASS 银行 第 3 次主动被抑制（无台词）
+  PASS 第 3 次被抑制时计数不再增长（仍为 2）
+  PASS 第 3 次被抑制时 conceptKey 也不再出现
+  PASS 玩家主动呼叫在配额用尽后仍可用
+  PASS 呼叫确实产生台词
+  PASS 呼叫不计入「最多主动讲 2 次」的上限
+  PASS 另一概念（券商）不受银行配额影响，第 2 次仍开口
+[② 计数跨章累加，且 toJSON → loadFrom 往返一致]
+  PASS 进入第二章不清零导师计数
+  PASS 跨章进入 2.1（restoring）不开口
+  PASS 存档里 mentor 只有三个键
+  PASS loadFrom(空) 确实清空（证明往返断言有效）
+  PASS toJSON → loadFrom 后计数逐项一致
+  PASS toJSON → loadFrom 后 muted 一致
+  PASS toJSON → loadFrom 后 proactiveEnabled 一致
+[⑤ 无隐藏层：持久化面只有计数 + 静音 + 主动开关，白名单丢弃未知键]
+  PASS 活的调度器状态面只有三个键
+  PASS 确实把伏笔 / 身份 / 延迟台词塞进了活对象（测试有效）
+  PASS MentorScheduler.toJSON() 丢掉全部未知键
+  PASS ChapterRuntime.toJSON().mentor 只有三个键
+  PASS 塞进去的键在断言后已清理干净
+  PASS SaveStore 读回的 mentor 只有三个键（白名单生效）
+  PASS 白名单保留合法字段（计数器原样读回）
+  PASS 净化后的存档里没有任何伏笔 / 身份 / 延迟类键
+  PASS 真实 localStorage 存档里的 mentor 也只有三个键
+  PASS 存档快照里没有额外的导师字段（快照面 = 三项 + 当次投影 + 诊断 source）
+[③ 静音：只吞非剧情发言，剧情/功能性台词照常，且计数照常累加（取消静音不补讲）]
+  PASS setMuted(true) 生效
+  PASS 静音下章开场（剧情台词）照常出现
+  PASS 静音下章开场的来源是剧情来源 beat
+  PASS 静音下首遇概念的讲解（非剧情发言）不出现
+  PASS 静音下对话层也没有台词文本
+  PASS 静音下计数照常推进（银行 2 → 3）
+  PASS 补记不会重复计数（再刷新一次计数不变）
+  PASS 静音时判定理由为 muted
+  PASS 取消静音后不补讲（无积压台词）
+  PASS 取消静音后对话层仍为空
+  PASS 取消静音不改变计数
+  PASS 取消静音后章开场恢复开口（静音确实被解除）
+  PASS 静音期间累加的计数在取消静音后仍然生效（配额成立）
+[④ freeDay / sandbox：普通动作不主动弹窗]
+  PASS 切到 freeDay 后调度器台词被清空
+  PASS freeDay 下 reactive 判定为 non_intrusive_mode
+  PASS freeDay 下首遇概念同样不开口（即使配额未满）
+  PASS freeDay 下推进交易日不产生台词
+  PASS freeDay 下真实被拒单也不产生台词
+  PASS 切到 sandbox 后调度器台词为空
+  PASS sandbox 下 reactive 判定为 non_intrusive_mode
+  PASS sandbox 下推进交易日不产生台词
+  PASS sandbox 下真实被拒单也不产生台词
+  PASS sandbox 下对话层整体收起
+[⑥ R10：章内 MentorView 静态（只有中性标签），freeDay 恢复事件台词]
+  PASS 章内当前存在一条导师台词（有可被抢的内容）
+  PASS 制造台词的公开钩子 callMentor 成功
+  PASS MentorView 置 data-mentorStatic=1
+  PASS MentorView 带 .static 类
+  PASS MentorView 的中性标签为「导师 · 周老师」
+  PASS MentorView 的 say 行为空
+  PASS MentorView 的 foot 行为空
+  PASS MentorView 的 say/foot 被 CSS 隐藏（display:none）
+  PASS MentorView 的 DOM 文本 == 中性标签（无台词）
+  PASS MentorView 不渲染当日 mentorLine
+  PASS 台词由对话层显示（一次只有一张嘴）
+  PASS freeDay 下 MentorView 退出静态态
+  PASS freeDay 下 MentorView 恢复显示当日事件的 mentorLine
+  PASS freeDay 下 MentorView 的 say 行可见（display:block）
+  PASS freeDay 下对话层收起（仍然只有一张嘴）
+[⑦ 空转 30 帧：没有任何操作时不得开口]
+  PASS 收尾停在章内 1.5
+  PASS 收尾时无台词
+  PASS 空转 30 帧后仍无台词
+  PASS 空转 30 帧后计数不变（没有偷偷记一笔）
+
+107/107 断言通过

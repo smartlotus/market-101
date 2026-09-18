@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+§3.3 开机状态：第 1 交易日已抽 1 件
+  PASS  eventDeck.total == 20
+  PASS  eventDeck.cycle == 1
+  PASS  eventDeck.drawnThisCycle == 1（开机已抽当日事件）
+  PASS  usedIds 长度 == 1
+§3.3 再连续 devDrawEvent() 19 次 → 本轮用尽
+  PASS  19 次调用返回 19 个 id
+  PASS  usedIds 长度 == 20（本轮 20 件全部用过）
+  PASS  usedIds 为 20 个互异 id（同一轮内不重复）
+  PASS  usedIds 与 config/events.json 的 20 个 id 完全一致（本轮确实覆盖全池）
+  PASS  19 次抽到的 id 两两互异（本轮内不重复）
+  PASS  cycle 仍为 1（本轮未结束）
+  PASS  drawnThisCycle == 20
+§3.3 第 20 次抽签：池空 → 洗牌开启第 2 轮
+  PASS  cycle == 2
+  PASS  usedIds 长度回到 1（洗牌归零后计入本次抽签）
+  PASS  drawnThisCycle == 1（不是 0 —— 洗牌清零后再计入本次抽签）
+  PASS  第 20 次抽到的事件 id 属于事件池（允许与上一轮重复）
+  PASS  第 20 次抽到的事件带完整公开字段（headline / targets）
+§3.3 第 2 轮继续抽签
+  PASS  cycle 仍为 2
+  PASS  usedIds 长度 == 2
+  PASS  第 2 轮内不重复（usedIds 两个互异）
+  PASS  第 2 轮第 2 件与第 1 件不同
+
+20 项断言，0 项失败

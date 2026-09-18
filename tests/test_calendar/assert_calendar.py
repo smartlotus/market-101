@@ -74,9 +74,12 @@ def main():
         sat["calendarClosedReason"] == "weekend",
         "reason=%r" % sat["calendarClosedReason"],
     )
+    # 加密 7×24：周末行情会动，逐字比较只对非加密标的成立（同下方周六→周日）
+    _C = ("BTC", "ETH")
+    _nc = lambda q: {k: v for k, v in (q or {}).items() if k not in _C}
     check(
-        "周五 → 周六：全部标的最新价（行情）不变",
-        sat["quotes"] == fri["quotes"],
+        "周五 → 周六：非加密标的最新价（行情）不变",
+        _nc(sat["quotes"]) == _nc(fri["quotes"]),
         "quotes mismatch",
     )
     check(
@@ -113,10 +116,22 @@ def main():
     check("周日 inGameDate == 2026-01-11", sun["inGameDate"] == "2026-01-11", sun["inGameDate"])
     check("周日 isMarketOpen == false", sun["isMarketOpen"] is False)
     check("周日 calendarClosedReason == 'weekend'", sun["calendarClosedReason"] == "weekend")
+    # 加密是 7×24：周末行情**会**动。逐字比较只对非加密标的成立。
+    _CRYPTO = ("BTC", "ETH")
+    _non_crypto = lambda q: {k: v for k, v in (q or {}).items() if k not in _CRYPTO}
     check(
-        "周六 → 周日：行情仍未变（不自动跳过周末）",
-        sun["quotes"] == sat["quotes"],
+        "周六 → 周日：非加密标的行情仍未变（不自动跳过周末）",
+        _non_crypto(sun["quotes"]) == _non_crypto(sat["quotes"]),
         "quotes mismatch",
+    )
+    check(
+        "周六 → 周日：加密标的行情**照常波动**（7×24）",
+        any(
+            (sun["quotes"].get(k) or {}).get("lastPrice") != (sat["quotes"].get(k) or {}).get("lastPrice")
+            for k in _CRYPTO
+            if k in (sat["quotes"] or {})
+        ),
+        "crypto frozen",
     )
     check("周日 NAV 不变", close(sun["NAV"], sat["NAV"]), "%r vs %r" % (sun["NAV"], sat["NAV"]))
     check(

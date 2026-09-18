@@ -1,0 +1,286 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+证据文件与截图齐全
+  PASS  dom_01.json 已产出
+  PASS  state_01.json 已产出
+  PASS  01-layout-default.png 已产出且非空
+  PASS  dom_02.json 已产出
+  PASS  state_02.json 已产出
+  PASS  02-klines-gain-RED.png 已产出且非空
+  PASS  dom_03.json 已产出
+  PASS  state_03.json 已产出
+  PASS  03-klines-loss-GREEN.png 已产出且非空
+  PASS  dom_04.json 已产出
+  PASS  state_04.json 已产出
+  PASS  04-after-buy.png 已产出且非空
+  PASS  dom_05.json 已产出
+  PASS  state_05.json 已产出
+  PASS  05-after-advance-day.png 已产出且非空
+  PASS  dom_06.json 已产出
+  PASS  state_06.json 已产出
+  PASS  06-rejected-order.png 已产出且非空
+  PASS  dom_07.json 已产出
+  PASS  state_07.json 已产出
+  PASS  07-weekend-closed.png 已产出且非空
+  PASS  dom_08.json 已产出
+  PASS  state_08.json 已产出
+  PASS  08-mentor-long-line-B01.png 已产出且非空
+逻辑画布 1440×810（project.json settings.width/height）
+  PASS  [01] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [01] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [02] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [02] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [03] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [03] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [04] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [04] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [05] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [05] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [06] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [06] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [07] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [07] 页面无横向溢出（documentElement.scrollWidth = 1440）
+  PASS  [08] #broker-shell 为 1440×810（实测 1440×810）
+  PASS  [08] 页面无横向溢出（documentElement.scrollWidth = 1440）
+§2.5 五块区域齐备
+  PASS  [01] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [02] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [03] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [04] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [05] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [06] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [07] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+  PASS  [08] 顶栏/自选/行情主区/下单/持仓/导师 六块区域各恰好 1 个
+§2.5 面板内容不溢出（scrollHeight/scrollWidth vs client）
+  PASS  [01] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [02] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [03] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [04] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [05] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [06] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [07] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+  PASS  [08] 8 个面板越出量均在容差内（.chart 因轴标签居中放宽到 8px，其余 1px）
+K 线图内越界元素只能是居中的价格轴刻度标签
+  PASS  [01] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [01] 轴标签越出量 <= 8px（[]）
+  PASS  [02] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [02] 轴标签越出量 <= 8px（[]）
+  PASS  [03] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [03] 轴标签越出量 <= 8px（[]）
+  PASS  [04] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [04] 轴标签越出量 <= 8px（[]）
+  PASS  [05] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [05] 轴标签越出量 <= 8px（[]）
+  PASS  [06] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [06] 轴标签越出量 <= 8px（[]）
+  PASS  [07] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [07] 轴标签越出量 <= 8px（[]）
+  PASS  [08] 蜡烛/最新价标签/参考线均未越出 .chart（越界元素 0 个，全为 .chart-glabel）
+  PASS  [08] 轴标签越出量 <= 8px（[]）
+  PASS  [01] #broker-shell .topbar 内无任何后代越界
+  PASS  [02] #broker-shell .topbar 内无任何后代越界
+  PASS  [03] #broker-shell .topbar 内无任何后代越界
+  PASS  [04] #broker-shell .topbar 内无任何后代越界
+  PASS  [05] #broker-shell .topbar 内无任何后代越界
+  PASS  [06] #broker-shell .topbar 内无任何后代越界
+  PASS  [07] #broker-shell .topbar 内无任何后代越界
+  PASS  [08] #broker-shell .topbar 内无任何后代越界
+  PASS  [01] #broker-shell .watch 内无任何后代越界
+  PASS  [02] #broker-shell .watch 内无任何后代越界
+  PASS  [03] #broker-shell .watch 内无任何后代越界
+  PASS  [04] #broker-shell .watch 内无任何后代越界
+  PASS  [05] #broker-shell .watch 内无任何后代越界
+  PASS  [06] #broker-shell .watch 内无任何后代越界
+  PASS  [07] #broker-shell .watch 内无任何后代越界
+  PASS  [08] #broker-shell .watch 内无任何后代越界
+  PASS  [01] #broker-shell .mid 内无任何后代越界
+  PASS  [02] #broker-shell .mid 内无任何后代越界
+  PASS  [03] #broker-shell .mid 内无任何后代越界
+  PASS  [04] #broker-shell .mid 内无任何后代越界
+  PASS  [05] #broker-shell .mid 内无任何后代越界
+  PASS  [06] #broker-shell .mid 内无任何后代越界
+  PASS  [07] #broker-shell .mid 内无任何后代越界
+  PASS  [08] #broker-shell .mid 内无任何后代越界
+  PASS  [01] #broker-shell .ticket 内无任何后代越界
+  PASS  [02] #broker-shell .ticket 内无任何后代越界
+  PASS  [03] #broker-shell .ticket 内无任何后代越界
+  PASS  [04] #broker-shell .ticket 内无任何后代越界
+  PASS  [05] #broker-shell .ticket 内无任何后代越界
+  PASS  [06] #broker-shell .ticket 内无任何后代越界
+  PASS  [07] #broker-shell .ticket 内无任何后代越界
+  PASS  [08] #broker-shell .ticket 内无任何后代越界
+  PASS  [01] #broker-shell .positions 内无任何后代越界
+  PASS  [02] #broker-shell .positions 内无任何后代越界
+  PASS  [03] #broker-shell .positions 内无任何后代越界
+  PASS  [04] #broker-shell .positions 内无任何后代越界
+  PASS  [05] #broker-shell .positions 内无任何后代越界
+  PASS  [06] #broker-shell .positions 内无任何后代越界
+  PASS  [07] #broker-shell .positions 内无任何后代越界
+  PASS  [08] #broker-shell .positions 内无任何后代越界
+  PASS  [01] #broker-shell .mentor 内无任何后代越界
+  PASS  [02] #broker-shell .mentor 内无任何后代越界
+  PASS  [03] #broker-shell .mentor 内无任何后代越界
+  PASS  [04] #broker-shell .mentor 内无任何后代越界
+  PASS  [05] #broker-shell .mentor 内无任何后代越界
+  PASS  [06] #broker-shell .mentor 内无任何后代越界
+  PASS  [07] #broker-shell .mentor 内无任何后代越界
+  PASS  [08] #broker-shell .mentor 内无任何后代越界
+  PASS  [01] #broker-shell .news 内无任何后代越界
+  PASS  [02] #broker-shell .news 内无任何后代越界
+  PASS  [03] #broker-shell .news 内无任何后代越界
+  PASS  [04] #broker-shell .news 内无任何后代越界
+  PASS  [05] #broker-shell .news 内无任何后代越界
+  PASS  [06] #broker-shell .news 内无任何后代越界
+  PASS  [07] #broker-shell .news 内无任何后代越界
+  PASS  [08] #broker-shell .news 内无任何后代越界
+§2.5 关键元素落在其所属面板矩形内（长文案不撑破面板）
+  PASS  [01] 全部可见关键元素均完整落在所属面板内
+  PASS  [02] 全部可见关键元素均完整落在所属面板内
+  PASS  [03] 全部可见关键元素均完整落在所属面板内
+  PASS  [04] 全部可见关键元素均完整落在所属面板内
+  PASS  [05] 全部可见关键元素均完整落在所属面板内
+  PASS  [06] 全部可见关键元素均完整落在所属面板内
+  PASS  [07] 全部可见关键元素均完整落在所属面板内
+  PASS  [08] 全部可见关键元素均完整落在所属面板内
+导师立绘：使用真实素材 mentor_portrait
+  PASS  [01] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [01] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [02] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [02] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [03] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [03] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [04] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [04] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [05] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [05] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [06] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [06] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [07] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [07] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+  PASS  [08] <img> 已加载（complete=True, naturalWidth=1024）
+  PASS  [08] 立绘按 CSS 的 100×128 渲染（border-box，实测 100×128）
+§2.5 K 线图为 DOM/CSS 蜡烛（无 canvas）
+  PASS  [01] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [01] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [01] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [01] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [02] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [02] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [02] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [02] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [03] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [03] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [03] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [03] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [04] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [04] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [04] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [04] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [05] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [05] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [05] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [05] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [06] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [06] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [06] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [06] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [07] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [07] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [07] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [07] 每根蜡烛实体高度 > 0（形态可辨）
+  PASS  [08] 蜡烛/影线/实体/刻度 DOM 元素齐备
+  PASS  [08] 空状态文案未显示（K 线 >= 2 根）
+  PASS  [08] 使用 <canvas> 的蜡烛数为 0（纯 DOM）
+  PASS  [08] 每根蜡烛实体高度 > 0（形态可辨）
+§2.5 涨跌配色：涨 = 红、跌 = 绿（硬规则）
+  PASS  [01] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [01] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [01] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [02] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [02] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [02] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [03] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [03] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [03] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [04] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [04] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [04] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [05] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [05] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [05] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [06] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [06] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [06] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [07] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [07] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [07] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+  PASS  [08] --up 解析为红系（'rgb(194, 64, 47)'）
+  PASS  [08] --down 解析为绿系（'rgb(46, 125, 91)'）
+  PASS  [08] theme.js 变量存在：--up='#C2402F' --down='#2E7D5B'
+步骤 02：GOOD 事件 → 当根蜡烛为红（涨）
+  PASS  02 定向事件生效（close > prevClose，6.29 → 6.78）
+  PASS  02 选中标的为被事件命中的 601398
+  PASS  02 最后一根蜡烛 class 含 dir-up
+  PASS  02 最后一根蜡烛实体为红系（'rgb(194, 64, 47)'）
+  PASS  02 新闻卡标题为当日利好新闻
+步骤 03：BAD 事件 → 当根蜡烛为绿（跌）
+  PASS  03 定向事件生效（close < prevClose，6.19 → 5.7）
+  PASS  03 最后一根蜡烛 class 含 dir-down
+  PASS  03 最后一根蜡烛实体为绿系（'rgb(46, 125, 91)'）
+步骤 04/05：买入后与推进一日后的可见变化
+  PASS  04 持仓表出现 1 行
+  PASS  04 持仓区空状态已隐藏
+  PASS  04 下单面板回执可见且为「已成交」（cls='result ok show'）
+  PASS  04 回执文案含「已成交」
+  PASS  04 持仓行含「锁定(T+1)」标记（当日买入）
+  PASS  05 推进一日后持仓仍 1 行
+  PASS  05 T+1 锁定已解除（状态 lockedQty = 0）
+  PASS  05 持仓盘中不再显示锁定标记
+  PASS  05 P&L 有肉眼可辨的移动（unrealizedPnL 0 → -102）
+  PASS  05 NAV 随之变化（99994.99 → 99892.99）
+  PASS  05 顶栏当日涨跌幅非 0（可见）
+  PASS  05 净值序列新增一笔（04 重置 1 笔 + 05 推进 1 笔 = 2，实测 2）
+步骤 06：拒单反馈可见
+  PASS  06 回执元素可见且为「被拒」样式（cls='result bad show'）
+  PASS  06 回执文案含「委托被拒」与「可用资金不足」
+  PASS  06 导师面板同步给出温和解释（含「买不起不是你的问题」）
+  PASS  06 拒单后持仓区仍空
+  PASS  06 拒单后顶栏可用资金未变（¥100,000）
+步骤 07：休市（周末）状态可见
+  PASS  07 顶栏「今日休市」徽标可见
+  PASS  07 主按钮文案变「下一日（休市）」（实测 '下一日（休市）▶'）
+  PASS  07 主按钮仍可点击（休市日允许推进日历）
+  PASS  07 提交按钮禁用
+  PASS  07 下单区可见文案含「休市」
+  PASS  07 新闻卡切到休市态（tag = '休市'）
+  PASS  07 导师文案切到周末语境
+  PASS  07 状态：dayIndex=6 / 周六 / 休市
+步骤 08：导师面板显示最长 mentorLine（B01，83 字）
+  PASS  08 钉住的正是 B01 事件
+  PASS  08 mentorLine 长度 >= 80（事件池内最长）
+  PASS  08 导师面板文案 == 当日事件 mentorLine（逐字）
+  PASS  08 长文案未溢出导师面板（.mentor overflowY = [0]）
+  PASS  08 .say 完整落在 .mentor 矩形内
+  PASS  08 新闻卡内的导师点评也完整落在 .news 矩形内
+§2.5 自选行情与下单面板结构
+  PASS  01 自选列出全部已解锁标的（沙盒全解锁）
+  PASS  01 恰好 1 行高亮（当前选中）
+  PASS  01 默认选中 601398
+  PASS  01 顶栏显示游戏名「入市第一课」
+  PASS  01 顶栏含日期与星期（'1 交易日 · 周一2026-01-05'）
+  PASS  01 下单面板默认「买入」+「限价」
+  PASS  01 下单面板有可买提示（'可买约 159 手可卖 0 股'）
+  PASS  01 下单面板逐项明细齐备（成交金额/手续费/印花税/过户费/预计支出）
+  PASS  01 顶栏有「重置账户」入口
+无 console error
+  PASS  console error 条目数为 0（实测 0）
+
+257 项断言，0 项失败

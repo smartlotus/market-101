@@ -91,7 +91,8 @@ ok("段结束后 extraSegment 清空", g["afterComplete"]["extraSegment"] is Non
 ok("段结束后落到理解确认面板", any("confirm" in x for x in g["afterComplete"]["openPanels"]), g["afterComplete"])
 ok("未答理解确认题时章末确认被拒（负例）", g["confirmBeforeAnswer"].get("ok") is False, g["confirmBeforeAnswer"])
 ok("答对后章末确认成功（完成后可照常确认）", g["confirmAfterRemedial"].get("ok") is True, g["confirmAfterRemedial"])
-ok("第二章确认后进入 freeDay（PRD §4）", g["modeAfter"] == "freeDay", g["modeAfter"])
+# 第三章已实现：确认第二章后直接进入第三章（不再是「停在 freeDay」）
+ok("第二章确认后进入第三章", g["modeAfter"] == "chapter", g["modeAfter"])
 
 # ── §3.6 补救一次配额 ───────────────────────────────────────────────────────
 print("[§3.6 补救一次配额：真线先触发 → 章末 D 只显示评级，不重复起段；跨章重置]")

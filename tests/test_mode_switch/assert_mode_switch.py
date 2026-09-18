@@ -115,13 +115,14 @@ ok("sandbox → chapter 同样给承接语", bool(rl["fromSandbox"]["line"]), rl
 print("[§4 第二章确认后进入 freeDay + 第三章预告卡]")
 ce = R["chapterEndFree"]
 ok("章末确认成功", ce["confirm"].get("ok") is True, ce["confirm"])
-ok("确认后 mode == 'freeDay'", ce["mode"] == "freeDay", ce["mode"])
-ok("确认后 chapterId 仍为 2（第三章未实现，不进入）", ce["chapterId"] == 2, ce["chapterId"])
-ok("nextChapter 给出第三章名与预告",
-   ce["nextChapter"]["id"] == 3 and ce["nextChapter"]["name"] == "一篮子里的一颗蛋" and
+# 第三章已实现：确认第二章后**直接进入第三章**（不再是「停在 freeDay + 预告第三章」）。
+ok("确认后进入第三章（chapter 模式）", ce["mode"] == "chapter" and ce["chapterId"] == 3,
+   {"mode": ce["mode"], "chapterId": ce["chapterId"]})
+ok("第三章目标卡已就位",
+   (ce["dom"].get("goalCardText") or "").find("一篮子里的一颗蛋") >= 0, ce["dom"])
+ok("nextChapter 指向第四章并给出预告",
+   ce["nextChapter"]["id"] == 4 and bool(ce["nextChapter"]["name"]) and
    bool(ce["nextChapter"]["preview"]), ce["nextChapter"])
-ok("自由窗口常驻卡可见并显示第三章",
-   ce["dom"]["freeWinVisible"] is True and "第 3 章" in (ce["dom"]["freeWinText"] or ""), ce["dom"])
 
 print(f"\n{checks - len(fails)}/{checks} 断言通过")
 if fails:

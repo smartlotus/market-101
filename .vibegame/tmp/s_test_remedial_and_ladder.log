@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+[§3.6 红线：NAV < ¥10,000 → 强制补救段 → 回到被打断的节拍并恢复推进]
+  PASS 中断发生在 2.2（非首拍，断言才有意义）
+  PASS moneyTier == 'red'
+  PASS redLineActive == true
+  PASS 打断时记下 interruptedBeatId == '2.2'
+  PASS 补救段已建立：kind='remedial' / origin='redLine'
+  PASS 段内 4 步（四层拆账）且从头开始
+  PASS 段内文案标「再摆一次」
+  PASS 段末尾有「一键补足本金」入口
+  PASS 补救配额已被消耗
+  PASS 段面板在 DOM 上真的可见
+  PASS 段面板有可点的「继续」按钮
+  PASS 段面板有「一键补足本金」按钮
+  PASS 「继续」按钮未被禁用
+  PASS 面板正文含四层拆账四步
+  PASS 面板正文含「一键补足本金」
+  PASS 开面板期间真暂停（sceneTree.running == false）
+  PASS 4 次真实按钮点击走完 4 步
+  PASS 第 4 次点击后段被清除
+  PASS 段后 extraSegment / redLineActive / interruptedBeatId 全清空
+  PASS 回到被打断的节拍 2.2（beatIndex 未变）
+  PASS 回到该拍起点（require 全部未满足）
+  PASS 段面板已关闭
+  PASS 暂停解除（sceneTree.running == true）
+  PASS 推进恢复：2.2 提交 → REJECT_2 且节拍推进到 2.3
+  PASS 同章第二次触线不再起段（配额）
+[§3.3/§3.6 D 级是帮助：remedial 段必过 + 一键补足本金入口 + 完成后可照常确认]
+  PASS 章末评级为 D
+  PASS D 级 → extraSegment.kind == 'remedial' / origin == 'grade'
+  PASS 先打开的是章末结算面板
+  PASS 进入补救段后面板可见且有「继续」/「一键补足本金」
+  PASS 段内标「再摆一次」
+  PASS 段内 4 步
+  PASS 4 次真实点击即可走完（必过）
+  PASS 段结束后 extraSegment 清空
+  PASS 段结束后落到理解确认面板
+  PASS 未答理解确认题时章末确认被拒（负例）
+  PASS 答对后章末确认成功（完成后可照常确认）
+  PASS 第二章确认后进入第三章
+[§3.6 补救一次配额：真线先触发 → 章末 D 只显示评级，不重复起段；跨章重置]
+  PASS 真线触发后配额为 true
+  PASS 补救段走完后回到被打断的 2.2
+  PASS 章末仍评 D
+  PASS 章末 D：extraSegment == null（不重复触发补救）
+  PASS 章末照常显示结算面板
+  PASS 结算文案仍给出 D 档点评
+  PASS 章末推进后直接到理解确认（无补救段）
+  PASS 跨章边界重置为 false（重进第一章）
+[§3.6 一键补足本金：NAV 补到 ¥100,000，持仓/净值史/章节进度/导师关系全保留，不限次数]
+  PASS 补足前 NAV < ¥100,000
+  PASS 点一次后 NAV == ¥100,000
+  PASS 注入额 == ¥100,000 − 补足前 NAV
+  PASS cash 按注入额增加
+  PASS 持仓保留
+  PASS navHistory 保留
+  PASS 章节进度保留（beatId 不变）
+  PASS 已介绍概念保留
+  PASS 导师关系保留（explainCounts 不变）
+  PASS 不限次数：第二次点击 NAV 已满 → 不倒扣、不报错
+[§3.6 黄档：章目标卡常驻行 + 补足按钮；老周每章最多非侵入提示一次]
+  PASS NAV ∈ [¥10,000, ¥50,000) → moneyTier == 'yellow'
+  PASS 章目标卡出现「你的本金只剩 ¥X。随时可以补足。」
+  PASS goalCard 上同款黄档行与「补足本金」标签
+  PASS 老周有一次非侵入提示（mentor.line 非空、speaker='face'）
+  PASS 同一章内再次触线不再追加提示（行文案不变）
+  PASS 回到绿档 → 黄档行隐藏
+[§3.3 外来入金剔除：补足本金后 rar 不改善；重置账户记 max(0, ¥100,000 − NAV)]
+  PASS 有外来入金与无外来入金的 rar 完全相同（不改善）
+  PASS S 也不因外来入金改善
+  PASS maxDD 不受外来入金影响
+  PASS 真实补足本金：窗口外来入金 == 净增额
+  PASS 补足后 NAV == ¥100,000
+  PASS 重置账户记入 max(0, ¥100,000 − 重置前 NAV)
+  PASS 重置账户的净增额同样进评级窗口的外来入金
+  PASS 调整净值把外来入金剔除（最后一个采样 = NAV − 累计外来入金）
+
+69/69 断言通过

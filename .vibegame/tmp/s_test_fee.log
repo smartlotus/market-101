@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+§3.4 市价买入费用（1 手工行）
+  PASS  委托被接受且成交
+  PASS  市价买入 fillPrice == lastPrice×(1+0.1%) = 6.22
+  PASS  qty == 100
+  PASS  notional == round(fillPrice × 100, 0.01) = 622.00
+  PASS  fee == max(notional×0.00025, 5) + notional×0.00001 = 5.01
+  PASS  cash 减 notional + fee（100000.00 → 99372.99）
+  PASS  市价单 ΔNAV == −(滑点成本 + fee) = -6.01
+§3.4 市价卖出费用（印花税仅卖出收取）
+  PASS  卖出委托被接受且成交
+  PASS  市价卖出 fillPrice == lastPrice×(1−0.1%) = 6.21
+  PASS  卖出 fee == max(n×0.00025,5) + n×0.0005 + n×0.00001 = 5.32
+  PASS  卖出 fee > 同额买入 fee（印花税确实只在卖出侧收）
+  PASS  cash 加 (notional − fee)（99372.99 → 99988.67）
+  PASS  realizedPnL == 原值 + (fillPrice−avgCost)×Q − fee = -6.32
+
+13 项断言，0 项失败

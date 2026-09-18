@@ -131,9 +131,10 @@ ok("词典面板打开且含四张规则卡概念",
 ok("未答对理解确认题时章末确认被拒（requiresRuleCards + choice）",
    R["chapterConfirmBeforeChoice"].get("ok") is False, R["chapterConfirmBeforeChoice"])
 ok("答对后章末确认成功", R["chapterConfirmAfterChoice"].get("ok") is True, R["chapterConfirmAfterChoice"])
-ok("第二章确认后进入 freeDay（PRD §4）", R["finalMode"] == "freeDay", R["finalMode"])
-ok("自由窗口常驻卡给出第三章名与预告",
-   R["nextChapter"]["id"] == 3 and bool(R["nextChapter"]["preview"]), R["nextChapter"])
+# 第三章已实现：确认第二章后**直接进入第三章**（不再是「停在 freeDay + 预告第三章」）
+ok("第二章确认后进入第三章", R["finalMode"] == "chapter", R["finalMode"])
+ok("下一章指向第四章并给出预告",
+   R["nextChapter"]["id"] == 4 and bool(R["nextChapter"]["preview"]), R["nextChapter"])
 
 # ── §3.8 定向事件（第二章 2.7 钉 I01）─────────────────────────────────────
 print("[§3.8 第二章定向事件：2.7 钉 I01 / drawn 按声明顺序前缀]")

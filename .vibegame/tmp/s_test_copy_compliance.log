@@ -1,0 +1,151 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+[0] 落点：第二章章末结算面板
+  PASS entered.chapterId == 2
+  PASS entered.beatId == '2.1'
+  PASS entered.settlementPanelId == 'panel.settlement'
+  PASS 结算面板声明可读（blocks 非空）
+  PASS 声明里有一个 formula 块
+[1] 六词纪律（扫描面 = 结算面板全文 + A/B/C/D 档位标签）
+  PASS A.强制档位生效（rating.grade == 'A'）
+  PASS A.settle 走强制档（forced == True）
+  PASS A.评级窗口已结算（graded == True）
+  PASS A.结算面板已打开
+  PASS A.结算面板 DOM 文本非空
+  PASS A.面板内无未解析占位（data-ch-unresolved 为空）
+  PASS A.档位点评已渲染在面板里
+  PASS B.强制档位生效（rating.grade == 'B'）
+  PASS B.settle 走强制档（forced == True）
+  PASS B.评级窗口已结算（graded == True）
+  PASS B.结算面板已打开
+  PASS B.结算面板 DOM 文本非空
+  PASS B.面板内无未解析占位（data-ch-unresolved 为空）
+  PASS B.档位点评已渲染在面板里
+  PASS C.强制档位生效（rating.grade == 'C'）
+  PASS C.settle 走强制档（forced == True）
+  PASS C.评级窗口已结算（graded == True）
+  PASS C.结算面板已打开
+  PASS C.结算面板 DOM 文本非空
+  PASS C.面板内无未解析占位（data-ch-unresolved 为空）
+  PASS C.档位点评已渲染在面板里
+  PASS D.强制档位生效（rating.grade == 'D'）
+  PASS D.settle 走强制档（forced == True）
+  PASS D.评级窗口已结算（graded == True）
+  PASS D.结算面板已打开
+  PASS D.结算面板 DOM 文本非空
+  PASS D.面板内无未解析占位（data-ch-unresolved 为空）
+  PASS D.档位点评已渲染在面板里
+  PASS 结算面板四档全文都不含「失败」
+  PASS 结算面板四档全文都不含「不及格」
+  PASS 结算面板四档全文都不含「差」
+  PASS 结算面板四档全文都不含「淘汰」
+  PASS 结算面板四档全文都不含「降级」
+  PASS 结算面板四档全文都不含「扣分」
+  PASS 档位标签都不含「失败」
+  PASS 档位标签都不含「不及格」
+  PASS 档位标签都不含「差」
+  PASS 档位标签都不含「淘汰」
+  PASS 档位标签都不含「降级」
+  PASS 档位标签都不含「扣分」
+  PASS D 级档位标签 == 「本章需要再摆一次」
+  PASS D 级档位标签（运行时快照）同字面
+  PASS D 级档位标签（词典 DOM）同字面
+  PASS 档位标签 A 在词典 GRADES 里逐字渲染
+  PASS 档位标签 B 在词典 GRADES 里逐字渲染
+  PASS 档位标签 C 在词典 GRADES 里逐字渲染
+  PASS 档位标签 D 在词典 GRADES 里逐字渲染
+  PASS 词典 GRADES 四档齐全
+  PASS labels 扫描面非空（确实扫到了东西）
+[2] 评级公式可见（不得用单个「综合评分」掩盖算法）
+  PASS 结算面板三段输入（声明 = kvRows 三行）
+  PASS 结算面板分数块（声明 = bigNumber rating.S）
+  PASS A.面板逐项列出 rar / maxDD / costRatio
+  PASS A.三项输入各自的数值已代入（非空且为百分比）
+  PASS A.面板逐字给出公式表达式
+  PASS A.面板列出四条口径说明
+  PASS A.中间量 baseScore / ddPenalty / costPenalty 逐步展开
+  PASS A.原始输入（NAV 端点 / 费用 / 成交额）也摊开
+  PASS A.面板显示本章分数 S（bigNumber）
+  PASS A.显示的 S 与计算出的一致
+  PASS A.分数与档位同屏（S 与档位点评在同一面板）
+  PASS B.面板逐项列出 rar / maxDD / costRatio
+  PASS B.三项输入各自的数值已代入（非空且为百分比）
+  PASS B.面板逐字给出公式表达式
+  PASS B.面板列出四条口径说明
+  PASS B.中间量 baseScore / ddPenalty / costPenalty 逐步展开
+  PASS B.原始输入（NAV 端点 / 费用 / 成交额）也摊开
+  PASS B.面板显示本章分数 S（bigNumber）
+  PASS B.显示的 S 与计算出的一致
+  PASS B.分数与档位同屏（S 与档位点评在同一面板）
+  PASS C.面板逐项列出 rar / maxDD / costRatio
+  PASS C.三项输入各自的数值已代入（非空且为百分比）
+  PASS C.面板逐字给出公式表达式
+  PASS C.面板列出四条口径说明
+  PASS C.中间量 baseScore / ddPenalty / costPenalty 逐步展开
+  PASS C.原始输入（NAV 端点 / 费用 / 成交额）也摊开
+  PASS C.面板显示本章分数 S（bigNumber）
+  PASS C.显示的 S 与计算出的一致
+  PASS C.分数与档位同屏（S 与档位点评在同一面板）
+  PASS D.面板逐项列出 rar / maxDD / costRatio
+  PASS D.三项输入各自的数值已代入（非空且为百分比）
+  PASS D.面板逐字给出公式表达式
+  PASS D.面板列出四条口径说明
+  PASS D.中间量 baseScore / ddPenalty / costPenalty 逐步展开
+  PASS D.原始输入（NAV 端点 / 费用 / 成交额）也摊开
+  PASS D.面板显示本章分数 S（bigNumber）
+  PASS D.显示的 S 与计算出的一致
+  PASS D.分数与档位同屏（S 与档位点评在同一面板）
+  PASS 表达式含基分项 50 + rar × 833
+  PASS 表达式含回撤罚分项（maxDD）
+  PASS 表达式含成本罚分项（costRatio）
+  PASS 表达式含三段 clamp
+  PASS 口径说明覆盖 rar / maxDD / costRatio 三条
+[2b] 完整公式查询入口（词典与公式）
+  PASS 存在「词典与公式」入口按钮
+  PASS openDictionary() 能打开查询面板
+  PASS 查询面板有「评级公式」页签
+  PASS 点击后停在「评级公式」页
+  PASS 查询面板逐字给出同一条公式
+  PASS 查询面板列出同四条口径说明
+  PASS 查询面板列出 RATING_PARAMS 常量
+  PASS 查询面板列出本次代入值（navStart / feesInWindow / ddPenalty …）
+  PASS 查询面板档位行含门槛数值
+  PASS 查询面板无未解析占位
+[3] 拒单回执与教学反馈：无「你不该」「建议按导师指引操作」
+  PASS 拒单场景在开市时段（前置条件）
+  PASS 拒单[funds]：被拒且有回执文案
+  PASS 拒单[funds]：回执文案渲染到下单面板
+  PASS 拒单[limitRange]：被拒且有回执文案
+  PASS 拒单[limitRange]：回执文案渲染到下单面板
+  PASS 拒单[t1Sell]：被拒且有回执文案
+  PASS 拒单[t1Sell]：回执文案渲染到下单面板
+  PASS 拒单[tick]：被拒且有回执文案
+  PASS 拒单[tick]：回执文案渲染到下单面板
+  PASS 拒单[lotSize]：被拒且有回执文案
+  PASS 拒单[lotSize]：回执文案渲染到下单面板
+  PASS 拒单[qtyZero]：被拒且有回执文案
+  PASS 拒单[qtyZero]：回执文案渲染到下单面板
+  PASS 拒单[closed]：被拒且有回执文案
+  PASS 拒单[closed]：回执文案渲染到下单面板
+  PASS 拒单场景覆盖 7 类（资金 / 涨跌停 / T+1 / 价位 / 手数 / 数量 / 休市）
+  PASS 教学语料：两道选择题的题干与逐选项反馈都在
+  PASS 教学语料：导师台词都在
+  PASS 教学语料：四张规则卡面板已渲染
+  PASS 教学语料：补救段与加演段正文都在（仅用于本面扫描）
+  PASS 教学语料：选错后的反馈确实被抛出
+  PASS 拒单语料非空（确实扫到了东西）
+  PASS 教学语料非空（确实扫到了东西）
+  PASS 拒单回执不含「你不该」
+  PASS 拒单回执不含「建议按导师指引操作」
+  PASS 教学反馈不含「你不该」
+  PASS 教学反馈不含「建议按导师指引操作」
+
+134/134 断言通过

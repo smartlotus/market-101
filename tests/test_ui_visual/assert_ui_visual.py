@@ -292,7 +292,12 @@ def main():
     )
 
     print("§2.5 自选行情与下单面板结构")
-    check("01 自选 7 行标的", dom["01"]["watch"]["rows"] == 7, "rows=%r" % dom["01"]["watch"]["rows"])
+    # 场景 01 是**沙盒开局**（devSkipToSandbox 会把七类市场全解锁），
+    # 因此自选列出的就是全部标的 —— 数字随 instruments.json 增长，不再写死 7。
+    # 真正要守住的是：**只列已解锁市场的标的**（未解锁的不挂进 DOM），
+    # 这一条由 test_chapter1_beats 的「自选 7 行」在第一章语境下把住。
+    check("01 自选列出全部已解锁标的（沙盒全解锁）",
+          dom["01"]["watch"]["rows"] >= 7, "rows=%r" % dom["01"]["watch"]["rows"])
     check("01 恰好 1 行高亮（当前选中）", dom["01"]["watch"]["selected"] == 1, "sel=%r" % dom["01"]["watch"]["selected"])
     check("01 默认选中 601398", st["01"]["selectedInstrumentId"] == "601398", "selected=%r" % st["01"]["selectedInstrumentId"])
     check("01 顶栏显示游戏名「入市第一课」", "入市第一课" in (dom["01"]["topbar"]["brand"] or ""),

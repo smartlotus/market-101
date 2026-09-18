@@ -1,0 +1,69 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+[§3.1 存档恢复到「最后完成节拍之后」]
+  PASS 存档点 2.2 完成后落在 2.3 起点（beatIndex 2）
+  PASS 存档元信息指向恢复拍
+  PASS 刷新后仍在新拍起点且 require 全未满足
+  PASS 刷新后存档仍在 localStorage
+  PASS 刷新前後 chapterId 逐字节一致
+  PASS 刷新前後 beatId 逐字节一致
+  PASS 刷新前後 beatIndex 逐字节一致
+  PASS 刷新前後 mode 逐字节一致
+  PASS 刷新前後 cash 逐字节一致
+  PASS 刷新前後 NAV 逐字节一致
+  PASS 刷新前後 frozenCash 逐字节一致
+  PASS 刷新前後 realizedPnL 逐字节一致
+  PASS 刷新前後 dayIndex 逐字节一致
+  PASS 刷新前後 inGameDate 逐字节一致
+  PASS 刷新前後 isMarketOpen 逐字节一致
+  PASS 刷新前後 eventDeck 逐字节一致
+  PASS 刷新前後 currentEvent 逐字节一致
+  PASS 刷新前後 positions 逐字节一致
+  PASS 刷新前後 pendingOrders 逐字节一致
+  PASS 刷新前後 navHistory 逐字节一致
+  PASS 刷新前後 tradedNotional 逐字节一致
+  PASS 刷新前後 feesPaid 逐字节一致
+  PASS 刷新前後 conceptsIntroduced 逐字节一致
+  PASS 刷新前後 ruleCardsSeen 逐字节一致
+  PASS 刷新前後 completedBeats 逐字节一致
+  PASS 刷新前後 selectedInstrumentId 逐字节一致
+  PASS 7 只标的的价格 / 涨跌停逐项一致
+  PASS K 线历史跨刷新保留（quotes 契约含 K 线）
+[Edge Case 存档落在节拍中途 → 恢复到该节拍起点]
+  PASS 存档时处于 2.6 半完成态（4 项 require 只满足 1 项）
+  PASS 刷新后仍在 2.6
+  PASS 刷新后 require 全部未满足（半完成进度被丢弃）
+[Edge Case 面板打开时刷新 → 重新打开同一面板且状态保留]
+  PASS 刷新前面板已开、已作答（answeredKey 记录）
+  PASS 刷新后仍停在 1.9
+  PASS 刷新后重新打开同一面板 panel.confirm
+  PASS 刷新后 pendingChoice.answeredKey 保留
+  PASS 刷新后该拍仍未满足（错答不推进）
+  PASS 除面板外世界状态一致（cash / 日期 / 净值史 / 事件池）
+[B2 回归] 刷新后 2.6 仍可完成（`chapterRejectSeen` 必须持久化；该拍无 giveUp 出口）
+  PASS 刷新前已停在 2.6 起点（已撞过 2.1–2.4 的拒单）
+  PASS 存档白名单里有 chapterRejectSeen 键
+  PASS 刷新后仍在 2.6、四项 require 全未满足
+  PASS 刷新后四类合法委托全部成交（无拒单干扰）
+  PASS 刷新后 2.6 被满足并推进到 2.7（第二章仍可结章）
+[B2 反证] 全新会话直接到 2.6、全程无拒单 → correctedLimit 不可满足（证明场景 4 有判别力）
+  PASS 四类委托都成交但 correctedLimit 仍不满足
+  PASS 节拍停在 2.6（未推进）
+[§4 章节进度重置]
+  PASS 重置前章内状态非空（概念 / 规则卡 / 评级 / 存档）
+  PASS 重置后 chapterId == 1 / beatId == '1.0' / beatIndex == 0
+  PASS 重置后 conceptsIntroduced == []
+  PASS 重置后 rating == null 且 ratingInputs 未打分
+  PASS 重置后 completedBeats == [] / extraSegment == null / 补救配额复位
+  PASS 重置后存档被清空（exists=false 且 localStorage 无键）
+  PASS 规则卡（词典侧已读标记）保留 —— PRD §4 只要求清「章内状态」
+
+51/51 断言通过

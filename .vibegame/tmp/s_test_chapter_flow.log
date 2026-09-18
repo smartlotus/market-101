@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "frame": 0
+}
+{
+  "status": "ok"
+}
+{
+  "status": "ok"
+}
+[§1 开局落在节拍 1.0]
+  PASS chapterId == 1
+  PASS beatId == '1.0'
+  PASS beatIndex == 0
+  PASS mode == 'chapter'
+  PASS shellMode == 'hidden'
+  PASS accountOpened == False
+  PASS cash == 0
+  PASS NAV == 0
+  PASS dayIndex == 1（日期未推进）
+  PASS inGameDate == 2026-01-05（未推进）
+  PASS defaultInstrumentId == '601398'
+  PASS panelId is null
+  PASS 券商壳 display:none（开户前不可见）
+  PASS 券商壳 data-shell-mode == hidden
+  PASS 券商壳无可见文本
+  PASS 无打开的面板
+  PASS 首拍 require = interact:1.0.start
+[§3.1 顺序推进 + 无跳拍路径]
+  PASS 跳过尝试前在 1.0
+  PASS 钩子 chapterAck(1.6.advance) 不能推进
+  PASS 钩子 chapterAck(1.5.buy) 不能推进
+  PASS 钩子 chapterAck(1.9.confirm) 不能推进
+  PASS 钩子 chapterClosePanel() 不能推进
+  PASS 钩子 chapterAnswer(1.9.confirm,t1) 不能推进
+  PASS 钩子 chapterExtraStep() 不能推进
+  PASS 钩子 chapterCompleteExtra() 不能推进
+  PASS 钩子 chapterEndPhase() 不能推进
+  PASS 钩子 chapterGiveUp() 不能推进
+  PASS 钩子 chapterConfirm() 不能推进
+  PASS 钩子 chapterRead(panel.deposit,9) 不能推进
+  PASS 走完整章记录 >= 12 步
+  PASS 1.0 start 后 beatIndex 恰好 +1
+  PASS [负例] 1.1 openDeposit 不推进（require 未全满足）
+  PASS [负例] 1.1 read 1 then close 不推进（require 未全满足）
+  PASS 1.1 read 1 more 后 beatIndex 恰好 +1
+  PASS 1.2 openAccount 后 beatIndex 恰好 +1
+  PASS 1.3 fundInitial 后 beatIndex 恰好 +1
+  PASS 1.4 select cheapest 后 beatIndex 恰好 +1
+  PASS 1.5 buy 后 beatIndex 恰好 +1
+  PASS [负例] 1.5.5 read 1 then close 不推进（require 未全满足）
+  PASS 1.5.5 read 3 + close 后 beatIndex 恰好 +1
+  PASS 1.6 advanceDay 后 beatIndex 恰好 +1
+  PASS 1.7 sell 后 beatIndex 恰好 +1
+  PASS [负例] 1.8 review open (not closed) 不推进（require 未全满足）
+  PASS 1.8 read 5 + close 后 beatIndex 恰好 +1
+  PASS 终局 beatId == '1.9'
+[§3.4 章末理解确认题：选错只重讲 / 选对推进]
+  PASS 1.9 有 pendingChoice
+  PASS 选择题 id 题干为 T+1 题
+  PASS 两个选项
+  PASS confirm 面板已打开
+  PASS 错答被记录（answeredKey）
+  PASS 错答不满足 choice 条件（只重讲）
+  PASS 错答后 beatId 仍是 '1.9'
+  PASS 错答反馈无「答错」字样
+  PASS 错答时章末确认被拒绝（未答对）
+  PASS 错答不给任何否定措辞（屏幕无「答错」）
+  PASS 同题可无限重试（再答一次仍被记录）
+  PASS 选对后 choice 条件满足
+  PASS 选对后章末确认成功
+  PASS 确认后 chapterId == 2
+  PASS 确认后 beatId == '2.1'
+[Edge Case beatCount 显示：加演段不增 beatCount、remainingBeats 不变]
+  PASS 章末 beatCount == 7
+  PASS 章末 7 拍全部完成
+  PASS 章末 remainingBeats == 0
+  PASS 章末打开结算面板
+  PASS 章末评级 A（注入加演段）
+  PASS 章末 extraSegment.kind == 'advanced'
+  PASS 段内 beatCount 不变（== 7）
+  PASS 段内 remainingBeats 不变（== 0）
+  PASS 段内 completedBeats 不变（== 7）
+  PASS 段面板已打开
+  PASS 段内文案含「加演」
+  PASS 段内有 2 个步骤
+  PASS 步进到底 stepIndex == 1
+  PASS 步进期间 remainingBeats 仍为 0
+  PASS 段结束后 extraSegment 清空
+  PASS 段结束后 remainingBeats 仍为 0
+  PASS 段结束后进入理解确认面板
+[§3.7 章内残留清理]
+  PASS 跨章前有未成交挂单
+  PASS 跨章前有 T+1 锁定 100 股
+  PASS 跨章前冻结资金 > 0
+  PASS 跨章确认成功
+  PASS 进入第二章 2.1
+  PASS 进入瞬间 pendingOrders == []
+  PASS 进入瞬间 lockedQty == 0
+  PASS 进入瞬间 frozenCash == 0
+  PASS 持仓本身保留
+
+86/86 断言通过
