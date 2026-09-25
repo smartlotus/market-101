@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * SwipeSlashModule — runtime pointer-swipe slash.

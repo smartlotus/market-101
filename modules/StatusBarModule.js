@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 function clamp01(value) {
   if (!Number.isFinite(value)) return 1

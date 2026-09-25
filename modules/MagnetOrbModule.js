@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * MagnetOrbModule — collectible orb that gravitates toward a target tag (default: player).

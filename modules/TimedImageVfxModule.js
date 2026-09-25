@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * TimedImageVfxModule — a fire-and-forget transient sprite effect.

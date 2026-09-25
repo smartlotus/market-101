@@ -29,8 +29,8 @@
  *         devAdvanceDay / devTopUpCapital / devSkipToSandbox / devSetChapterGrades
  */
 
-import { Node } from '/engine/Node.js'
-import { fetchJson } from '/engine/url.js'
+import { Node } from '../engine/Node.js'
+import { fetchJson } from '../engine/url.js'
 import MarketSim from './sim/market.js'
 import { QUOTE_PARAMS } from './sim/quote.js'
 import { LOT_SIZE, PRICE_TICK, computeFee, roundMoney } from './sim/fees.js'

@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * GameOverlayModule — DOM-based pause / death / victory / custom menu overlay.

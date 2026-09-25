@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 export default class SideviewFighterModule extends Node {
   facing = 1

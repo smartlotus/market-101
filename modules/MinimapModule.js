@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * MinimapModule — DOM-based grid minimap for room-based games.

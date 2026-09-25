@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * MaskHUDModule — discrete N-pip icon meter (mask / heart / pip).

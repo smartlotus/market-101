@@ -1,4 +1,4 @@
-import { Node } from '/engine/Node.js'
+import { Node } from '../engine/Node.js'
 
 /**
  * UpgradeChoiceModule — DOM 3-of-N upgrade/buff choice overlay.
