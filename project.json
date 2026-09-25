@@ -14,5 +14,6 @@
     }
   },
   "startScene": "scenes/main.scene.json",
-  "inputMap": "config/input-map.json"
+  "inputMap": "config/input-map.json",
+  "releaseExtraRoots": ["modules/", ".nojekyll"]
 }

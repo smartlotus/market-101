@@ -32,7 +32,7 @@
  *   runtimeState()                  —— 模块的 visible 快照 + panelId / panelOpen / paused
  */
 
-import GameOverlayModule from '/modules/GameOverlayModule.js'
+import GameOverlayModule from '../modules/GameOverlayModule.js'
 import { CHAPTER_THEME_CSS } from './ui/chapter/theme.js'
 
 const THEME_STYLE_ID = 'chapter-theme'
