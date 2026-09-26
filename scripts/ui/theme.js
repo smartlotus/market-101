@@ -50,6 +50,8 @@ export const THEME_CSS = `
   height: 810px;
   box-sizing: border-box;
   padding: 10px;
+  /* 章节侧栏预留宽度（见 .main 注释）：默认留给侧栏，自由模式置 0 */
+  --rail-reserve: 332px;
   display: grid;
   grid-template-rows: 62px minmax(0, 1fr) 206px;
   gap: 8px;
@@ -134,12 +136,26 @@ export const THEME_CSS = `
 #broker-shell .ghost.arm { background: #D9CFBE; color: #D9564A; border-color: #C7B9A0; }
 
 /* ---------- 中部三列 ---------- */
+/**
+ * 主区三栏。
+ *
+ * `--rail-reserve`：**给章节侧栏预留的宽度**。
+ * 章节层的常驻栏 `.ch-resident` 是覆盖在券商界面之上的（left:14px; width:306px，即占 x=14..320），
+ * 若不给它留位置，它会整个压住左栏的自选名单 —— 玩家就看不到也点不到股票列表了。
+ * 这里把 .main 整体右移，使自选名单落在侧栏右侧，并**再留 12px 空隙**，两者互不接触。
+ * 自由模式（无目标卡、无侧栏）时由 ShellRoot 置为 0，把宽度还给行情区。
+ */
 #broker-shell .main {
   display: grid;
   grid-template-columns: 236px minmax(0, 1fr) 330px;
   gap: 8px;
   min-height: 0;
+  padding-left: var(--rail-reserve, 332px);
 }
+
+/* 自由模式（尾声 E.4 之后）：没有目标卡、没有侧栏，把预留宽度还给行情区。
+   由 ShellRoot 按 state.chapter.mode 切换 data-rail。 */
+#broker-shell[data-rail="off"] { --rail-reserve: 0px; }
 
 /* 自选行情 */
 #broker-shell .watch { display: flex; flex-direction: column; min-height: 0; }

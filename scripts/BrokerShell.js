@@ -252,6 +252,9 @@ export default class BrokerShell extends Node {
     const chapter = state.chapter || {}
     const mode = chapter.mode === 'chapter' ? chapter.shellMode : 'full'
     this.shell.setDisplayMode(mode)
+    // 自由模式（尾声 E.4 之后）没有目标卡、也没有常驻侧栏 —— 把给侧栏预留的宽度还回行情区。
+    // 只改一个 data 属性，具体宽度由 CSS 的 --rail-reserve 决定（布局数值不散落在 JS 里）。
+    if (this.shell.el) this.shell.el.dataset.rail = chapter.mode === 'freeDay' ? 'off' : 'on'
     if (mode === 'openAccount') {
       this.shell.setGateContent(this._gateContent(state), (id) => this.chapterAck(id))
     }
