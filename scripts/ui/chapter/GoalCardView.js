@@ -27,6 +27,10 @@ function chapterOf(state) {
 const REMAINING_PREFIX = '本章还剩'
 const REMAINING_SUFFIX = '个节拍'
 
+/** 「下一步」区的两个标题词。数据文件里没有这两句 —— 见交付说明的文案缺口。 */
+const NEXT_PREFIX = '下一步'
+const NEXT_DONE_PREFIX = '本拍都做完了'
+
 export default class GoalCardView {
   constructor(root, ui, cfg = {}) {
     this.root = root
@@ -41,6 +45,24 @@ export default class GoalCardView {
 
     this.titleEl = el('div', 'ch-goal-title', this.cardEl, '')
     this.teachEl = el('div', 'ch-goal-teach', this.cardEl)
+
+    /**
+     * 「下一步」—— 把本拍**未完成**的完成条件的 `label` 明写出来。
+     *
+     * 为什么必须要有：完成条件的 label 一直存在于运行时快照里
+     * （`chapter.beatRequirements[].label`，如「点开存单」「读完存单上的两个数字」），
+     * 但此前**没有任何视图渲染它** —— 玩家只看到一个可点的物件，
+     * 不知道那是不是「该点的地方」、也不知道还有几件事要做。
+     * 这是「节拍提示不出现 / 不知道下一步点哪」的直接原因。
+     *
+     * 纪律：只印数据里已有的 `label`，视图不编文案（缺 label 就不显示该行）。
+     * 完成条件全部满足时不留空块，改为一句完成态，避免玩家以为还有事没做。
+     */
+    this.nextEl = el('div', 'ch-next', this.cardEl)
+    this.nextHead = el('div', 'nh', this.nextEl)
+    this.nextKey = el('div', 'k', this.nextHead, '')
+    this.nextCount = el('div', 'n num', this.nextHead, '')
+    this.nextList = el('div', 'ch-next-list', this.nextEl)
 
     this.rowsEl = el('div', 'ch-goal-rows', this.cardEl)
     this.remainingEl = el('div', 'ch-grow', this.rowsEl)
@@ -79,6 +101,7 @@ export default class GoalCardView {
     this.titleEl.textContent = goal.title || ''
 
     this._renderTeach(goal.teach || [])
+    this._renderNext(ch)
     this._renderRemaining(ch)
     this._renderGraded(goal)
     this._renderTier(ch, goal)
@@ -95,6 +118,39 @@ export default class GoalCardView {
       const chip = el('span', 'ch-chip', this.teachEl)
       chip.textContent = concept ? concept.name : key
       chip.dataset.conceptKey = key
+    }
+  }
+
+  /**
+   * 下一步：本拍未完成的完成条件，逐条印出数据里的 `label`。
+   *
+   * 加演 / 补救段期间不显示（那两段有自己的 `label` 与流程，见 `extraSegment`），
+   * 避免与段内的引导重复甚至矛盾。
+   */
+  _renderNext(ch) {
+    const reqs = Array.isArray(ch.beatRequirements) ? ch.beatRequirements : []
+    const pending = reqs.filter((r) => r && !r.satisfied && r.label)
+    // 段内交给段自己引导；没有完成条件（如纯叙事拍）也没有「下一步」可言
+    const show = !ch.extraSegment && reqs.length > 0 && Boolean(ch.beatId)
+    this.nextEl.classList.toggle('ch-hidden', !show)
+    if (!show) return
+
+    const signature = pending.map((r) => r.id).join('|') + '#' + (reqs.length - pending.length)
+    if (signature === this._nextSignature) return
+    this._nextSignature = signature
+
+    const done = reqs.length - pending.length
+    this.nextKey.textContent = pending.length ? NEXT_PREFIX : NEXT_DONE_PREFIX
+    this.nextCount.textContent = `${done} / ${reqs.length}`
+    this.nextEl.classList.toggle('all-done', pending.length === 0)
+
+    clear(this.nextList)
+    for (const r of pending) {
+      const row = el('div', 'row', this.nextList)
+      row.dataset.kind = String(r.kind || '')
+      row.dataset.reqId = String(r.id || '')
+      el('span', 'mk', row, '')
+      el('span', 'tx', row, String(r.label))
     }
   }
 

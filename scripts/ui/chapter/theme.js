@@ -497,7 +497,9 @@ ${PALETTE}
 #chapter-root .ch-resident {
   position: absolute;
   left: 14px;
-  top: 84px;
+  /* top 必须让开场景说明标签（.ch-scene-caption 占 y=74..97），
+     否则侧栏会把它压掉一截。104 给它留 7px 空隙。 */
+  top: 104px;
   width: 306px;
   display: flex;
   flex-direction: column;
@@ -1719,6 +1721,51 @@ ${PALETTE}
   vertical-align: middle;
   image-rendering: auto;
 }
+/* ---- 「下一步」区（GoalCardView._renderNext）----
+   作用：把本拍**未完成**的完成条件逐条印出来。
+   在此之前完成条件的 label 只存在于运行时快照里、没有任何视图渲染它，
+   玩家只看到一个可点物件，不知道那是不是该点的地方、也不知道还剩几件事 ——
+   这是「节拍提示不出现 / 不知道下一步点哪」的直接原因。
+   视觉上要压过卡片里其它块：左侧强调色竖条 + 淡靛青底。 */
+#chapter-root .ch-next {
+  margin: 9px -1px 3px;
+  padding: 7px 9px 8px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(180deg, rgba(58, 107, 138, 0.11), rgba(58, 107, 138, 0.05));
+}
+#chapter-root .ch-next .nh {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+#chapter-root .ch-next .nh .k {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+#chapter-root .ch-next .nh .n { font-size: 11px; color: var(--muted); }
+#chapter-root .ch-next-list { display: flex; flex-direction: column; gap: 3px; }
+#chapter-root .ch-next-list .row { display: flex; align-items: flex-start; gap: 6px; }
+#chapter-root .ch-next-list .mk {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+#chapter-root .ch-next-list .tx { font-size: 12px; line-height: 1.55; color: var(--text); }
+/* 本拍条件全部满足：转成完成态，不再暗示还有事要做 */
+#chapter-root .ch-next.all-done {
+  border-left-color: var(--ok-line);
+  background: linear-gradient(180deg, rgba(47, 110, 122, 0.10), rgba(47, 110, 122, 0.04));
+}
+#chapter-root .ch-next.all-done .nh .k { color: var(--ok-line); }
+#chapter-root .ch-next.all-done .ch-next-list { display: none; }
+
 .ch-badge.xs { width: 16px; height: 16px; margin-right: 6px; }
 .ch-badge.sm { width: 24px; height: 24px; margin-right: 8px; }
 .ch-badge.md { width: 40px; height: 40px; margin-right: 10px; }
